@@ -30,6 +30,10 @@ Plug 'joequery/Stupid-EasyMotion'
 Plug 'mhinz/vim-signify'
 "Plug 'Yggdroot/indentLine'
 
+" Python stuff
+Plug 'https://github.com/majutsushi/tagbar.git'
+Plug 'https://github.com/kien/rainbow_parentheses.vim.git'
+
 call plug#end()
 
 "Want a different map leader than \
@@ -166,6 +170,9 @@ endfunction
 
 nnoremap <Leader>rts :call Preserve("%s/\\s\\+$//e")<CR>
 
+"List chars are useful
+set list
+
 "autocmd FileType python
 
 "Plugin configuration
@@ -178,7 +185,7 @@ let NERDTreeIgnore = ['\.pyc$']
 
 "CtrlP configuration
 "let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
 nnoremap <Leader>o :CtrlP<CR>
@@ -196,3 +203,8 @@ let g:signify_vcs_list = [ 'bzr', 'git' ]
 "let g:indentLine_leadingSpaceChar = '.'
 "let g:indentLine_leadingSpaceEnabled = 1
 
+"TagBar configuration
+nnoremap <F2> :TagbarToggle<cr>
+
+" Rainbow parenthesis configuration
+nnoremap <F3> :RainbowParenthesesToggleAll<cr>
