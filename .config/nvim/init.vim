@@ -30,9 +30,13 @@ Plug 'joequery/Stupid-EasyMotion'
 Plug 'mhinz/vim-signify'
 "Plug 'Yggdroot/indentLine'
 
+Plug 'Valloric/YouCompleteMe'
+
 " Python stuff
 Plug 'https://github.com/majutsushi/tagbar.git'
 Plug 'https://github.com/kien/rainbow_parentheses.vim.git'
+Plug 'tmhedberg/SimpylFold'
+Plug 'hynek/vim-python-pep8-indent'
 
 call plug#end()
 
@@ -98,6 +102,10 @@ noremap <leader>q gqip
 
 "Enable code folding
 set foldenable
+set foldmethod=indent
+set foldlevel=99
+
+nnoremap <space> za
 
 "Hide mouse when typing
 set mousehide
@@ -117,9 +125,14 @@ nnoremap <c-k> <c-w><c-k>
 nnoremap <c-l> <c-w><c-l>
 nnoremap <c-h> <c-w><c-h>
 
+" where we want our splits
+set splitbelow
+set splitright
+
 "Backups
-set backupdir=~/.vim/tmp/backup//
-set directory=~/.vim/tmp/swap//
+call mkdir ($HOME . '/.config/nvim/tmp/backup', 'p')
+set backupdir=~/.config/nvim/tmp/backup//
+set directory=~/.config/nvim/tmp/swap//
 set backup
 
 "Show matching brackets
@@ -208,3 +221,10 @@ nnoremap <F2> :TagbarToggle<cr>
 
 " Rainbow parenthesis configuration
 nnoremap <F3> :RainbowParenthesesToggleAll<cr>
+
+"YCM configuration
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"Configure vim-python-pep8-indent
+let g:pymode_indent = 0
