@@ -38,6 +38,9 @@ Plug 'https://github.com/kien/rainbow_parentheses.vim.git'
 Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
 
+" Golang stuff
+Plug 'fatih/vim-go'
+
 call plug#end()
 
 "Want a different map leader than \
