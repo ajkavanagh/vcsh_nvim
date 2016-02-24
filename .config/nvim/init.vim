@@ -37,6 +37,7 @@ Plug 'https://github.com/majutsushi/tagbar.git'
 Plug 'https://github.com/kien/rainbow_parentheses.vim.git'
 Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'hdima/python-syntax'
 
 call plug#end()
 
@@ -70,7 +71,7 @@ set number
 set relativenumber
 
 "Scrolling - I like to see a number of lines in the buffer
-set scrolloff=7
+set scrolloff=3
 
 "Indent stuff
 set autoindent
@@ -198,7 +199,7 @@ let NERDTreeIgnore = ['\.pyc$']
 
 "CtrlP configuration
 "let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
 nnoremap <Leader>o :CtrlP<CR>
@@ -224,7 +225,11 @@ nnoremap <F3> :RainbowParenthesesToggleAll<cr>
 
 "YCM configuration
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_auto_trigger = 0
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "Configure vim-python-pep8-indent
 let g:pymode_indent = 0
+
+"Configure python-syntax
+let python_highlight_all = 1
