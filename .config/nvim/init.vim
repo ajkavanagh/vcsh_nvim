@@ -46,6 +46,9 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'hdima/python-syntax'
 
+" Golang stuff
+Plug 'fatih/vim-go'
+
 call plug#end()
 
 "Want a different map leader than \
