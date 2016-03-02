@@ -219,7 +219,7 @@ nnoremap j gj
 nnoremap k gk
 
 " <leader>ev to edit my (n)vim RC file
-nnoremap <leader>ev :tabe $MYVIMRC>cr>
+nnoremap <leader>ev :tabe $MYVIMRC<cr>
 
 " file augroups
 augroup files
