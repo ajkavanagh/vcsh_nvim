@@ -24,6 +24,13 @@ call plug#begin("~/.config/nvim/plugged")
 " NERD tree will be loaded on the first invocation of NERDTreeToggle command
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'YankRing.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'duff/vim-scratch'
+
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'terryma/vim-expand-region'
 Plug 'joequery/Stupid-EasyMotion'
@@ -66,9 +73,16 @@ set guifont=Menlo:h14
 "Show command in bottom right portion of the screen
 set showcmd
 
+" Sane autocompletions for the tab key in menus
+set wildmenu
+set wildmode=list:longest
+
 "Show line numbers
 set number
 set relativenumber
+
+" Like to see the cursor line
+set cursorline
 
 "Scrolling - I like to see a number of lines in the buffer
 set scrolloff=3
@@ -82,21 +96,17 @@ set laststatus=2
 "Prefer a slightly higher line height
 set linespace=3
 
-"Set incremental searching
+"Set incremental, highlighted and case-insensitive searching
+"also sane regexs (the / /\v bit)
+nnoremap / /\v
+vnoremap / /\v
 set incsearch
-
-"Set highlighing seaching
 set hlsearch
-
-"Use <CR> to disable the search highlight until the next search
-"nnoremap <CR> :noh<CR><CR>
-nnoremap <leader><CR> :noh<CR>
-
-"case insensitive searching
 set ignorecase
 set smartcase
 
-"Hide MacVim toolbar by default
+"Use leader <space>> to disable the search highlight until the next search
+nnoremap <leader><space> :noh<CR>
 
 "Hard-wrap paragraphs of text
 noremap <leader>q gqip
@@ -106,6 +116,7 @@ set foldenable
 set foldmethod=indent
 set foldlevel=99
 
+" open/close folds using <space> in normal mode.
 nnoremap <space> za
 
 "Hide mouse when typing
@@ -135,6 +146,9 @@ call mkdir ($HOME . '/.config/nvim/tmp/backup', 'p')
 set backupdir=~/.config/nvim/tmp/backup//
 set directory=~/.config/nvim/tmp/swap//
 set backup
+
+" Undofile is useful!
+set undofile
 
 "Show matching brackets
 set showmatch
@@ -186,6 +200,28 @@ nnoremap <Leader>rts :call Preserve("%s/\\s\\+$//e")<CR>
 
 "List chars are useful
 set list
+set listchars=tab:▸\ ,eol:¬
+
+" stop using arrow keys to make me learn hjkl and use modes more
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+" make j, k do 'normal' action on wrapped lines.
+nnoremap j gj
+nnoremap k gk
+
+" <leader>ev to edit my (n)vim RC file
+nnoremap <leader>ev :tabe $MYVIMRC>cr>
+
+" file augroups
+augroup files
+	autocmd FocusLost * :wa
+augroup END
 
 "autocmd FileType python
 
@@ -233,3 +269,6 @@ let g:pymode_indent = 0
 
 "Configure python-syntax
 let python_highlight_all = 1
+
+" Map Scratch to leader <tab> to open the scratch buffer
+nnoremap <leader><tab> :Scratch
