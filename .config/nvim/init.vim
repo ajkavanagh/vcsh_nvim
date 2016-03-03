@@ -26,7 +26,6 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 Plug 'scrooloose/nerdcommenter'
 
-Plug 'YankRing.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'duff/vim-scratch'
