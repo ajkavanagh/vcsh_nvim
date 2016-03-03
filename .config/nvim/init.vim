@@ -1,12 +1,12 @@
 ".vimrc file
 " copied from http://net.tutsplus.com (originally)
 "
+set encoding=utf-8
 
 "Enable filetypes
 filetype on
 filetype plugin on
 filetype indent on
-syntax on
 
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
@@ -28,13 +28,14 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
 Plug 'duff/vim-scratch'
+Plug 'mileszs/ack.vim'
 
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'terryma/vim-expand-region'
 Plug 'joequery/Stupid-EasyMotion'
 Plug 'mhinz/vim-signify'
-"Plug 'Yggdroot/indentLine'
 
 Plug 'Valloric/YouCompleteMe'
 
@@ -226,6 +227,12 @@ augroup files
 augroup END
 
 "autocmd FileType python
+augroup python
+	autocmd BufNewFile,BufRead *.py set tabstop=4 softtabstop=4
+		\ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
+	autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+	autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+augroup END
 
 "Plugin configuration
 
@@ -271,6 +278,14 @@ let g:pymode_indent = 0
 
 "Configure python-syntax
 let python_highlight_all = 1
+syntax on
 
 " Map Scratch to leader <tab> to open the scratch buffer
 nnoremap <leader><tab> :Scratch
+
+" Configure ack.vim on Ubunut (it's called ack-grep)
+if executable('ag')
+	let g:ackprg = 'ag --vimgrep'
+elseif executable('ack-grep')
+	let g:ackprg = 'ack-grep'
+endif
