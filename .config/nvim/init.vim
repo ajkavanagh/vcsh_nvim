@@ -1,7 +1,9 @@
-".vimrc file
-" copied from http://net.tutsplus.com (originally)
+"NVIM init.vim file
 "
-set encoding=utf-8
+" Shouldn't be needed, but would be useful in the .vimrc file.
+if !has('nvim')
+	set encoding=utf-8
+endif
 
 "Enable filetypes
 filetype on
