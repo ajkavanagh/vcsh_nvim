@@ -25,8 +25,11 @@ call plug#begin("~/.config/nvim/plugged")
 
 " NERD tree will be loaded on the first invocation of NERDTreeToggle command
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-
 Plug 'scrooloose/nerdcommenter'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-ctrlspace/vim-ctrlspace'
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -61,8 +64,11 @@ let g:mapleader = ","
 "the timeout.
 set timeoutlen=500
 
-"Switch between buffers without saving
+"Switch between buffers without saving - also required by vim-ctrlspace
 set hidden
+
+" This is for vim-ctrlspace
+set showtabline=0
 
 "Set the colour scheme.  Change this to your preference
 "Here's 100's to choose from:
