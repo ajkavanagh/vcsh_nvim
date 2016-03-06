@@ -27,6 +27,7 @@ call plug#begin("~/.config/nvim/plugged")
 " NERD tree will be loaded on the first invocation of NERDTreeToggle command
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -51,6 +52,7 @@ Plug 'https://github.com/kien/rainbow_parentheses.vim.git'
 Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'hdima/python-syntax'
+Plug 'nvie/vim-flake8'
 
 " Golang stuff
 Plug 'fatih/vim-go'
