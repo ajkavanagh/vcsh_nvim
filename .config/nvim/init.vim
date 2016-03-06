@@ -3,6 +3,7 @@
 " Shouldn't be needed, but would be useful in the .vimrc file.
 if !has('nvim')
 	set encoding=utf-8
+	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
 "Enable filetypes
