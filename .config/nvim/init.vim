@@ -57,6 +57,10 @@ Plug 'nvie/vim-flake8'
 " Golang stuff
 Plug 'fatih/vim-go'
 
+" themes
+Plug 'altercation/vim-colors-solarized'
+Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+
 call plug#end()
 
 "Want a different map leader than \
@@ -300,3 +304,9 @@ if executable('ag')
 elseif executable('ack-grep')
 	let g:ackprg = 'ack-grep'
 endif
+
+
+" Set the theme up
+set background=dark
+" colorscheme solarized
+colorscheme dracula
