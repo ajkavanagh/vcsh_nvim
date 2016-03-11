@@ -76,6 +76,10 @@ set hidden
 
 " This is for vim-ctrlspace
 set showtabline=0
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+let g:airline_exclude_preview = 1
 
 "Set the colour scheme.  Change this to your preference
 "Here's 100's to choose from:
@@ -259,7 +263,7 @@ let NERDTreeIgnore = ['\.pyc$']
 
 "CtrlP configuration
 "let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPBuffer'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
 nnoremap <Leader>o :CtrlP<CR>
