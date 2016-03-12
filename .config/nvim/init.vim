@@ -72,6 +72,7 @@ call plug#end()
 "Want a different map leader than \
 let mapleader = ","
 let g:mapleader = ","
+let maplocalleader = "\\"
 
 "Ever notice a slight lag after typing the leader key + command? This lowers
 "the timeout.
@@ -79,6 +80,10 @@ set timeoutlen=500
 
 "Switch between buffers without saving - also required by vim-ctrlspace
 set hidden
+
+" Insert mode key mappings
+" Ctrl-U = uppercase current work in Insert mode.
+inoremap <c-u> <esc>viwUi
 
 " This is for vim-ctrlspace
 set showtabline=0
@@ -248,18 +253,23 @@ nnoremap k gk
 
 " <leader>ev to edit my (n)vim RC file
 nnoremap <leader>ev :tabe $MYVIMRC<cr>
+" <leader>ev to source the (n)vim RC file
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " file augroups
 augroup files
+	autocmd!
 	autocmd FocusLost * :wa
 augroup END
 
 "autocmd FileType python
 augroup python
+	autocmd!
 	autocmd BufNewFile,BufRead *.py set tabstop=4 softtabstop=4
 		\ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
 	autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 	autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+	autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
 augroup END
 
 "Plugin configuration
@@ -321,5 +331,4 @@ endif
 
 " Set the theme up
 set background=dark
-" colorscheme solarized
 colorscheme dracula
