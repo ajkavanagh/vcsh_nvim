@@ -60,6 +60,12 @@ Plug 'fatih/vim-go'
 " themes
 Plug 'altercation/vim-colors-solarized'
 Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plug 'goatslacker/mango.vim'
+Plug 'zeis/vim-kolor'
+Plug 'jnurmine/Zenburn'
+Plug 'morhetz/gruvbox'
+Plug 'sickill/vim-monokai'
+Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 
@@ -80,6 +86,9 @@ let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
 let g:airline_exclude_preview = 1
+
+" airline specific stuff
+set noshowmode
 
 "Set the colour scheme.  Change this to your preference
 "Here's 100's to choose from:
