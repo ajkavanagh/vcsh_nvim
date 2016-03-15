@@ -321,6 +321,11 @@ syntax on
 " Map Scratch to leader <tab> to open the scratch buffer
 nnoremap <leader><tab> :Scratch
 
+" Fugitive mappings
+nnoremap <leader>gu :diffupdate<cr>
+nnoremap <leader>g2 :diffget //2<cr>
+nnoremap <leader>g3 :diffget //3<cr>
+
 " Configure ack.vim on Ubunut (it's called ack-grep)
 if executable('ag')
 	let g:ackprg = 'ag --vimgrep'
