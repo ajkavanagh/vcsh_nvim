@@ -336,4 +336,4 @@ endif
 
 " Set the theme up
 set background=dark
-colorscheme dracula
+colorscheme solarized
