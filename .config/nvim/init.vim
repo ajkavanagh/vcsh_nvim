@@ -27,37 +27,42 @@ call plug#begin("~/.config/nvim/plugged")
 " NERD tree will be loaded on the first invocation of NERDTreeToggle command
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-ctrlspace/vim-ctrlspace'
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'duff/vim-scratch'
 Plug 'mileszs/ack.vim'
+Plug 'sjl/gundo.vim'
 
-Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'ctrlpvim/ctrlp.vim'
+
 Plug 'terryma/vim-expand-region'
 Plug 'joequery/Stupid-EasyMotion'
 Plug 'mhinz/vim-signify'
 
-Plug 'Valloric/YouCompleteMe'
+" Markdown / writing support
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
-" Python stuff
-Plug 'https://github.com/majutsushi/tagbar.git'
-Plug 'https://github.com/kien/rainbow_parentheses.vim.git'
+" Python/programming support type stuff stuff
+Plug 'majutsushi/tagbar'
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'hdima/python-syntax'
+Plug 'scrooloose/syntastic'
 Plug 'nvie/vim-flake8'
+Plug 'Valloric/YouCompleteMe'
 
 " Golang stuff
 Plug 'fatih/vim-go'
 
-" themes
+" themes and look'n'feel of vim
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 Plug 'altercation/vim-colors-solarized'
 Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plug 'goatslacker/mango.vim'
@@ -216,20 +221,20 @@ vmap <Leader>P "+P
 match ErrorMsg '\s\+$'
 
 function! Preserve(command)
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  execute a:command
-  " Clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
+	" Preparation: save last search, and cursor position.
+	let _s=@/
+	let l = line(".")
+	let c = col(".")
+	" Do the business:
+	execute a:command
+	" Clean up: restore previous search history, and cursor position
+	let @/=_s
+	call cursor(l, c)
 endfunction
 
 " Removes trailing spaces
 function! TrimWhiteSpace()
-    %s/\s\+$//e
+	%s/\s\+$//e
 endfunction
 
 nnoremap <Leader>rts :call Preserve("%s/\\s\\+$//e")<CR>
@@ -305,6 +310,9 @@ nnoremap <F2> :TagbarToggle<cr>
 
 " Rainbow parenthesis configuration
 nnoremap <F3> :RainbowParenthesesToggleAll<cr>
+
+" Gundo call up configuration
+nnoremap <F5> :GundoToggle<cr>
 
 "YCM configuration
 let g:ycm_autoclose_preview_window_after_completion=1
