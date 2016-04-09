@@ -2,8 +2,8 @@
 "
 " Shouldn't be needed, but would be useful in the .vimrc file.
 if !has('nvim')
-	set encoding=utf-8
-	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  set encoding=utf-8
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
 "Enable filetypes
@@ -166,9 +166,6 @@ set mousehide
 "Allow Cmd-C in item2
 set mouse=
 
-"Map escape key to jk -- much, much faster
-imap jj <esc>
-
 "Map K to 'split' line in normal mode
 :nnoremap K i<CR><Esc>
 
@@ -196,14 +193,14 @@ set showmatch
 
 "Highlight the colour column to be textwidth+2 and 120
 if v:version >= 703
-	"a faint gray color, not too insistent
-	highlight ColorColumn term=reverse ctermbg=233 guibg=#202020
-	" put the marker(s) at 'textwidth+2' and 120
-	set colorcolumn=+2,120
-	" if we're called as '*view' or on a console, turn it off
-	if v:progname =~? 'view' || &term =~? 'linux|console'
-		set colorcolumn=
-	endif
+  "a faint gray color, not too insistent
+  highlight ColorColumn term=reverse ctermbg=233 guibg=#202020
+  " put the marker(s) at 'textwidth+2' and 120
+  set colorcolumn=+2,120
+  " if we're called as '*view' or on a console, turn it off
+  if v:progname =~? 'view' || &term =~? 'linux|console'
+    set colorcolumn=
+  endif
 endif
 
 "Copy & Paste to the system clipboard
@@ -221,20 +218,20 @@ vmap <Leader>P "+P
 match ErrorMsg '\s\+$'
 
 function! Preserve(command)
-	" Preparation: save last search, and cursor position.
-	let _s=@/
-	let l = line(".")
-	let c = col(".")
-	" Do the business:
-	execute a:command
-	" Clean up: restore previous search history, and cursor position
-	let @/=_s
-	call cursor(l, c)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
 endfunction
 
 " Removes trailing spaces
 function! TrimWhiteSpace()
-	%s/\s\+$//e
+  %s/\s\+$//e
 endfunction
 
 nnoremap <Leader>rts :call Preserve("%s/\\s\\+$//e")<CR>
@@ -263,18 +260,25 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " file augroups
 augroup files
-	autocmd!
-	autocmd FocusLost * :wa
+  autocmd!
+  autocmd FocusLost * :wa
 augroup END
 
 "autocmd FileType python
 augroup python
-	autocmd!
-	autocmd BufNewFile,BufRead *.py set tabstop=4 softtabstop=4
-		\ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
-	autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-	autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-	autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+  autocmd!
+  autocmd BufNewFile,BufRead *.py set tabstop=4 softtabstop=4
+    \ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
+  autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+  autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+  autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+augroup END
+
+"autocmd FileType yaml
+augroup yaml
+  autocmd!
+  autocmd BufNewFile,BufRead *.yaml set tabstop=2 softtabstop=2
+    \ shiftwidth=2 textwidth=79 expandtab autoindent fileformat=unix
 augroup END
 
 "Plugin configuration
@@ -291,6 +295,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
 nnoremap <Leader>o :CtrlP<CR>
+nnoremap <C-t> :CtrlPBuffer<cr>
 
 "vim-expand-region
 vmap v <Plug>(expand_region_expand)
@@ -336,9 +341,9 @@ nnoremap <leader>g3 :diffget //3<cr>
 
 " Configure ack.vim on Ubunut (it's called ack-grep)
 if executable('ag')
-	let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --vimgrep'
 elseif executable('ack-grep')
-	let g:ackprg = 'ack-grep'
+  let g:ackprg = 'ack-grep'
 endif
 
 
