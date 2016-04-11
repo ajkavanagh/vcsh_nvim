@@ -45,6 +45,8 @@ Plug 'mhinz/vim-signify'
 " Markdown / writing support
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'reedes/vim-pencil'
 
 " Python/programming support type stuff stuff
 Plug 'majutsushi/tagbar'
@@ -63,7 +65,8 @@ Plug 'fatih/vim-go'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plug 'goatslacker/mango.vim'
 Plug 'zeis/vim-kolor'
@@ -71,6 +74,7 @@ Plug 'jnurmine/Zenburn'
 Plug 'morhetz/gruvbox'
 Plug 'sickill/vim-monokai'
 Plug 'w0ng/vim-hybrid'
+Plug 'reedes/vim-colors-pencil'
 
 call plug#end()
 
@@ -281,6 +285,15 @@ augroup yaml
     \ shiftwidth=2 textwidth=79 expandtab autoindent fileformat=unix
 augroup END
 
+" pencil configuration for writing
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
+
+let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
+
 "Plugin configuration
 
 "NERDTree
@@ -339,7 +352,7 @@ nnoremap <leader>gu :diffupdate<cr>
 nnoremap <leader>g2 :diffget //2<cr>
 nnoremap <leader>g3 :diffget //3<cr>
 
-" Configure ack.vim on Ubunut (it's called ack-grep)
+" Configure ack.vim on Ubuntu (it's called ack-grep)
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 elseif executable('ack-grep')
@@ -348,5 +361,12 @@ endif
 
 
 " Set the theme up
-set background=dark
+set background=light
 colorscheme solarized
+
+" I like italicised comments
+highlight Comment cterm=italic
+
+" And some keyboard shortcuts to switch between the color schemes
+nnoremap <leader><leader>bd :set background=dark<cr>
+nnoremap <leader><leader>bl :set background=light<cr>
