@@ -373,7 +373,7 @@ let g:syntastic_html_tidy_ignore_errors = [
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 elseif executable('ack-grep')
-  let g:ackprg = 'ack-grep'
+  let g:ackprg = 'ack-grep --nocolor'
 endif
 
 
