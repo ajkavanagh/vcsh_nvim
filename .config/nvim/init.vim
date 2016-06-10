@@ -289,7 +289,7 @@ augroup END
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
+  "autocmd FileType text         call pencil#init()
 augroup END
 
 let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
@@ -356,7 +356,7 @@ nnoremap <leader>g3 :diffget //3<cr>
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 elseif executable('ack-grep')
-  let g:ackprg = 'ack-grep'
+  let g:ackprg = 'ack-grep --nocolor'
 endif
 
 
