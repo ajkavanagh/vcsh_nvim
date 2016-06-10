@@ -288,8 +288,8 @@ augroup END
 " pencil configuration for writing
 augroup pencil
   autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
+  "autocmd FileType markdown,mkd call pencil#init()
+  "autocmd FileType text         call pencil#init()
 augroup END
 
 let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
