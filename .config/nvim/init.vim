@@ -294,6 +294,14 @@ augroup END
 
 let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
 
+" html files
+augroup html
+  autocmd!
+  autocmd BufNewFile,BufRead *.html,*.htm set tabstop=2 softtabstop=2
+    \ shiftwidth=2 expandtab autoindent fileformat=unix
+augroup END
+
+
 "Plugin configuration
 
 "NERDTree
@@ -351,6 +359,15 @@ nnoremap <leader><tab> :Scratch
 nnoremap <leader>gu :diffupdate<cr>
 nnoremap <leader>g2 :diffget //2<cr>
 nnoremap <leader>g3 :diffget //3<cr>
+
+" Syntastic ignore empty spans, h1s, etc as common with Bootstrap
+let g:syntastic_html_tidy_ignore_errors = [
+  \  '<html> attribute "lang" lacks value',
+  \  '<a> attribute "href" lacks value',
+  \  'trimming empty <span>',
+  \  'trimming empty <h1>',
+  \  '<link> proprietary attribute "sizes"'
+  \ ]
 
 " Configure ack.vim on Ubuntu (it's called ack-grep)
 if executable('ag')
