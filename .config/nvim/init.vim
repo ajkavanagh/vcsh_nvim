@@ -42,6 +42,9 @@ Plug 'terryma/vim-expand-region'
 Plug 'joequery/Stupid-EasyMotion'
 Plug 'mhinz/vim-signify'
 
+" Miscelaneous plugins
+Plug 'cespare/vim-toml'
+
 " Markdown / writing support
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
@@ -378,7 +381,7 @@ endif
 
 
 " Set the theme up
-set background=light
+set background=dark
 colorscheme solarized
 
 " I like italicised comments
