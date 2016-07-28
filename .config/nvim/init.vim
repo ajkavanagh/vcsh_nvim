@@ -6,6 +6,28 @@ if !has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
+"Determine what the os is and set a global.
+"This will be either Linux, Darwin or Windows
+if has("win64") || has("win32") || has("win16")
+	let g:os = "Windows"
+else
+	let g:os = substitute(system('uname'), '\n', '', '')
+endif
+
+"Determine if we are running under tmux (the variable TMUX will set)
+if !empty($TMUX)
+	let g:tmux = 1
+else
+	let g:tmux = 0
+endif
+
+"Determine if xwindows is running (i.e. for clipboard, etc.)
+if !empty($DISPLAY)
+	let g:xwindows = 1
+else
+	let g:xwindows = 0
+endif
+
 "Enable filetypes
 filetype on
 filetype plugin on
@@ -57,6 +79,7 @@ Plug 'hdima/python-syntax'
 Plug 'scrooloose/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'Valloric/YouCompleteMe'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 " Golang stuff
 Plug 'fatih/vim-go'
@@ -143,8 +166,8 @@ set linespace=3
 
 "Set incremental, highlighted and case-insensitive searching
 "also sane regexs (the / /\v bit)
-nnoremap / /\v
-vnoremap / /\v
+"nnoremap / /\v
+"vnoremap / /\v
 set incsearch
 set hlsearch
 set ignorecase
@@ -207,13 +230,25 @@ if v:version >= 703
   endif
 endif
 
-"Copy & Paste to the system clipboard
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+" if now windows AND we are in tmux, then use the tmux paste register
+if !g:xwindows && g:tmux
+	"Copy & Paste to the fakeclip & register (tmux paste)
+	vmap <Leader>y "&y
+	vmap <Leader>d "&d
+	nmap <Leader>p "&p
+	nmap <Leader>P "&P
+	vmap <Leader>p "&p
+	vmap <Leader>P "&P
+else
+	"we either have the system clipboard or a fake system clipboard
+	"Copy & Paste to the system clipboard
+	vmap <Leader>y "+y
+	vmap <Leader>d "+d
+	nmap <Leader>p "+p
+	nmap <Leader>P "+P
+	vmap <Leader>p "+p
+	vmap <Leader>P "+P
+endif
 
 "Enter visual mode quickly.
 "nmap <Leader><Leader> V
@@ -288,11 +323,12 @@ augroup END
 " pencil configuration for writing
 augroup pencil
   autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
+  "autocmd FileType markdown,mkd call pencil#init()
   "autocmd FileType text         call pencil#init()
 augroup END
 
-let g:pencil#joinspaces = 1     " 0=one_space (def), 1=two_spaces
+let g:pencil#joinspaces = 1      " 0=one_space (def), 1=two_spaces
+let g:pencil#autoformat = 0      " 0=manual, 1=auto (def)
 
 " html files
 augroup html
@@ -324,6 +360,10 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 "vim-signify
 let g:signify_vcs_list = [ 'bzr', 'git' ]
+let g:signify_update_on_focusgained = 1
+let g:signify_mapping_next_hunk = '<leader>gj'
+let g:signify_mapping_prev_hunk = '<leader>gk'
+
 
 "Yggdroot/indentLine
 "let g:indentLine_char = '┊'
@@ -343,7 +383,7 @@ nnoremap <F5> :GundoToggle<cr>
 "YCM configuration
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_auto_trigger = 0
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>gg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "Configure vim-python-pep8-indent
 let g:pymode_indent = 0
