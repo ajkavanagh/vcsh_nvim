@@ -72,6 +72,8 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'reedes/vim-pencil'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 
 " Python/programming support type stuff stuff
 "Plug 'majutsushi/tagbar'
@@ -402,7 +404,7 @@ let python_highlight_all = 1
 syntax on
 
 " Map Scratch to leader <tab> to open the scratch buffer
-nnoremap <leader><tab> :Scratch
+nnoremap <leader><tab> :Scratch<cr>
 
 " Fugitive mappings
 nnoremap <leader>gu :diffupdate<cr>
@@ -425,6 +427,8 @@ elseif executable('ack-grep')
   let g:ackprg = 'ack-grep --nocolor'
 endif
 
+" Configure notes.vim
+let g:notes_directories = ['~/Dropbox/VimNotes']
 
 " Set the theme up
 set background=light
