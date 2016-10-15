@@ -74,7 +74,7 @@ Plug 'nelstrom/vim-markdown-folding'
 Plug 'reedes/vim-pencil'
 
 " Python/programming support type stuff stuff
-Plug 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
@@ -83,6 +83,7 @@ Plug 'scrooloose/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'python-rope/ropevim'
 
 " Golang stuff
 Plug 'fatih/vim-go'
@@ -188,7 +189,7 @@ set foldmethod=indent
 set foldlevel=99
 
 " open/close folds using <space> in normal mode.
-nnoremap <space> za
+"nnoremap <space> za
 
 "Hide mouse when typing
 set mousehide
@@ -253,6 +254,10 @@ else
 	vmap <Leader>P "+P
 endif
 
+" use a register in tmp to copy text between sessions (or even just store it)
+vmap <Leader><Leader>y :w! /tmp/neovim.tmp<CR>
+nmap <Leader><Leader>p :r! cat /tmp/neovim.tmp<CR>
+
 "Enter visual mode quickly.
 "nmap <Leader><Leader> V
 
@@ -280,7 +285,8 @@ nnoremap <Leader>rts :call Preserve("%s/\\s\\+$//e")<CR>
 
 "List chars are useful
 set list
-set listchars=tab:▸\ ,eol:¬
+"set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ 
 
 " stop using arrow keys to make me learn hjkl and use modes more
 nnoremap <up> <nop>
@@ -375,7 +381,7 @@ let g:signify_mapping_prev_hunk = '<leader>gk'
 "let g:indentLine_leadingSpaceEnabled = 1
 
 "TagBar configuration
-nnoremap <F2> :TagbarToggle<cr>
+"nnoremap <F2> :TagbarToggle<cr>
 
 " Rainbow parenthesis configuration
 nnoremap <F3> :RainbowParenthesesToggleAll<cr>
@@ -421,7 +427,7 @@ endif
 
 
 " Set the theme up
-set background=dark
+set background=light
 colorscheme solarized
 
 " I like italicised comments
