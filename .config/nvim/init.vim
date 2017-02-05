@@ -74,6 +74,7 @@ Plug 'nelstrom/vim-markdown-folding'
 Plug 'reedes/vim-pencil'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
+Plug 'joanrivera/vim-zimwiki-syntax'
 
 " Python/programming support type stuff stuff
 "Plug 'majutsushi/tagbar'
@@ -85,7 +86,7 @@ Plug 'scrooloose/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'python-rope/ropevim'
+"Plug 'python-rope/ropevim'
 
 " Golang stuff
 Plug 'fatih/vim-go'
@@ -125,6 +126,7 @@ inoremap <c-u> <esc>viwUi
 
 " This is for vim-ctrlspace
 set showtabline=0
+let g:CtrlSpaceDefaultMapping = 1
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
