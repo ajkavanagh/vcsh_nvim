@@ -87,6 +87,7 @@ Plug 'nvie/vim-flake8'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Glench/Vim-Jinja2-Syntax'
 "Plug 'python-rope/ropevim'
+Plug 'rust-lang/rust.vim'
 
 " Golang stuff
 Plug 'fatih/vim-go'
@@ -105,6 +106,7 @@ Plug 'morhetz/gruvbox'
 Plug 'sickill/vim-monokai'
 Plug 'w0ng/vim-hybrid'
 Plug 'reedes/vim-colors-pencil'
+Plug 'fneu/breezy'
 
 call plug#end()
 
@@ -397,6 +399,7 @@ nnoremap <F5> :GundoToggle<cr>
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_auto_trigger = 0
 map <leader>gg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_rust_src_path = '/home/alex/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 
 "Configure vim-python-pep8-indent
 let g:pymode_indent = 0
@@ -421,6 +424,9 @@ let g:syntastic_html_tidy_ignore_errors = [
   \  'trimming empty <h1>',
   \  '<link> proprietary attribute "sizes"'
   \ ]
+
+" Ensure that syntastic + rust play properly
+let g:syntastic_rust_checkers = ['rustc']
 
 " Configure ack.vim on Ubuntu (it's called ack-grep)
 if executable('ag')
