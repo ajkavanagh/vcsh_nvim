@@ -1,7 +1,7 @@
 "NVIM init.vim file
 "
 " Shouldn't be needed, but would be useful in the .vimrc file.
-if !has('nvim')
+if has('nvim')
   set encoding=utf-8
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
@@ -49,16 +49,16 @@ call plug#begin("~/.config/nvim/plugged")
 " NERD tree will be loaded on the first invocation of NERDTreeToggle command
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-scripts/restore_view.vim'
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 Plug 'duff/vim-scratch'
 Plug 'mileszs/ack.vim'
 Plug 'sjl/gundo.vim'
-
-Plug 'vim-ctrlspace/vim-ctrlspace'
-Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'terryma/vim-expand-region'
 Plug 'joequery/Stupid-EasyMotion'
@@ -75,28 +75,50 @@ Plug 'reedes/vim-pencil'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'joanrivera/vim-zimwiki-syntax'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'reedes/vim-wordy'
 
 " Python/programming support type stuff stuff
 "Plug 'majutsushi/tagbar'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'hdima/python-syntax'
+Plug 'vim-python/python-syntax'
 Plug 'scrooloose/syntastic'
 Plug 'nvie/vim-flake8'
-Plug 'Valloric/YouCompleteMe'
 Plug 'Glench/Vim-Jinja2-Syntax'
 "Plug 'python-rope/ropevim'
 Plug 'rust-lang/rust.vim'
 
+" Completions using YouCompleteMe
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer --gocode-completer --racer-completer
+  endif
+endfunction
+
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+
+" Rust language stuff (using the language server)
+" Note that until the neovim language server is ready we use this plugin
+" Plug 'autozimu/LanguageClient-neovim', {'do': ':UpdateRemotePlugins' }
+
+
 " Golang stuff
 Plug 'fatih/vim-go'
+" We like Ctrl-T for our own mapping
+let g:go_def_mapping_enabled = 0
 
 " themes and look'n'feel of vim
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-"Plug 'altercation/vim-colors-solarized'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plug 'goatslacker/mango.vim'
@@ -191,7 +213,7 @@ noremap <leader>q gqip
 
 "Enable code folding
 set foldenable
-set foldmethod=indent
+"set foldmethod=indent
 set foldlevel=99
 
 " open/close folds using <space> in normal mode.
@@ -323,8 +345,8 @@ augroup python
   autocmd!
   autocmd BufNewFile,BufRead *.py set tabstop=4 softtabstop=4
     \ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
-  autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-  autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+  "autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+  "autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
   autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
 augroup END
 
@@ -338,7 +360,7 @@ augroup END
 " pencil configuration for writing
 augroup pencil
   autocmd!
-  "autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType markdown,mkd call pencil#init()
   "autocmd FileType text         call pencil#init()
 augroup END
 
@@ -366,7 +388,7 @@ let NERDTreeIgnore = ['\.pyc$']
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
-nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>o :CtrlPCurWD<CR>
 nnoremap <C-t> :CtrlPBuffer<cr>
 
 "vim-expand-region
@@ -407,6 +429,9 @@ let g:pymode_indent = 0
 "Configure python-syntax
 let python_highlight_all = 1
 syntax on
+
+"Configure python SimpylFold
+let g:SimpylFold_docstring_preview=1
 
 " Map Scratch to leader <tab> to open the scratch buffer
 nnoremap <leader><tab> :Scratch<cr>
