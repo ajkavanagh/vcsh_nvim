@@ -75,6 +75,7 @@ Plug 'reedes/vim-pencil'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'joanrivera/vim-zimwiki-syntax'
+Plug 'vimwiki/vimwiki'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'junegunn/goyo.vim'
@@ -115,6 +116,9 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'fatih/vim-go'
 " We like Ctrl-T for our own mapping
 let g:go_def_mapping_enabled = 0
+
+" Rustlang stuff
+Plug 'rust-lang/rust.vim'
 
 " themes and look'n'feel of vim
 Plug 'vim-airline/vim-airline'
@@ -218,6 +222,13 @@ set foldlevel=99
 
 " open/close folds using <space> in normal mode.
 "nnoremap <space> za
+
+" Moving text around (transposes, etc.)
+" transpose chars, without moving the character position
+:nnoremap <silent> gc xph
+" Swap the current word with the next, without moving
+:nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>:nohlsearch<CR>
+
 
 "Hide mouse when typing
 set mousehide
@@ -421,7 +432,12 @@ nnoremap <F5> :GundoToggle<cr>
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_auto_trigger = 0
 map <leader>gg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>gr  :YcmCompleter GoToReferences<CR>
+
 let g:ycm_rust_src_path = '/home/alex/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+
+" also ensure we rustfmt on every save:
+let g:rustfmt_autosave = 1
 
 "Configure vim-python-pep8-indent
 let g:pymode_indent = 0
@@ -462,6 +478,10 @@ endif
 
 " Configure notes.vim
 let g:notes_directories = ['~/Dropbox/VimNotes']
+
+" Configure vimwiki
+let g:vimwiki_list = [{'path': '~/Dropbox/VimWiki',
+    \ 'nested_syntaxes': {'python': 'python', 'rust': 'rust'}}]
 
 " Set the theme up
 set background=light
