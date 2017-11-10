@@ -41,6 +41,10 @@ set autowrite
 "Display current cursor position in the lower right corner
 set ruler
 
+"Set the titlestring; this is for the autoswap plugin that also requires wmctrl
+"to be installed in linux
+set title titlestring=
+
 "Plugins using vim-plug
 call plug#begin("~/.config/nvim/plugged")
 
@@ -59,6 +63,14 @@ Plug 'tpope/vim-unimpaired'
 Plug 'duff/vim-scratch'
 Plug 'mileszs/ack.vim'
 Plug 'sjl/gundo.vim'
+
+Plug 'vim-scripts/vis'
+"Disabled as they don't work properly -- try to debug sometime
+"Plug 'vim-scripts/align'
+"Plug 'vim-scripts/cecutil'
+"Plug 'atweiden/vim-dragvisuals'
+
+Plug 'gioele/vim-autoswap'
 
 Plug 'terryma/vim-expand-region'
 Plug 'joequery/Stupid-EasyMotion'
@@ -81,6 +93,7 @@ Plug 'mattn/webapi-vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'reedes/vim-wordy'
+Plug 'atweiden/vim-betterdigraphs'
 
 " Python/programming support type stuff stuff
 "Plug 'majutsushi/tagbar'
@@ -388,6 +401,19 @@ augroup END
 
 
 "Plugin configuration
+
+"Better digraphs
+inoremap <expr> <C-K> BDG_GetDigraph()
+
+"dragvisuals.vim configuration
+"Doesn't work properly yet!
+"vmap <expr> <LEFT>   DVB_Drag('lefy')
+"vmap <expr> <RIGHT>  DVB_Drag('right')
+"vmap <expr> <DOWN>   DVB_Drag('down')
+"vmap <expr> <UP>     DVB_Drag('up')
+"vmap <expr> D        DVB_Duplicate()
+
+"let g:DVB_TrimWS = 1
 
 "NERDTree
 map <C-n> :NERDTreeToggle<CR>
