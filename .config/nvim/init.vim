@@ -213,7 +213,7 @@ set smartcase
 nnoremap <leader><space> :noh<CR>
 
 "Hard-wrap paragraphs of text
-noremap <leader>q gqip
+noremap <leader>q gqi
 
 "Enable code folding
 set foldenable
@@ -325,7 +325,8 @@ nnoremap <Leader>rts :call Preserve("%s/\\s\\+$//e")<CR>
 "List chars are useful
 set list
 "set listchars=tab:▸\ ,eol:¬
-set listchars=tab:▸\ 
+"set listchars=tab:▸\ 
+set listchars=tab:→\ 
 
 " stop using arrow keys to make me learn hjkl and use modes more
 nnoremap <up> <nop>
