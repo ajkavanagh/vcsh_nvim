@@ -84,8 +84,8 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'reedes/vim-pencil'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
+"Plug 'xolox/vim-misc'
+"Plug 'xolox/vim-notes'
 Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/gist-vim'
@@ -504,7 +504,7 @@ elseif executable('ack-grep')
 endif
 
 " Configure notes.vim
-let g:notes_directories = ['~/Dropbox/VimNotes']
+"let g:notes_directories = ['~/Dropbox/VimNotes']
 
 " Configure vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/VimWiki',
