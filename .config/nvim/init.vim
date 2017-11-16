@@ -101,7 +101,8 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-python/python-syntax'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'nvie/vim-flake8'
 Plug 'Glench/Vim-Jinja2-Syntax'
 "Plug 'python-rope/ropevim'
@@ -485,16 +486,20 @@ nnoremap <leader>g2 :diffget //2<cr>
 nnoremap <leader>g3 :diffget //3<cr>
 
 " Syntastic ignore empty spans, h1s, etc as common with Bootstrap
-let g:syntastic_html_tidy_ignore_errors = [
-  \  '<html> attribute "lang" lacks value',
-  \  '<a> attribute "href" lacks value',
-  \  'trimming empty <span>',
-  \  'trimming empty <h1>',
-  \  '<link> proprietary attribute "sizes"'
-  \ ]
+"let g:syntastic_html_tidy_ignore_errors = [
+  "\  '<html> attribute "lang" lacks value',
+  "\  '<a> attribute "href" lacks value',
+  "\  'trimming empty <span>',
+  "\  'trimming empty <h1>',
+  "\  '<link> proprietary attribute "sizes"'
+  "\ ]
 
-" Ensure that syntastic + rust play properly
-let g:syntastic_rust_checkers = ['rustc']
+"" Ensure that syntastic + rust play properly
+"let g:syntastic_rust_checkers = ['rustc']
+
+" ALE (Asynchronous Linting Engine configuration
+let g:airline#extensions#ale#enabled = 1
+let g:ale_lint_on_text_changed = 'normal'
 
 " Configure ack.vim on Ubuntu (it's called ack-grep)
 if executable('ag')
