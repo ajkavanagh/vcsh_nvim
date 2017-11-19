@@ -400,6 +400,12 @@ augroup html
     \ shiftwidth=2 expandtab autoindent fileformat=unix
 augroup END
 
+" gitcommit files
+augroup gitcommit
+  autocmd!
+  autocmd FileType  gitcommit BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+augroup END
+
 
 "Plugin configuration
 
