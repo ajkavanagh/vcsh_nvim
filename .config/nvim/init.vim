@@ -514,6 +514,10 @@ elseif executable('ack-grep')
   let g:ackprg = 'ack-grep --nocolor'
 endif
 
+" leader-a to start a search, leader-c to close the small results window
+nnoremap <leader>a :Ack! ""<Left>
+nnoremap <leader>c :ccl<CR>
+
 " Configure notes.vim
 "let g:notes_directories = ['~/Dropbox/VimNotes']
 
