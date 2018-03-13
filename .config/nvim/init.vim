@@ -33,6 +33,9 @@ filetype on
 filetype plugin on
 filetype indent on
 
+" we like modelines
+set modeline
+
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 "Write the old file out when switching between files.
@@ -94,6 +97,19 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'reedes/vim-wordy'
 Plug 'atweiden/vim-betterdigraphs'
+
+
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+
+Plug 'euclio/vim-markdown-composer', {'do': function('BuildComposer') }
 
 " Python/programming support type stuff stuff
 "Plug 'majutsushi/tagbar'
