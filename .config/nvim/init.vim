@@ -422,6 +422,13 @@ augroup gitcommit
   autocmd FileType gitcommit autocmd! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 augroup END
 
+"autocmd FileType haskell
+augroup haskell
+  autocmd!
+  autocmd BufNewFile,BufRead *.hs set tabstop=8 softtabstop=4
+    \ shiftwidth=4 textwidth=80 expandtab autoindent shiftround
+    \ fileformat=unix
+augroup END
 
 "Plugin configuration
 
