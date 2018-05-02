@@ -48,6 +48,13 @@ set ruler
 "to be installed in linux
 set title titlestring=
 
+" add some digraphs -- we have to do it early before the plugin initialises
+let g:BDG_add = {
+    \
+    \ '::' : '∷',
+    \ '=>' : '⇒',
+    \}
+
 "Plugins using vim-plug
 call plug#begin("~/.config/nvim/plugged")
 
@@ -555,6 +562,9 @@ colorscheme solarized
 
 " I like italicised comments
 highlight Comment cterm=italic
+
+" vim-markdown-composer ... I don't like it opening the browser wing
+let g:markdown_composer_open_browser = 1
 
 " And some keyboard shortcuts to switch between the color schemes
 nnoremap <leader><leader>bd :set background=dark<cr>
