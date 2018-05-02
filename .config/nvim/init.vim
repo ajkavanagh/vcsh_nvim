@@ -123,6 +123,7 @@ Plug 'nvie/vim-flake8'
 Plug 'Glench/Vim-Jinja2-Syntax'
 "Plug 'python-rope/ropevim'
 Plug 'rust-lang/rust.vim'
+Plug 'sbdchd/neoformat'
 
 " Completions using YouCompleteMe
 function! BuildYCM(info)
