@@ -14,7 +14,7 @@ else
 	let g:os = substitute(system('uname'), '\n', '', '')
 endif
 
-"Determine if we are running under tmux (the variable TMUX will set)
+"Determine if we are running under tmux (the variable TMUX will be set)
 if !empty($TMUX)
 	let g:tmux = 1
 else
@@ -66,6 +66,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/restore_view.vim'
 
+" General editing plugins
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -73,6 +74,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'duff/vim-scratch'
 Plug 'mileszs/ack.vim'
 Plug 'sjl/gundo.vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'tmhedberg/SimpylFold'
 
 Plug 'vim-scripts/vis'
 "Disabled as they don't work properly -- try to debug sometime
@@ -118,18 +121,30 @@ endfunction
 
 Plug 'euclio/vim-markdown-composer', {'do': function('BuildComposer') }
 
-" Python/programming support type stuff stuff
-"Plug 'majutsushi/tagbar'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'tmhedberg/SimpylFold'
+" Python/programming support
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-python/python-syntax'
-"Plug 'scrooloose/syntastic'
-Plug 'w0rp/ale'
 Plug 'nvie/vim-flake8'
 Plug 'Glench/Vim-Jinja2-Syntax'
-"Plug 'python-rope/ropevim'
+
+" Rust language support
 Plug 'rust-lang/rust.vim'
+" Note that until the neovim language server is ready we use this plugin
+" Plug 'autozimu/LanguageClient-neovim', {'do': ':UpdateRemotePlugins' }
+
+" Haskell specific plugins
+Plug 'neovimhaskell/haskell-vim'
+Plug 'alx741/vim-hindent'
+Plug 'parsonsmatt/intero-neovim'
+
+" Golang specific plugins
+Plug 'fatih/vim-go'
+" We like Ctrl-T for our own mapping
+let g:go_def_mapping_enabled = 0
+
+" General Programming support
+"Plug 'majutsushi/tagbar'
+Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
 
 " Completions using YouCompleteMe
@@ -144,19 +159,6 @@ function! BuildYCM(info)
 endfunction
 
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-
-" Rust language stuff (using the language server)
-" Note that until the neovim language server is ready we use this plugin
-" Plug 'autozimu/LanguageClient-neovim', {'do': ':UpdateRemotePlugins' }
-
-
-" Golang stuff
-Plug 'fatih/vim-go'
-" We like Ctrl-T for our own mapping
-let g:go_def_mapping_enabled = 0
-
-" Rustlang stuff
-Plug 'rust-lang/rust.vim'
 
 " themes and look'n'feel of vim
 Plug 'vim-airline/vim-airline'
@@ -430,14 +432,6 @@ augroup gitcommit
   autocmd FileType gitcommit autocmd! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 augroup END
 
-"autocmd FileType haskell
-augroup haskell
-  autocmd!
-  autocmd BufNewFile,BufRead *.hs set tabstop=8 softtabstop=4
-    \ shiftwidth=4 textwidth=80 expandtab autoindent shiftround
-    \ fileformat=unix
-augroup END
-
 "Plugin configuration
 
 "Better digraphs
@@ -513,6 +507,54 @@ syntax on
 
 "Configure python SimpylFold
 let g:SimpylFold_docstring_preview=1
+
+" Haskell related config
+" neovimhaskell/haskell-vim:
+let g:haskell_indent_if = 2
+let g:haskell_indent_before_where = 2
+let g:haskell_indent_case_alternative = 1
+let g:haskell_indent_let_no_in = 0
+
+" hindent & stylish-haskell
+" don't indent on save
+let g:hindent_on_save = 0
+
+" Helper function (from https://blog.jez.io/haskell-development-with-neovim/)
+" To do either an hindent, a stylish or both:
+function! HaskellFormat(which) abort
+  if a:which ==# 'hindent' || a:which ==# 'both'
+    :Hindent
+  endif
+  if a:which ==# 'stylish' || a:which ==# 'both'
+    silent! exe 'undojoin'
+    silent! exe 'keepjumps %!stylish-haskell'
+  endif
+endfunction
+
+"autocmd FileType haskell
+augroup haskell
+  autocmd!
+  autocmd BufNewFile,BufRead *.hs set tabstop=8 softtabstop=4
+    \ shiftwidth=4 textwidth=80 expandtab autoindent shiftround
+    \ fileformat=unix
+augroup END
+
+" keybindings for haskell files
+augroup haskellStylish
+  autocmd!
+  autocmd FileType haskell nnoremap <leader>hi :Hindent<CR>
+  autocmd FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
+  autocmd FileType haskell nnoremap <leader>hr :call HaskellFormat('both')<CR>
+augroup END
+
+" for w0rp/ale for haskell
+let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
+
+" parsonsmatt/intero-neovim --- just disable it until I've got to grips with it
+let g:intero_start_immediately = 0
+" use ALE instead
+let g:intero_use_neomake = 0
+
 
 " Map Scratch to leader <tab> to open the scratch buffer
 nnoremap <leader><tab> :Scratch<cr>
