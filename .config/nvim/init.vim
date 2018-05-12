@@ -548,7 +548,10 @@ augroup haskellStylish
 augroup END
 
 " for w0rp/ale for haskell
+let g:ale_linters = {}
 let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
+" Note for ghc-mod, the following is needed to install it:
+" stack build ghc-mod-5.7.0.0 --resolver=lts-8.23
 
 " parsonsmatt/intero-neovim --- just disable it until I've got to grips with it
 let g:intero_start_immediately = 0
