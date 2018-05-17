@@ -9,5 +9,6 @@ fi
 # from: https://blog.jez.io/haskell-development-with-neovim/
 stack install hindent
 stack install stylish-haskell
+stack install hsimport hsdevtools
 # it's old and this is the latest version that seems to work.
 stack build ghc-mod-5.7.0.0 --resolver=lts-8.23

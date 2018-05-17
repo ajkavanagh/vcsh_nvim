@@ -55,6 +55,13 @@ let g:BDG_add = {
     \ '=>' : '⇒',
     \}
 
+" Bindings for terminal mode.  Let's use Crtl hjkl to leave rather than Ctrl
+" + \n which is just annoying
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+
 "Plugins using vim-plug
 call plug#begin("~/.config/nvim/plugged")
 
@@ -76,6 +83,7 @@ Plug 'mileszs/ack.vim'
 Plug 'sjl/gundo.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'tmhedberg/SimpylFold'
+Plug 'godlygeek/tabular'
 
 Plug 'vim-scripts/vis'
 "Disabled as they don't work properly -- try to debug sometime
@@ -136,6 +144,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent'
 Plug 'parsonsmatt/intero-neovim'
+Plug 'dan-t/vim-hsimport'
 
 " Golang specific plugins
 Plug 'fatih/vim-go'
@@ -545,6 +554,10 @@ augroup haskellStylish
   autocmd FileType haskell nnoremap <leader>hi :Hindent<CR>
   autocmd FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
   autocmd FileType haskell nnoremap <leader>hr :call HaskellFormat('both')<CR>
+  autocmd FileType haskell nnoremap <leader>= :Tabularize /=<CR>
+  autocmd FileType haskell nnoremap <leader>- :Tabularize /-><CR>
+  autocmd FileType haskell nnoremap <leader>i :HsimportSymbol<CR>
+  autocmd FileType haskell nnoremap <leader>m :HsimportModule<CR>
 augroup END
 
 " for w0rp/ale for haskell
