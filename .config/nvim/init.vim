@@ -117,6 +117,7 @@ Plug 'reedes/vim-wordy'
 Plug 'atweiden/vim-betterdigraphs'
 
 
+" Markdown composer plugin - building feature
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
     if has('nvim')
@@ -168,6 +169,10 @@ function! BuildYCM(info)
 endfunction
 
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+
+" Zeal - offline, searchable, programming documentation
+" https://github.com/KabbAmine/zeavim.vim
+Plug 'KabbAmine/zeavim.vim'
 
 " themes and look'n'feel of vim
 Plug 'vim-airline/vim-airline'
