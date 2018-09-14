@@ -61,6 +61,8 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
+" Let's allow Ctrl-\ Ctrl R n be paste from the 'n' buffer.
+tnoremap <expr> <C-\><C-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 "Plugins using vim-plug
 call plug#begin("~/.config/nvim/plugged")
@@ -206,14 +208,6 @@ set hidden
 " Ctrl-U = uppercase current work in Insert mode.
 inoremap <c-u> <esc>viwUi
 
-" This is for vim-ctrlspace
-set showtabline=0
-let g:CtrlSpaceDefaultMapping = 1
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
-let g:airline_exclude_preview = 1
-
 " airline specific stuff
 set noshowmode
 
@@ -227,6 +221,11 @@ set guifont=Menlo:h14
 
 "Tab stuff
 "TODO
+
+" spelling stuff
+set spelllang=en
+set spellfile=$HOME/syncthing/Config/nvim/en.utf-8.add
+" use :setlocal spell to enable it for the file
 
 "Show command in bottom right portion of the screen
 set showcmd
@@ -267,7 +266,7 @@ set smartcase
 nnoremap <leader><space> :noh<CR>
 
 "Hard-wrap paragraphs of text
-noremap <leader>q gqi
+noremap <leader>q gqip
 
 "Enable code folding
 set foldenable
@@ -423,10 +422,18 @@ augroup yaml
     \ shiftwidth=2 textwidth=79 expandtab autoindent fileformat=unix
 augroup END
 
+"autocmd FileType json
+augroup json
+  autocmd!
+  autocmd BufNewFile,BufRead *.json set tabstop=4 softtabstop=4
+    \ shiftwidth=4 textwidth=80 expandtab autoindent fileformat=unix
+augroup END
+
 " pencil configuration for writing
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType markdown,mkd setlocal spell
   "autocmd FileType text         call pencil#init()
 augroup END
 
@@ -608,8 +615,12 @@ elseif executable('ack-grep')
   let g:ackprg = 'ack-grep --nocolor'
 endif
 
-" leader-a to start a search, leader-c to close the small results window
-nnoremap <leader>a :Ack! ""<Left>
+" leader-aa to start a search, leader-aw to search for the word under the
+" cursor
+nnoremap <leader>aa :Ack! ""<Left>
+nnoremap <leader>aw :Ack! "<c-r>=expand("<cword>")<cr>"<Left>
+
+" close the results window.
 nnoremap <leader>c :ccl<CR>
 
 " Configure notes.vim
@@ -618,6 +629,8 @@ nnoremap <leader>c :ccl<CR>
 " Configure vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/VimWiki',
     \ 'nested_syntaxes': {'python': 'python', 'rust': 'rust'}}]
+" don't shorten links at all
+let g:vimwiki_url_maxsave = 0
 
 " Set the theme up
 set background=light
@@ -627,7 +640,8 @@ colorscheme solarized
 highlight Comment cterm=italic
 
 " vim-markdown-composer ... I don't like it opening the browser wing
-let g:markdown_composer_open_browser = 1
+let g:markdown_composer_browser = "google-chrome"
+let g:markdown_composer_open_browser = 0
 
 " And some keyboard shortcuts to switch between the color schemes
 nnoremap <leader><leader>bd :set background=dark<cr>
