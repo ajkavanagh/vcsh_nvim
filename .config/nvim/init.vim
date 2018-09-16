@@ -555,7 +555,7 @@ endfunction
 "autocmd FileType haskell
 augroup haskell
   autocmd!
-  autocmd BufNewFile,BufRead *.hs set tabstop=8 softtabstop=4
+  autocmd BufNewFile,BufRead *.hs set tabstop=8 softtabstop=2
     \ shiftwidth=4 textwidth=80 expandtab autoindent shiftround
     \ fileformat=unix
 augroup END
@@ -568,6 +568,7 @@ augroup haskellStylish
   autocmd FileType haskell nnoremap <leader>hr :call HaskellFormat('both')<CR>
   autocmd FileType haskell nnoremap <leader>= :Tabularize /=<CR>
   autocmd FileType haskell nnoremap <leader>- :Tabularize /-><CR>
+  autocmd FileType haskell nnoremap <leader>; :Tabularize /::<CR>
   autocmd FileType haskell nnoremap <leader>i :HsimportSymbol<CR>
   autocmd FileType haskell nnoremap <leader>m :HsimportModule<CR>
 augroup END
@@ -638,6 +639,9 @@ colorscheme solarized
 
 " I like italicised comments
 highlight Comment cterm=italic
+
+" I want haskell to use the alternative -- always
+let g:NERDAltDelims_haskell = 1
 
 " vim-markdown-composer ... I don't like it opening the browser wing
 let g:markdown_composer_browser = "google-chrome"
