@@ -9,23 +9,23 @@ endif
 "Determine what the os is and set a global.
 "This will be either Linux, Darwin or Windows
 if has("win64") || has("win32") || has("win16")
-	let g:os = "Windows"
+  let g:os = "Windows"
 else
-	let g:os = substitute(system('uname'), '\n', '', '')
+  let g:os = substitute(system('uname'), '\n', '', '')
 endif
 
 "Determine if we are running under tmux (the variable TMUX will be set)
 if !empty($TMUX)
-	let g:tmux = 1
+  let g:tmux = 1
 else
-	let g:tmux = 0
+  let g:tmux = 0
 endif
 
 "Determine if xwindows is running (i.e. for clipboard, etc.)
 if !empty($DISPLAY)
-	let g:xwindows = 1
+  let g:xwindows = 1
 else
-	let g:xwindows = 0
+  let g:xwindows = 0
 endif
 
 "Enable filetypes
@@ -63,6 +63,10 @@ tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 " Let's allow Ctrl-\ Ctrl R n be paste from the 'n' buffer.
 tnoremap <expr> <C-\><C-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
+" configure python interpreters for neovim
+let g:python_host_prog = '/home/alex/.virtualenvs/py2-for-neovim/bin/python'
+let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
 
 "Plugins using vim-plug
 call plug#begin("~/.config/nvim/plugged")
@@ -137,17 +141,22 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-python/python-syntax'
 Plug 'nvie/vim-flake8'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'davidhalter/jedi-vim'
 
 " Rust language support
 Plug 'rust-lang/rust.vim'
 " Note that until the neovim language server is ready we use this plugin
-" Plug 'autozimu/LanguageClient-neovim', {'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh'
+  \}
 
 " Haskell specific plugins
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent'
 Plug 'parsonsmatt/intero-neovim'
 Plug 'dan-t/vim-hsimport'
+Plug 'eagletmt/neco-ghc'  " used with deoplete
 
 " Golang specific plugins
 Plug 'fatih/vim-go'
@@ -159,18 +168,9 @@ let g:go_def_mapping_enabled = 0
 Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
 
-" Completions using YouCompleteMe
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer --racer-completer
-  endif
-endfunction
-
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+" Deoplete plugins -- see Deoplete config for how it is configured.
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
 
 " Zeal - offline, searchable, programming documentation
 " https://github.com/KabbAmine/zeavim.vim
@@ -328,22 +328,22 @@ endif
 
 " if now windows AND we are in tmux, then use the tmux paste register
 if !g:xwindows && g:tmux
-	"Copy & Paste to the fakeclip & register (tmux paste)
-	vmap <Leader>y "&y
-	vmap <Leader>d "&d
-	nmap <Leader>p "&p
-	nmap <Leader>P "&P
-	vmap <Leader>p "&p
-	vmap <Leader>P "&P
+  "Copy & Paste to the fakeclip & register (tmux paste)
+  vmap <Leader>y "&y
+  vmap <Leader>d "&d
+  nmap <Leader>p "&p
+  nmap <Leader>P "&P
+  vmap <Leader>p "&p
+  vmap <Leader>P "&P
 else
-	"we either have the system clipboard or a fake system clipboard
-	"Copy & Paste to the system clipboard
-	vmap <Leader>y "+y
-	vmap <Leader>d "+d
-	nmap <Leader>p "+p
-	nmap <Leader>P "+P
-	vmap <Leader>p "+p
-	vmap <Leader>P "+P
+  "we either have the system clipboard or a fake system clipboard
+  "Copy & Paste to the system clipboard
+  vmap <Leader>y "+y
+  vmap <Leader>d "+d
+  nmap <Leader>p "+p
+  nmap <Leader>P "+P
+  vmap <Leader>p "+p
+  vmap <Leader>P "+P
 endif
 
 " use a register in tmp to copy text between sessions (or even just store it)
@@ -508,17 +508,54 @@ nnoremap <F3> :RainbowParenthesesToggleAll<cr>
 " Gundo call up configuration
 nnoremap <F5> :GundoToggle<cr>
 
-"YCM configuration
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_auto_trigger = 0
-map <leader>gg  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-map <leader>gr  :YcmCompleter GoToReferences<CR>
 
-let g:ycm_rust_src_path = '/home/alex/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+" TODO: move this to the python section
+" Disable Jedi-vim autocompletion and enable call-signatures options
+let g:jedi#auto_initialization = 1
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = ""
+let g:jedi#show_call_signatures = "1"
+let g:jedi#force_py_version = 3
 
+"
+" Deoplete options
+" Enable deoplete on startup
+let g:deoplete#enable_at_startup = 1
+
+let g:deoplete#disable_auto_complete = 1
+
+" Ctrl-Space to trigger deoplete manually
+inoremap <silent><expr> <C-Space>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#mappings#manual_complete()
+
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" use C-n and C-p to go up and down the completions
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" deoplete python options
+let g:deoplete#sources#jedi#show_docstring = 1
+
+" language client options
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+    \ }
+
+" TODO: move to a rust section
 " also ensure we rustfmt on every save:
 let g:rustfmt_autosave = 1
 
+"TODO: move to a python section
 "Configure vim-python-pep8-indent
 let g:pymode_indent = 0
 
@@ -530,6 +567,10 @@ syntax on
 let g:SimpylFold_docstring_preview=1
 
 " Haskell related config
+
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+
 " neovimhaskell/haskell-vim:
 let g:haskell_indent_if = 2
 let g:haskell_indent_before_where = 2
