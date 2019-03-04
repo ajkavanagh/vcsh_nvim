@@ -68,6 +68,20 @@ tnoremap <expr> <C-\><C-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 let g:python_host_prog = '/home/alex/.virtualenvs/py2-for-neovim/bin/python'
 let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
 
+
+" Disable Jedi-vim autocompletion and enable call-signatures options
+" This has to come before the plugin is loaded to have an effect
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#auto_initialization = 0
+let g:jedi#completions_enabled = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = ""
+let g:jedi#show_call_signatures = "1"
+let g:jedi#force_py_version = 3
+let g:jedi#documentation_command = "<leader>k"
+
+
 "Plugins using vim-plug
 call plug#begin("~/.config/nvim/plugged")
 
@@ -508,17 +522,6 @@ nnoremap <F3> :RainbowParenthesesToggleAll<cr>
 " Gundo call up configuration
 nnoremap <F5> :GundoToggle<cr>
 
-
-" TODO: move this to the python section
-" Disable Jedi-vim autocompletion and enable call-signatures options
-let g:jedi#auto_initialization = 1
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = "1"
-let g:jedi#force_py_version = 3
 
 "
 " Deoplete options
