@@ -79,8 +79,13 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#completions_command = ""
 let g:jedi#show_call_signatures = "1"
 let g:jedi#force_py_version = 3
-let g:jedi#documentation_command = "<leader>k"
 
+let g:jedi#documentation_command = "<leader>kk"
+let g:jedi#goto_command = "<leader>cc"
+let g:jedi#goto_assignments_command = "<leader>gg"
+let g:jedi#goto_definitions_command = "<leader>dd"
+let g:jedi#usages_command = "<leader>gn"
+let g:jedi#rename_command = "<leader>rr"
 
 "Plugins using vim-plug
 call plug#begin("~/.config/nvim/plugged")
