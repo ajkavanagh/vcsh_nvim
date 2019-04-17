@@ -72,7 +72,7 @@ let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
 " Disable Jedi-vim autocompletion and enable call-signatures options
 " This has to come before the plugin is loaded to have an effect
 let g:jedi#auto_vim_configuration = 0
-let g:jedi#auto_initialization = 0
+let g:jedi#auto_initialization = 1  " this enables the plugin and sets up the keys below
 let g:jedi#completions_enabled = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#popup_on_dot = 0
