@@ -77,7 +77,7 @@ let g:jedi#completions_enabled = 0
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#popup_on_dot = 0
 let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = "1"
+let g:jedi#show_call_signatures = 2  " Call signatures go in the command prompt area
 let g:jedi#force_py_version = 3
 
 let g:jedi#documentation_command = "<leader>kk"
@@ -424,7 +424,10 @@ let g:LanguageClient_serverCommands = {
     \ 'haskell': ['hie-wrapper'],
     \ }
 
-function SetLSPShortcuts()
+" move diagnostics to quickfix
+let g:LanguageClient_diagnosticsList = "Quickfix"
+
+function! SetLSPShortcuts()
   nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
   nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
   nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
@@ -566,6 +569,11 @@ inoremap <silent><expr> <C-Space>
 \ <SID>check_back_space() ? "\<TAB>" :
 \ deoplete#mappings#manual_complete()
 
+call deoplete#custom#option('sources', {})
+
+call deoplete#custom#source('_',
+  \ 'disabled_syntaxes', ['Comment', 'String'])
+
 function! s:check_back_space() abort "{{{
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
@@ -639,8 +647,8 @@ augroup haskellStylish
   autocmd FileType haskell nnoremap <leader>= :Tabularize /=<CR>
   autocmd FileType haskell nnoremap <leader>- :Tabularize /-><CR>
   autocmd FileType haskell nnoremap <leader>; :Tabularize /::<CR>
-  autocmd FileType haskell nnoremap <leader>i :HsimportSymbol<CR>
-  autocmd FileType haskell nnoremap <leader>m :HsimportModule<CR>
+  autocmd FileType haskell nnoremap <leader>I :HsimportSymbol<CR>
+  autocmd FileType haskell nnoremap <leader>M :HsimportModule<CR>
 augroup END
 
 " for w0rp/ale for haskell
@@ -654,6 +662,45 @@ let g:intero_start_immediately = 0
 " use ALE instead
 let g:intero_use_neomake = 0
 
+
+augroup Intero
+  autocmd!
+  " Automatically reload on save
+  au BufWritePost *.hs InteroReload
+
+  " Lookup the type of expression under the cursor
+  au FileType haskell nmap <silent> <leader>it <Plug>InteroGenericType
+  au FileType haskell nmap <silent> <leader>iT <Plug>InteroType
+  " Insert type declaration
+  au FileType haskell nnoremap <silent> <leader>id :InteroTypeInsert<CR>
+  " Show info about expression or type under the cursor
+  au FileType haskell nnoremap <silent> <leader>ii :InteroInfo<CR>
+
+  " Open/Close the Intero terminal window
+  au FileType haskell nnoremap <silent> <leader>in :InteroOpen<CR>
+  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
+
+  " Reload the current file into REPL
+  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
+  " Jump to the definition of an identifier
+  au FileType haskell nnoremap <silent> <leader>ig :InteroGoToDef<CR>
+  " Evaluate an expression in REPL
+  au FileType haskell nnoremap <silent> <leader>ie :InteroEval<CR>
+
+  " Start/Stop Intero
+  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
+  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
+
+  " Reboot Intero, for when dependencies are added
+  au FileType haskell nnoremap <silent> <leader>ir :InteroKill<CR> :InteroOpen<CR>
+
+  " Managing targets
+  " Prompts you to enter targets (no silent):
+  au FileType haskell nnoremap <leader>iS :InteroSetTargets<CR>
+
+  " Send the spec to the current file
+  au FileType haskell nnoremap <leader>ib :InteroSend hspec spec<CR>
+augroup END
 
 " Map Scratch to leader <tab> to open the scratch buffer
 nnoremap <leader><tab> :Scratch<cr>
