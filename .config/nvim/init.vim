@@ -460,6 +460,7 @@ augroup python
   "autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
   "autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
   autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+  autocmd BufWinEnter *.py setlocal number relativenumber
 augroup END
 
 "autocmd FileType yaml
