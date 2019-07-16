@@ -321,6 +321,10 @@ nnoremap <c-h> <c-w><c-h>
 set splitbelow
 set splitright
 
+" resize splits by percentage
+nnoremap <silent> <leader>= :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
 "Backups
 call mkdir ($HOME . '/.config/nvim/tmp/backup', 'p')
 set backupdir=~/.config/nvim/tmp/backup//
