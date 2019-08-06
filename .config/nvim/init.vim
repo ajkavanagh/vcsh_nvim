@@ -109,6 +109,7 @@ Plug 'sjl/gundo.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'godlygeek/tabular'
+Plug 'junegunn/vim-peekaboo'
 
 Plug 'vim-scripts/vis'
 "Disabled as they don't work properly -- try to debug sometime
