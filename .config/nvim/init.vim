@@ -176,7 +176,8 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent'
 Plug 'parsonsmatt/intero-neovim'
 Plug 'dan-t/vim-hsimport'
-Plug 'eagletmt/neco-ghc'  " used with deoplete
+"Plug 'eagletmt/neco-ghc'  " used with deoplete -- disabled as ghc-mod is
+"broken these days
 
 " Golang specific plugins
 Plug 'fatih/vim-go'
