@@ -574,7 +574,7 @@ let g:deoplete#disable_auto_complete = 1
 inoremap <silent><expr> <C-Space>
 \ pumvisible() ? "\<C-n>" :
 \ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#mappings#manual_complete()
+\ deoplete#manual_complete()
 
 call deoplete#custom#option('sources', {})
 
