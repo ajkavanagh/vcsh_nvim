@@ -494,6 +494,7 @@ augroup END
 
 let g:pencil#joinspaces = 1      " 0=one_space (def), 1=two_spaces
 let g:pencil#autoformat = 0      " 0=manual, 1=auto (def)
+let g:pencil#textwidth = 79
 
 " html files
 augroup html
