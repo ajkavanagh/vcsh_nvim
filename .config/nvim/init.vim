@@ -107,7 +107,8 @@ Plug 'duff/vim-scratch'
 Plug 'mileszs/ack.vim'
 Plug 'sjl/gundo.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'tmhedberg/SimpylFold'
+"Plug 'tmhedberg/SimpylFold'
+Plug 'Konfekt/FastFold'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-peekaboo'
 
@@ -162,6 +163,7 @@ Plug 'vim-python/python-syntax'
 Plug 'nvie/vim-flake8'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'davidhalter/jedi-vim'
+Plug 'kalekundert/vim-coiled-snake'
 
 " Rust language support
 Plug 'rust-lang/rust.vim'
@@ -186,7 +188,7 @@ let g:go_def_mapping_enabled = 0
 
 " General Programming support
 "Plug 'majutsushi/tagbar'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'sbdchd/neoformat'
 Plug 'janko/vim-test'
 
@@ -609,7 +611,7 @@ let python_highlight_all = 1
 syntax on
 
 "Configure python SimpylFold
-let g:SimpylFold_docstring_preview=1
+"let g:SimpylFold_docstring_preview=1
 
 " Haskell related config
 
@@ -795,9 +797,36 @@ let test#python#nose#options = {
     \ 'suite': '-s --randomize',
     \}
 
+" -----------------
 " Configure vimwiki
-let g:vimwiki_list = [{'path': '~/Dropbox/VimWiki',
-    \ 'nested_syntaxes': {'python': 'python', 'rust': 'rust'}}]
+" This is the original, wikimarkup, wiki on Dropbox; I want to deprecate this
+let wiki_notes = {}
+let wiki_notes.path = '~/Dropbox/VimWiki'
+let wiki_notes.nested_syntaxes = {'python': 'python', 'rust': 'rust'}
+
+" This is an attempt at a blog using Vimwiki markdown with pandoc and my
+" own converter.  It's an on going project.
+let wiki_blog = {}
+let wiki_blog.path = '~/Documents/VimWikiBlog/source'
+let wiki_blog.path_html = '~/Documents/VimWikiBlog/html'
+let wiki_blog.syntax = 'markdown'
+let wiki_blog.ext = '.md'
+let wiki_blog.nested_syntaxes = {'python': 'python', 'rust': 'rust',
+                              \  'haskell': 'haskell'}
+let wiki_blog.auto_export = 0  " set to 1 to auto generate the page on save
+let wiki_blog.auto_doc = 0     " set to 1 to auto redo TOC on the page.
+let wiki_blog.custom_wiki2html = '~/bin/vimwiki-pandoc-convert-page'
+let wiki_blog.template_path = '~/Documents/VimWikiBlog/templates'
+let wiki_blog.template_default = 'default'
+let wiki_blog.template_ext = '.html'
+
+let wiki_blog.list_margin = 0  " needs to be this for markdown
+let wiki_blog.auto_tags = 1    " update tags metadata on save
+
+let g:vimwiki_list = [wiki_notes, wiki_blog]
+let g:vimwiki_global_ext = 0
+let g:vimwiki_markdown_link_ext = 1
+
 " don't shorten links at all
 let g:vimwiki_url_maxsave = 0
 
@@ -807,6 +836,11 @@ colorscheme solarized
 
 " I like italicised comments
 highlight Comment cterm=italic
+
+" Folding colous
+highlight Folded ctermbg=black ctermfg=grey
+highlight FoldColumn ctermbg=black ctermfg=blue
+
 
 " I want haskell to use the alternative -- always
 let g:NERDAltDelims_haskell = 1
