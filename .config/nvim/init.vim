@@ -799,10 +799,22 @@ let test#python#nose#options = {
 
 " -----------------
 " Configure vimwiki
-" This is the original, wikimarkup, wiki on Dropbox; I want to deprecate this
-let wiki_notes = {}
-let wiki_notes.path = '~/Dropbox/VimWiki'
-let wiki_notes.nested_syntaxes = {'python': 'python', 'rust': 'rust'}
+let wiki_notes_md = {}
+let wiki_notes_md.path = "~/Documents/VimWikiNotes/notes"
+let wiki_notes_md.path_html = '~/Documents/VimWikiNotes/html'
+let wiki_notes_md.syntax = 'markdown'
+let wiki_notes_md.ext = '.md'
+let wiki_notes_md.nested_syntaxes = {'python': 'python', 'rust': 'rust',
+                                  \  'haskell': 'haskell'}
+let wiki_notes_md.auto_export = 0  " set to 1 to auto generate the page on save
+let wiki_notes_md.auto_doc = 0     " set to 1 to auto redo TOC on the page.
+let wiki_notes_md.custom_wiki2html = '~/bin/vimwiki-pandoc-convert-page'
+let wiki_notes_md.template_path = '~/Documents/VimWikiNotes/templates'
+let wiki_notes_md.template_default = 'default'
+let wiki_notes_md.template_ext = '.html'
+
+let wiki_notes_md.list_margin = 0  " needs to be this for markdown
+let wiki_notes_md.auto_tags = 1    " update tags metadata on save
 
 " This is an attempt at a blog using Vimwiki markdown with pandoc and my
 " own converter.  It's an on going project.
@@ -823,7 +835,7 @@ let wiki_blog.template_ext = '.html'
 let wiki_blog.list_margin = 0  " needs to be this for markdown
 let wiki_blog.auto_tags = 1    " update tags metadata on save
 
-let g:vimwiki_list = [wiki_notes, wiki_blog]
+let g:vimwiki_list = [wiki_notes_md, wiki_blog
 let g:vimwiki_global_ext = 0
 let g:vimwiki_markdown_link_ext = 1
 
