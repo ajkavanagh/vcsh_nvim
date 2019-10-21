@@ -835,7 +835,7 @@ let wiki_blog.template_ext = '.html'
 let wiki_blog.list_margin = 0  " needs to be this for markdown
 let wiki_blog.auto_tags = 1    " update tags metadata on save
 
-let g:vimwiki_list = [wiki_notes_md, wiki_blog
+let g:vimwiki_list = [wiki_notes_md, wiki_blog]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_markdown_link_ext = 1
 
