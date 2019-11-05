@@ -858,7 +858,7 @@ highlight FoldColumn ctermbg=black ctermfg=blue
 let g:NERDAltDelims_haskell = 1
 
 " vim-markdown-composer ... I don't like it opening the browser wing
-let g:markdown_composer_browser = "google-chrome"
+let g:markdown_composer_browser = "firefox"
 let g:markdown_composer_open_browser = 0
 
 " And some keyboard shortcuts to switch between the color schemes
