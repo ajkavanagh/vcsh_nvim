@@ -71,21 +71,21 @@ let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
 
 " Disable Jedi-vim autocompletion and enable call-signatures options
 " This has to come before the plugin is loaded to have an effect
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#auto_initialization = 1  " this enables the plugin and sets up the keys below
-let g:jedi#completions_enabled = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = 2  " Call signatures go in the command prompt area
-let g:jedi#force_py_version = 3
+"let g:jedi#auto_vim_configuration = 0
+"let g:jedi#auto_initialization = 1  " this enables the plugin and sets up the keys below
+"let g:jedi#completions_enabled = 0
+"let g:jedi#smart_auto_mappings = 0
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#completions_command = ""
+"let g:jedi#show_call_signatures = 2  " Call signatures go in the command prompt area
+"let g:jedi#force_py_version = 3
 
-let g:jedi#documentation_command = "<leader>kk"
-let g:jedi#goto_command = "<leader>cc"
-let g:jedi#goto_assignments_command = "<leader>gg"
-let g:jedi#goto_definitions_command = "<leader>dd"
-let g:jedi#usages_command = "<leader>gn"
-let g:jedi#rename_command = "<leader>rr"
+"let g:jedi#documentation_command = "<leader>kk"
+"let g:jedi#goto_command = "<leader>cc"
+"let g:jedi#goto_assignments_command = "<leader>gg"
+"let g:jedi#goto_definitions_command = "<leader>dd"
+"let g:jedi#usages_command = "<leader>gn"
+"let g:jedi#rename_command = "<leader>rr"
 
 "Plugins using vim-plug
 call plug#begin("~/.config/nvim/plugged")
@@ -107,7 +107,6 @@ Plug 'duff/vim-scratch'
 Plug 'mileszs/ack.vim'
 Plug 'sjl/gundo.vim'
 Plug 'kien/rainbow_parentheses.vim'
-"Plug 'tmhedberg/SimpylFold'
 Plug 'Konfekt/FastFold'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-peekaboo'
@@ -157,21 +156,26 @@ endfunction
 
 Plug 'euclio/vim-markdown-composer', {'do': function('BuildComposer') }
 
+" COC Lanugage server
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"
+" DISABLED using COC instead:  Also, reason deoplete is removed.
+" Note that until the neovim language server is ready we use this plugin
+"Plug 'autozimu/LanguageClient-neovim', {
+  "\ 'branch': 'next',
+  "\ 'do': 'bash install.sh'
+  "\}
+
 " Python/programming support
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-python/python-syntax'
 Plug 'nvie/vim-flake8'
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'davidhalter/jedi-vim'
-Plug 'kalekundert/vim-coiled-snake'
+"Plug 'davidhalter/jedi-vim'
+Plug 'kalekundert/vim-coiled-snake'      " folding support
 
 " Rust language support
 Plug 'rust-lang/rust.vim'
-" Note that until the neovim language server is ready we use this plugin
-Plug 'autozimu/LanguageClient-neovim', {
-  \ 'branch': 'next',
-  \ 'do': 'bash install.sh'
-  \}
 
 " Haskell specific plugins
 Plug 'neovimhaskell/haskell-vim'
@@ -192,9 +196,10 @@ Plug 'dense-analysis/ale'
 Plug 'sbdchd/neoformat'
 Plug 'janko/vim-test'
 
+" DISABLED as using COC instead
 " Deoplete plugins -- see Deoplete config for how it is configured.
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'zchee/deoplete-jedi'
 
 " Zeal - offline, searchable, programming documentation
 " https://github.com/KabbAmine/zeavim.vim
@@ -428,32 +433,32 @@ nnoremap <leader>ev :tabe $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " language client options
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'haskell': ['hie-wrapper'],
-    \ }
+"let g:LanguageClient_serverCommands = {
+    "\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    "\ 'haskell': ['hie-wrapper'],
+    "\ }
 
 " move diagnostics to quickfix
-let g:LanguageClient_diagnosticsList = "Quickfix"
+"let g:LanguageClient_diagnosticsList = "Quickfix"
 
-function! SetLSPShortcuts()
-  nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-  nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
-  nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-  nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
-  nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
-  nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
-  nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
-endfunction()
+"function! SetLSPShortcuts()
+  "nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+  "nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+  "nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+  "nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+  "nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+  "nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+  "nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+  "nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+  "nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+  "nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+"endfunction()
 
 " LSP group is for filetypes that don't have their own group
-augroup LSP
-  autocmd!
-  autocmd FileType rust call SetLSPShortcuts()
-augroup END
+"augroup LSP
+  "autocmd!
+  "autocmd FileType rust call SetLSPShortcuts()
+"augroup END
 
 " file augroups
 augroup files
@@ -490,7 +495,7 @@ augroup END
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType markdown,mkd setlocal spell
+  "autocmd FileType markdown,mkd setlocal spell
   "autocmd FileType text         call pencil#init()
 augroup END
 
@@ -566,37 +571,70 @@ nnoremap <F3> :RainbowParenthesesToggleAll<cr>
 " Gundo call up configuration
 nnoremap <F5> :GundoToggle<cr>
 
+" COC configuration
+set cmdheight=2    " Better display for messages
+set updatetime=300  " quicker update time for messages.
+set shortmess+=c    " don't give |ins-completion-menu| messages
+set signcolumn=yes  " Will this compete with signify??
+inoremap <silent><expr> <c-space> coc#refresh() " Use c-space to trigger refresh
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-"
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> <leader>kk :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+
+" DISABLED as using COC instead
 " Deoplete options
 " Enable deoplete on startup
-let g:deoplete#enable_at_startup = 1
-
-let g:deoplete#disable_auto_complete = 1
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#disable_auto_complete = 1
 
 " Ctrl-Space to trigger deoplete manually
-inoremap <silent><expr> <C-Space>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#manual_complete()
+"inoremap <silent><expr> <C-Space>
+"\ pumvisible() ? "\<C-n>" :
+"\ <SID>check_back_space() ? "\<TAB>" :
+"\ deoplete#manual_complete()
 
-call deoplete#custom#option('sources', {})
+"call deoplete#custom#option('sources', {})
 
-call deoplete#custom#source('_',
-  \ 'disabled_syntaxes', ['Comment', 'String'])
+"call deoplete#custom#source('_',
+  "\ 'disabled_syntaxes', ['Comment', 'String'])
 
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+"function! s:check_back_space() abort "{{{
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
 
 " use C-n and C-p to go up and down the completions
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " deoplete python options
-let g:deoplete#sources#jedi#show_docstring = 1
+"let g:deoplete#sources#jedi#show_docstring = 1
 
 " TODO: move to a rust section
 " also ensure we rustfmt on every save:
