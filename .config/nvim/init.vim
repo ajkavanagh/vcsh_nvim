@@ -169,7 +169,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Python/programming support
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-python/python-syntax'
-Plug 'nvie/vim-flake8'
+"Plug 'nvie/vim-flake8'
 Plug 'Glench/Vim-Jinja2-Syntax'
 "Plug 'davidhalter/jedi-vim'
 Plug 'kalekundert/vim-coiled-snake'      " folding support
