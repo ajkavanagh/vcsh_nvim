@@ -495,7 +495,7 @@ augroup END
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
-  "autocmd FileType markdown,mkd setlocal spell
+  "autocmd FileType markdown,mkd setlocal spell "no spelling on markdown -- too annoying
   "autocmd FileType text         call pencil#init()
 augroup END
 
