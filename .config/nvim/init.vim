@@ -180,7 +180,7 @@ Plug 'rust-lang/rust.vim'
 " Haskell specific plugins
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent'
-Plug 'parsonsmatt/intero-neovim'
+"Plug 'parsonsmatt/intero-neovim'
 Plug 'dan-t/vim-hsimport'
 "Plug 'eagletmt/neco-ghc'  " used with deoplete -- disabled as ghc-mod is
 "broken these days
@@ -220,6 +220,8 @@ Plug 'reedes/vim-colors-pencil'
 Plug 'fneu/breezy'
 
 call plug#end()
+
+set viewoptions=cursor,slash,unix
 
 "Want a different map leader than \
 let mapleader = ","
@@ -297,10 +299,14 @@ nnoremap <leader><space> :noh<CR>
 "Hard-wrap paragraphs of text
 noremap <leader>q gqip
 
-"Enable code folding
-set foldenable
+"Disable code folding
+set nofoldenable
 "set foldmethod=indent
-set foldlevel=99
+"set foldlevel=99
+"set foldlevelstart=99
+" stop fastfold updating on save
+let g:fastfold_savehook = 0
+let g:fastfold_force = 1
 
 " open/close folds using <space> in normal mode.
 "nnoremap <space> za
@@ -487,6 +493,7 @@ augroup END
 "autocmd FileType json
 augroup json
   autocmd!
+  autocmd FileType json syntax match Comment +\/\/.\+$+
   autocmd BufNewFile,BufRead *.json set tabstop=4 softtabstop=4
     \ shiftwidth=4 textwidth=80 expandtab autoindent fileformat=unix
 augroup END
@@ -587,7 +594,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
+" Use <leader>kk to show documentation in preview window
 nnoremap <silent> <leader>kk :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -599,10 +606,15 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" NOTE: disabled as the highlight is hard to read at the moment!
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 
 " DISABLED as using COC instead
@@ -684,7 +696,7 @@ augroup haskell
   autocmd BufNewFile,BufRead *.hs set tabstop=8 softtabstop=2
     \ shiftwidth=4 textwidth=80 expandtab autoindent shiftround
     \ fileformat=unix
-  autocmd FileType haskell call SetLSPShortcuts()
+  "autocmd FileType haskell call SetLSPShortcuts()
 augroup END
 
 " keybindings for haskell files
@@ -712,44 +724,44 @@ let g:intero_start_immediately = 0
 let g:intero_use_neomake = 0
 
 
-augroup Intero
-  autocmd!
-  " Automatically reload on save
-  au BufWritePost *.hs InteroReload
+"augroup Intero
+  "autocmd!
+  "" Automatically reload on save
+  "au BufWritePost *.hs InteroReload
 
-  " Lookup the type of expression under the cursor
-  au FileType haskell nmap <silent> <leader>it <Plug>InteroGenericType
-  au FileType haskell nmap <silent> <leader>iT <Plug>InteroType
-  " Insert type declaration
-  au FileType haskell nnoremap <silent> <leader>id :InteroTypeInsert<CR>
-  " Show info about expression or type under the cursor
-  au FileType haskell nnoremap <silent> <leader>ii :InteroInfo<CR>
+  "" Lookup the type of expression under the cursor
+  "au FileType haskell nmap <silent> <leader>it <Plug>InteroGenericType
+  "au FileType haskell nmap <silent> <leader>iT <Plug>InteroType
+  "" Insert type declaration
+  "au FileType haskell nnoremap <silent> <leader>id :InteroTypeInsert<CR>
+  "" Show info about expression or type under the cursor
+  "au FileType haskell nnoremap <silent> <leader>ii :InteroInfo<CR>
 
-  " Open/Close the Intero terminal window
-  au FileType haskell nnoremap <silent> <leader>in :InteroOpen<CR>
-  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
+  "" Open/Close the Intero terminal window
+  "au FileType haskell nnoremap <silent> <leader>in :InteroOpen<CR>
+  "au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
 
-  " Reload the current file into REPL
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-  " Jump to the definition of an identifier
-  au FileType haskell nnoremap <silent> <leader>ig :InteroGoToDef<CR>
-  " Evaluate an expression in REPL
-  au FileType haskell nnoremap <silent> <leader>ie :InteroEval<CR>
+  "" Reload the current file into REPL
+  "au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
+  "" Jump to the definition of an identifier
+  "au FileType haskell nnoremap <silent> <leader>ig :InteroGoToDef<CR>
+  "" Evaluate an expression in REPL
+  "au FileType haskell nnoremap <silent> <leader>ie :InteroEval<CR>
 
-  " Start/Stop Intero
-  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
+  "" Start/Stop Intero
+  "au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
+  "au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
 
-  " Reboot Intero, for when dependencies are added
-  au FileType haskell nnoremap <silent> <leader>ir :InteroKill<CR> :InteroOpen<CR>
+  "" Reboot Intero, for when dependencies are added
+  "au FileType haskell nnoremap <silent> <leader>ir :InteroKill<CR> :InteroOpen<CR>
 
-  " Managing targets
-  " Prompts you to enter targets (no silent):
-  au FileType haskell nnoremap <leader>iS :InteroSetTargets<CR>
+  "" Managing targets
+  "" Prompts you to enter targets (no silent):
+  "au FileType haskell nnoremap <leader>iS :InteroSetTargets<CR>
 
-  " Send the spec to the current file
-  au FileType haskell nnoremap <leader>ib :InteroSend hspec spec<CR>
-augroup END
+  "" Send the spec to the current file
+  "au FileType haskell nnoremap <leader>ib :InteroSend hspec spec<CR>
+"augroup END
 
 " Map Scratch to leader <tab> to open the scratch buffer
 nnoremap <leader><tab> :Scratch<cr>

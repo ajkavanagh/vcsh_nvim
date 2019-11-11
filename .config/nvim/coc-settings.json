@@ -1,4 +1,27 @@
 {
     "coc.preferences.diagnostic.displayByAle": true,
-    "suggest.autoTrigger": "trigger"
+    "suggest.autoTrigger": "trigger",
+    "languageserver": {
+        "haskell": {
+            "command": "hie-wrapper",
+            "rootPatterns": [
+                ".stack.yaml",
+                "cabal.config",
+                "package.yaml"
+            ],
+            "filetypes": [
+                "hs",
+                "lhs",
+                "haskell"
+            ],
+            "initializationOptions": {
+                "languageServerHaskell": {}
+            },
+            "settings": {
+                "hlintOn": true,
+                "maxNumberOfProblems": 10,
+                "completionSnippetsOn": true
+            }
+        }
+    }
 }
