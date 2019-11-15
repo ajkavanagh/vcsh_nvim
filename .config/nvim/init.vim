@@ -660,6 +660,8 @@ let g:pymode_indent = 0
 let python_highlight_all = 1
 syntax on
 
+let g:ale_python_flake8_options = '--ignore=W503,E402'  " enable binary ops at start of line
+
 "Configure python SimpylFold
 "let g:SimpylFold_docstring_preview=1
 
