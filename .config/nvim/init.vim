@@ -721,9 +721,9 @@ let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
 " stack build ghc-mod-5.7.0.0 --resolver=lts-8.23
 
 " parsonsmatt/intero-neovim --- just disable it until I've got to grips with it
-let g:intero_start_immediately = 0
+"let g:intero_start_immediately = 0
 " use ALE instead
-let g:intero_use_neomake = 0
+"let g:intero_use_neomake = 0
 
 
 "augroup Intero
@@ -788,6 +788,8 @@ nnoremap <leader>g3 :diffget //3<cr>
 " ALE (Asynchronous Linting Engine configuration
 let g:airline#extensions#ale#enabled = 1
 let g:ale_lint_on_text_changed = 'normal'
+
+nnoremap <leader>ad :ALEDetail<cr>
 
 " Configure ack.vim on Ubuntu (it's called ack-grep)
 if executable('ag')
@@ -860,7 +862,7 @@ let wiki_notes_md.nested_syntaxes = {'python': 'python', 'rust': 'rust',
                                   \  'haskell': 'haskell'}
 let wiki_notes_md.auto_export = 0  " set to 1 to auto generate the page on save
 let wiki_notes_md.auto_doc = 0     " set to 1 to auto redo TOC on the page.
-let wiki_notes_md.custom_wiki2html = '~/bin/vimwiki-pandoc-convert-page'
+let wiki_notes_md.custom_wiki2html = '~/bin/vw2html'
 let wiki_notes_md.template_path = '~/Documents/VimWikiNotes/templates'
 let wiki_notes_md.template_default = 'default'
 let wiki_notes_md.template_ext = '.html'
@@ -879,7 +881,7 @@ let wiki_blog.nested_syntaxes = {'python': 'python', 'rust': 'rust',
                               \  'haskell': 'haskell'}
 let wiki_blog.auto_export = 0  " set to 1 to auto generate the page on save
 let wiki_blog.auto_doc = 0     " set to 1 to auto redo TOC on the page.
-let wiki_blog.custom_wiki2html = '~/bin/vimwiki-pandoc-convert-page'
+let wiki_blog.custom_wiki2html = '~/bin/vw2html'
 let wiki_blog.template_path = '~/Documents/VimWikiBlog/templates'
 let wiki_blog.template_default = 'default'
 let wiki_blog.template_ext = '.html'
