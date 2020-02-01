@@ -184,6 +184,7 @@ Plug 'alx741/vim-hindent'
 Plug 'dan-t/vim-hsimport'
 "Plug 'eagletmt/neco-ghc'  " used with deoplete -- disabled as ghc-mod is
 "broken these days
+Plug 'vmchale/sql-qq'     " syntax highlighting of sql within quasi-quoting.
 
 " Golang specific plugins
 Plug 'fatih/vim-go'
