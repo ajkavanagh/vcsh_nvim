@@ -4,6 +4,7 @@
 if has('nvim')
   set encoding=utf-8
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  set termguicolors
 endif
 
 "Determine what the os is and set a global.
@@ -898,7 +899,7 @@ let g:vimwiki_markdown_link_ext = 1
 let g:vimwiki_url_maxsave = 0
 
 " Set the theme up
-set background=light
+set background=dark
 colorscheme solarized
 
 " I like italicised comments
