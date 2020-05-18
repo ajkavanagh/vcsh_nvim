@@ -211,6 +211,12 @@ Plug 'KabbAmine/zeavim.vim'
 Plug 'xarthurx/taskwarrior.vim'
 "Plug 'tbabej/taskwiki'
 "Plug 'powerman/vim-plugin-AnsiEsc'
+"
+" CSS pretty colors in the window
+Plug 'ap/vim-css-color'
+
+" VIFM file picker
+Plug 'vifm/vifm.vim'
 
 " themes and look'n'feel of vim
 let g:airline#extensions#coc#enabled = 0
