@@ -207,7 +207,13 @@ Plug 'janko/vim-test'
 " https://github.com/KabbAmine/zeavim.vim
 Plug 'KabbAmine/zeavim.vim'
 
+" Taskwarrior related
+Plug 'xarthurx/taskwarrior.vim'
+"Plug 'tbabej/taskwiki'
+"Plug 'powerman/vim-plugin-AnsiEsc'
+
 " themes and look'n'feel of vim
+let g:airline#extensions#coc#enabled = 0
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'

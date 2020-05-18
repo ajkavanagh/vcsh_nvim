@@ -1,10 +1,13 @@
 {
+    "diagnostic.enable": false,
     "diagnostic.displayByAle": true,
     "suggest.autoTrigger": "trigger",
     "languageserver": {
         "haskell": {
             "command": "hie-wrapper",
+            "args": ["--lsp"],
             "rootPatterns": [
+                "*.cabal",
                 ".stack.yaml",
                 "cabal.config",
                 "package.yaml"
