@@ -94,8 +94,8 @@ call plug#begin("~/.config/nvim/plugged")
 "Ensure you use single quotes '' for plugin names
 
 " NERD tree will be loaded on the first invocation of NERDTreeToggle command
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-scripts/restore_view.vim'
 
@@ -621,7 +621,7 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 " NOTE: disabled as the highlight is hard to read at the moment!
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -674,7 +674,7 @@ let g:pymode_indent = 0
 let python_highlight_all = 1
 syntax on
 
-let g:ale_python_flake8_options = '--ignore=W503,E402'  " enable binary ops at start of line
+let g:ale_python_flake8_options = '--ignore=W503,W504,E402'  " enable binary ops at start of line
 
 "Configure python SimpylFold
 "let g:SimpylFold_docstring_preview=1
@@ -886,24 +886,24 @@ let wiki_notes_md.auto_tags = 1    " update tags metadata on save
 
 " This is an attempt at a blog using Vimwiki markdown with pandoc and my
 " own converter.  It's an on going project.
-let wiki_blog = {}
-let wiki_blog.path = '~/Documents/VimWikiBlog/source'
-let wiki_blog.path_html = '~/Documents/VimWikiBlog/html'
-let wiki_blog.syntax = 'markdown'
-let wiki_blog.ext = '.md'
-let wiki_blog.nested_syntaxes = {'python': 'python', 'rust': 'rust',
+let wiki_sites = {}
+let wiki_sites.path = '~/Projects/Personal/sites/vps-sites/vimwiki-src'
+let wiki_sites.path_html = '~/Projects/Personal/sites/vps-sites/vw2html-site'
+let wiki_sites.syntax = 'markdown'
+let wiki_sites.ext = '.md'
+let wiki_sites.nested_syntaxes = {'python': 'python', 'rust': 'rust',
                               \  'haskell': 'haskell'}
-let wiki_blog.auto_export = 0  " set to 1 to auto generate the page on save
-let wiki_blog.auto_doc = 0     " set to 1 to auto redo TOC on the page.
-let wiki_blog.custom_wiki2html = '~/bin/vw2html'
-let wiki_blog.template_path = '~/Documents/VimWikiBlog/templates'
-let wiki_blog.template_default = 'default'
-let wiki_blog.template_ext = '.html'
+let wiki_sites.auto_export = 0  " set to 1 to auto generate the page on save
+let wiki_sites.auto_doc = 0     " set to 1 to auto redo TOC on the page.
+let wiki_sites.custom_wiki2html = '~/bin/vw2html'
+let wiki_sites.template_path = '~/Projects/Personal/sites/vps-sites/vw2html-templates'
+let wiki_sites.template_default = 'default'
+let wiki_sites.template_ext = '.html'
 
-let wiki_blog.list_margin = 0  " needs to be this for markdown
-let wiki_blog.auto_tags = 1    " update tags metadata on save
+let wiki_sites.list_margin = 0  " needs to be this for markdown
+let wiki_sites.auto_tags = 1    " update tags metadata on save
 
-let g:vimwiki_list = [wiki_notes_md, wiki_blog]
+let g:vimwiki_list = [wiki_notes_md, wiki_sites]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_markdown_link_ext = 1
 
