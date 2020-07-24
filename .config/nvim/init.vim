@@ -104,6 +104,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
+Plug 'idanarye/vim-merginal'
 Plug 'duff/vim-scratch'
 Plug 'mileszs/ack.vim'
 Plug 'sjl/gundo.vim'
@@ -208,7 +209,7 @@ Plug 'janko/vim-test'
 Plug 'KabbAmine/zeavim.vim'
 
 " Taskwarrior related
-Plug 'xarthurx/taskwarrior.vim'
+" Plug 'xarthurx/taskwarrior.vim'
 "Plug 'tbabej/taskwiki'
 "Plug 'powerman/vim-plugin-AnsiEsc'
 "
@@ -352,8 +353,14 @@ set splitbelow
 set splitright
 
 " resize splits by percentage
-nnoremap <silent> <leader>= :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <C-Up>    :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <C-Down>  :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <C-Left>  :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <C-Right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+
+" change splits from vert to horiz and horiz to vert
+map <leader>th <C-w>t<C-W>H
+map <leader>tw <C-w>t<C-W>K
 
 "Backups
 call mkdir ($HOME . '/.config/nvim/tmp/backup', 'p')
@@ -535,6 +542,13 @@ augroup END
 augroup gitcommit
   autocmd!
   autocmd FileType gitcommit autocmd! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+augroup END
+
+"sh unix files -- I hate tabs
+augroup sh
+  autocmd!
+  autocmd FileType sh set tabstop=4 softtabstop=4
+    \ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
 augroup END
 
 "Plugin configuration
