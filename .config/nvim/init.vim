@@ -551,6 +551,14 @@ augroup sh
     \ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
 augroup END
 
+" markdown files NEVER use tabs
+augroup markdown
+  autocmd!
+  autocmd FileType sh set tabstop=4 softtabstop=4
+    \ shiftwidth=4 textwidth=79 expandtab autoindent
+augroup END
+
+
 "Plugin configuration
 
 "Better digraphs
@@ -942,6 +950,7 @@ let g:NERDAltDelims_haskell = 1
 " vim-markdown-composer ... I don't like it opening the browser wing
 let g:markdown_composer_browser = "firefox"
 let g:markdown_composer_open_browser = 0
+let g:markdown_composer_autostart = 0
 
 " And some keyboard shortcuts to switch between the color schemes
 nnoremap <leader><leader>bd :set background=dark<cr>
