@@ -948,7 +948,9 @@ let wiki_canonical.auto_tags = 1    " update tags metadata on save
 
 let g:vimwiki_list = [wiki_notes_md, wiki_sites]
 let g:vimwiki_global_ext = 0
+let g:vimwiki_ext2syntax = {}
 let g:vimwiki_markdown_link_ext = 1
+let g:vimwiki_auto_chdir = 1        " set the lcd to the vimwiki so that searching works
 
 " don't shorten links at all
 let g:vimwiki_url_maxsave = 0
