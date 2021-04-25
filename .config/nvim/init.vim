@@ -234,6 +234,9 @@ Plug 'w0ng/vim-hybrid'
 Plug 'reedes/vim-colors-pencil'
 Plug 'fneu/breezy'
 
+" nix support
+Plug 'LnL7/vim-nix'
+
 call plug#end()
 
 set viewoptions=cursor,slash,unix
