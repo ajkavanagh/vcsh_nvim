@@ -127,6 +127,7 @@ Plug 'mhinz/vim-signify'
 
 " Miscelaneous plugins
 Plug 'cespare/vim-toml'
+Plug 'pearofducks/ansible-vim'
 
 " Markdown / writing support
 Plug 'godlygeek/tabular'
