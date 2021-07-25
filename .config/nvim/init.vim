@@ -37,8 +37,6 @@ filetype indent on
 " we like modelines
 set modeline
 
-"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
 "Write the old file out when switching between files.
 set autowrite
 
@@ -134,8 +132,6 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'reedes/vim-pencil'
-"Plug 'xolox/vim-misc'
-"Plug 'xolox/vim-notes'
 Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/gist-vim'
@@ -161,13 +157,6 @@ Plug 'euclio/vim-markdown-composer', {'do': function('BuildComposer') }
 
 " COC Lanugage server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"
-" DISABLED using COC instead:  Also, reason deoplete is removed.
-" Note that until the neovim language server is ready we use this plugin
-"Plug 'autozimu/LanguageClient-neovim', {
-  "\ 'branch': 'next',
-  "\ 'do': 'bash install.sh'
-  "\}
 
 " Python/programming support
 Plug 'hynek/vim-python-pep8-indent'
@@ -183,10 +172,8 @@ Plug 'rust-lang/rust.vim'
 " Haskell specific plugins
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent'
-"Plug 'parsonsmatt/intero-neovim'
 Plug 'dan-t/vim-hsimport'
-"Plug 'eagletmt/neco-ghc'  " used with deoplete -- disabled as ghc-mod is
-"broken these days
+
 Plug 'vmchale/sql-qq'     " syntax highlighting of sql within quasi-quoting.
 
 " Golang specific plugins
@@ -199,11 +186,6 @@ let g:go_def_mapping_enabled = 0
 Plug 'dense-analysis/ale'
 Plug 'sbdchd/neoformat'
 Plug 'janko/vim-test'
-
-" DISABLED as using COC instead
-" Deoplete plugins -- see Deoplete config for how it is configured.
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'zchee/deoplete-jedi'
 
 " Zeal - offline, searchable, programming documentation
 " https://github.com/KabbAmine/zeavim.vim
@@ -463,33 +445,6 @@ nnoremap <leader>ev :tabe $MYVIMRC<cr>
 " <leader>ev to source the (n)vim RC file
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" language client options
-"let g:LanguageClient_serverCommands = {
-    "\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    "\ 'haskell': ['hie-wrapper'],
-    "\ }
-
-" move diagnostics to quickfix
-"let g:LanguageClient_diagnosticsList = "Quickfix"
-
-"function! SetLSPShortcuts()
-  "nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
-  "nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
-  "nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-  "nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
-  "nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-  "nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
-  "nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
-  "nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
-  "nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
-  "nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
-"endfunction()
-
-" LSP group is for filetypes that don't have their own group
-"augroup LSP
-  "autocmd!
-  "autocmd FileType rust call SetLSPShortcuts()
-"augroup END
 
 " file augroups
 augroup files
@@ -657,23 +612,6 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 
-" DISABLED as using COC instead
-" Deoplete options
-" Enable deoplete on startup
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#disable_auto_complete = 1
-
-" Ctrl-Space to trigger deoplete manually
-"inoremap <silent><expr> <C-Space>
-"\ pumvisible() ? "\<C-n>" :
-"\ <SID>check_back_space() ? "\<TAB>" :
-"\ deoplete#manual_complete()
-
-"call deoplete#custom#option('sources', {})
-
-"call deoplete#custom#source('_',
-  "\ 'disabled_syntaxes', ['Comment', 'String'])
-
 "function! s:check_back_space() abort "{{{
   "let col = col('.') - 1
   "return !col || getline('.')[col - 1]  =~ '\s'
@@ -684,9 +622,6 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" deoplete python options
-"let g:deoplete#sources#jedi#show_docstring = 1
 
 " TODO: move to a rust section
 " also ensure we rustfmt on every save:
@@ -759,51 +694,6 @@ let g:ale_linters = {}
 let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
 " Note for ghc-mod, the following is needed to install it:
 " stack build ghc-mod-5.7.0.0 --resolver=lts-8.23
-
-" parsonsmatt/intero-neovim --- just disable it until I've got to grips with it
-"let g:intero_start_immediately = 0
-" use ALE instead
-"let g:intero_use_neomake = 0
-
-
-"augroup Intero
-  "autocmd!
-  "" Automatically reload on save
-  "au BufWritePost *.hs InteroReload
-
-  "" Lookup the type of expression under the cursor
-  "au FileType haskell nmap <silent> <leader>it <Plug>InteroGenericType
-  "au FileType haskell nmap <silent> <leader>iT <Plug>InteroType
-  "" Insert type declaration
-  "au FileType haskell nnoremap <silent> <leader>id :InteroTypeInsert<CR>
-  "" Show info about expression or type under the cursor
-  "au FileType haskell nnoremap <silent> <leader>ii :InteroInfo<CR>
-
-  "" Open/Close the Intero terminal window
-  "au FileType haskell nnoremap <silent> <leader>in :InteroOpen<CR>
-  "au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-
-  "" Reload the current file into REPL
-  "au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-  "" Jump to the definition of an identifier
-  "au FileType haskell nnoremap <silent> <leader>ig :InteroGoToDef<CR>
-  "" Evaluate an expression in REPL
-  "au FileType haskell nnoremap <silent> <leader>ie :InteroEval<CR>
-
-  "" Start/Stop Intero
-  "au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  "au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
-
-  "" Reboot Intero, for when dependencies are added
-  "au FileType haskell nnoremap <silent> <leader>ir :InteroKill<CR> :InteroOpen<CR>
-
-  "" Managing targets
-  "" Prompts you to enter targets (no silent):
-  "au FileType haskell nnoremap <leader>iS :InteroSetTargets<CR>
-
-  "" Send the spec to the current file
-  "au FileType haskell nnoremap <leader>ib :InteroSend hspec spec<CR>
-"augroup END
 
 " Map Scratch to leader <tab> to open the scratch buffer
 nnoremap <leader><tab> :Scratch<cr>
