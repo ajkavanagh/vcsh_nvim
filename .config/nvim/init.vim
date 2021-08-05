@@ -108,8 +108,8 @@ Plug 'mileszs/ack.vim'
 Plug 'sjl/gundo.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Konfekt/FastFold'
-Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-peekaboo'
+Plug 'sindrets/diffview.nvim'
 
 Plug 'vim-scripts/vis'
 "Disabled as they don't work properly -- try to debug sometime
@@ -476,6 +476,12 @@ augroup json
   autocmd FileType json syntax match Comment +\/\/.\+$+
   autocmd BufNewFile,BufRead *.json set tabstop=4 softtabstop=4
     \ shiftwidth=4 textwidth=80 expandtab autoindent fileformat=unix
+augroup END
+
+augroup c
+  autocmd!
+  autocmd BufNewFile,BufRead *.c,*.h,*.cpp,*.c++,*.h++ set tabstop=4 softtabstop=4
+    \ shiftwidth=4 expandtab autoindent fileformat=unix
 augroup END
 
 " pencil configuration for writing
