@@ -33,6 +33,5 @@
     },
     "list.insertMappings": {
         "<C-c>": "do:exit"
-    },
-    "python.jediEnabled": false
+    }
 }
