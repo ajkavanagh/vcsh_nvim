@@ -109,6 +109,7 @@ Plug 'sjl/gundo.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Konfekt/FastFold'
 Plug 'junegunn/vim-peekaboo'
+Plug 'nvim-lua/plenary.nvim'
 Plug 'sindrets/diffview.nvim'
 
 Plug 'vim-scripts/vis'
