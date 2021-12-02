@@ -141,6 +141,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'reedes/vim-wordy'
 Plug 'atweiden/vim-betterdigraphs'
+Plug 'dhruvasagar/vim-table-mode'
 
 
 " Markdown composer plugin - building feature
@@ -155,6 +156,9 @@ function! BuildComposer(info)
 endfunction
 
 Plug 'euclio/vim-markdown-composer', {'do': function('BuildComposer') }
+
+" task/management support
+Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
 
 " COC Lanugage server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -403,6 +407,13 @@ nmap <Leader><Leader>p :r! cat /tmp/neovim.tmp<CR>
 "Show trailing whitespace as an error.
 match ErrorMsg '\s\+$'
 
+" Goyo set to 79 withd
+let g:goyo_width = 82
+map <F8> :Goyo<cr>
+
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
   let _s=@/
@@ -458,8 +469,8 @@ augroup python
   autocmd!
   autocmd BufNewFile,BufRead *.py set tabstop=4 softtabstop=4
     \ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
-  "autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-  "autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+  autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+  autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
   autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
   autocmd BufWinEnter *.py setlocal number relativenumber
 augroup END
@@ -488,7 +499,7 @@ augroup END
 " pencil configuration for writing
 augroup pencil
   autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
+  "autocmd FileType markdown,mkd call pencil#init()
   "autocmd FileType markdown,mkd setlocal spell "no spelling on markdown -- too annoying
   "autocmd FileType text         call pencil#init()
 augroup END
@@ -645,7 +656,7 @@ syntax on
 let g:ale_python_flake8_options = '--ignore=W503,W504,E402'  " enable binary ops at start of line
 
 "Configure python SimpylFold
-"let g:SimpylFold_docstring_preview=1
+let g:SimpylFold_docstring_preview=1
 
 " Haskell related config
 
@@ -790,6 +801,12 @@ let test#python#nose#options = {
 
 " -----------------
 " Configure vimwiki
+augroup vimwiki
+  autocmd!
+  autocmd FileType vimwiki setlocal tabstop=2 softtabstop=2
+    \ shiftwidth=2 expandtab autoindent shiftround
+augroup END
+
 let wiki_notes_md = {}
 let wiki_notes_md.path = "~/Documents/VimWikiNotes/notes"
 let wiki_notes_md.path_html = '~/Documents/VimWikiNotes/html'
@@ -847,6 +864,8 @@ let wiki_canonical.auto_tags = 1    " update tags metadata on save
 
 " back to global configuration for vimwiki
 
+let g:vimwiki_table_mappings=0
+let g:vimwiki_table_auto_fmt=0
 let g:vimwiki_list = [wiki_notes_md, wiki_sites]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}
