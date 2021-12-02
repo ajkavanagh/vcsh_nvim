@@ -1,6 +1,9 @@
 {
+    "suggest.floatEnable": false,
+    "signature.target": "echo",
     "diagnostic.enable": false,
-    "diagnostic.displayByAle": true,
+    "diagnostic.messageTarget": "echo",
+    "hover.target": "echo",
     "suggest.autoTrigger": "trigger",
     "languageserver": {
         "haskell": {
