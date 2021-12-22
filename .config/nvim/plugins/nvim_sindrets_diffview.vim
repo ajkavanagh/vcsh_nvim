@@ -1,0 +1,1 @@
+Plug 'sindrets/diffview.nvim'

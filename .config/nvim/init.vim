@@ -106,8 +106,8 @@ set signcolumn=yes  " Will this compete with signify??
 " Syntax highlighting on.
 syntax on
 
-" See where the cursor is at all times
-set viewoptions=cursor
+" See where the cursor is at all times, and remember the folds
+set viewoptions=cursor,folds
 
 "Ever notice a slight lag after typing the leader key + command? This lowers
 "the timeout.
@@ -245,7 +245,16 @@ vnoremap Y myY`y
 
 " open the file even if file doesn't exist
 :noremap <leader>gf :e <cfile><cr>
-" HERE
+
+" close the results window.
+nnoremap <leader>c :ccl<CR>
+
+" use C-n and C-p to go up and down the completions
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 
 " -----------------------------------------------------------------------------
 "
@@ -253,8 +262,8 @@ vnoremap Y myY`y
 "
 " -----------------------------------------------------------------------------
 
-"stdpath('data') == /home/alex/.local/share/nvim
 " Automatic installation of vim-plug if it is missing
+" stdpath('data') == /home/alex/.local/share/nvim
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -266,151 +275,59 @@ endif
 "Ensure you use single quotes '' for plugin names
 call plug#begin(data_dir . '/plugins')
 
+source ~/.config/nvim/plugins/airline.vim  " airline related configuration
 
-" NERD tree will be loaded on the first invocation of NERDTreeToggle command
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'preservim/nerdcommenter'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'vim-scripts/restore_view.vim'
+source ~/.config/nvim/plugins/nerdtree.vim
+source ~/.config/nvim/plugins/nerdcommenter.vim
+source ~/.config/nvim/plugins/ctrlp.vim
+source ~/.config/nvim/plugins/restore_view.vim
+source ~/.config/nvim/plugins/vim_surround.vim
+source ~/.config/nvim/plugins/vim_repeat.vim
+source ~/.config/nvim/plugins/vim_fugitive.vim
+source ~/.config/nvim/plugins/vim_unimpaired.vim
+source ~/.config/nvim/plugins/vim_scratch.vim
+source ~/.config/nvim/plugins/ack.vim
+source ~/.config/nvim/plugins/gundo.vim
+source ~/.config/nvim/plugins/rainbow_parentheses.vim
+source ~/.config/nvim/plugins/folding.vim
+source ~/.config/nvim/plugins/vim_peekaboo.vim
 
-" General editing plugins
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
-Plug 'idanarye/vim-merginal'
-Plug 'duff/vim-scratch'
-Plug 'mileszs/ack.vim'
-Plug 'sjl/gundo.vim'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'Konfekt/FastFold'
-Plug 'junegunn/vim-peekaboo'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'sindrets/diffview.nvim'
+" These two are lua plugins; diffview relies on plenary; NEEDS configuring.
+source ~/.config/nvim/plugins/nvim_lua_plenary.vim
+source ~/.config/nvim/plugins/nvim_sindrets_diffview.vim  " needs LUA configuration at some point
 
-Plug 'vim-scripts/vis'
-"Disabled as they don't work properly -- try to debug sometime
-"Plug 'vim-scripts/align'
-"Plug 'vim-scripts/cecutil'
-"Plug 'atweiden/vim-dragvisuals'
+source ~/.config/nvim/plugins/autoswap.vim
+source ~/.config/nvim/plugins/vim_expand_region.vim
+source ~/.config/nvim/plugins/easymotion.vim
+source ~/.config/nvim/plugins/vim_signify.vim
+source ~/.config/nvim/plugins/vim_toml.vim
+source ~/.config/nvim/plugins/ansible.vim
+source ~/.config/nvim/plugins/tabular.vim  " Note some au commands for Haskell
+source ~/.config/nvim/plugins/pencil.vim
+source ~/.config/nvim/plugins/wordy.vim
+source ~/.config/nvim/plugins/zim_wiki_syntax.vim
+source ~/.config/nvim/plugins/vimwiki.vim
+source ~/.config/nvim/plugins/gist.vim
+source ~/.config/nvim/plugins/goyo.vim
+source ~/.config/nvim/plugins/betterdigraphs.vim
+source ~/.config/nvim/plugins/vim_table_mode.vim
+source ~/.config/nvim/plugins/markdown_composer.vim
+source ~/.config/nvim/plugins/todoist.vim
+source ~/.config/nvim/plugins/coc.vim     " Replace with built-in language server
+source ~/.config/nvim/plugins/python.vim  " Python language support
+source ~/.config/nvim/plugins/jinja2_syntax.vim
+source ~/.config/nvim/plugins/rust.vim    " Rust language support
+source ~/.config/nvim/plugins/haskell.vim  " Haskell language support
+source ~/.config/nvim/plugins/go_lang.vim  " Go language support
+source ~/.config/nvim/plugins/ale.vim      " Replace with Treesitter/LUA?
+source ~/.config/nvim/plugins/vim_test.vim
+source ~/.config/nvim/plugins/zeal.vim
+source ~/.config/nvim/plugins/vim_css_color.vim
+source ~/.config/nvim/plugins/nix.vim
 
-Plug 'gioele/vim-autoswap'
-
-Plug 'terryma/vim-expand-region'
-Plug 'joequery/Stupid-EasyMotion'
-Plug 'mhinz/vim-signify'
-
-" Miscelaneous plugins
-Plug 'cespare/vim-toml'
-Plug 'pearofducks/ansible-vim'
-
-" Markdown / writing support
-Plug 'godlygeek/tabular'
-"Plug 'plasticboy/vim-markdown'
-Plug 'nelstrom/vim-markdown-folding'
-Plug 'preservim/vim-pencil'
-Plug 'joanrivera/vim-zimwiki-syntax'
-Plug 'vimwiki/vimwiki'
-Plug 'mattn/gist-vim'
-Plug 'mattn/webapi-vim'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'reedes/vim-wordy'
-
-" add some digraphs -- we have to do it early before the plugin initialises
-let g:BDG_add = {
-    \
-    \ '::' : '∷',
-    \ '=>' : '⇒',
-    \}
-Plug 'atweiden/vim-betterdigraphs'
-
-Plug 'dhruvasagar/vim-table-mode'
-
-
-" Markdown composer plugin - building feature
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release
-    else
-      !cargo build --release --no-default-features --features json-rpc
-    endif
-  endif
-endfunction
-
-Plug 'euclio/vim-markdown-composer', {'do': function('BuildComposer') }
-
-" task/management support
-Plug 'romgrk/todoist.nvim', { 'do': ':TodoistInstall' }
-
-" COC Lanugage server
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Python/programming support
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'vim-python/python-syntax'
-"Plug 'nvie/vim-flake8'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'kalekundert/vim-coiled-snake'      " folding support
-
-" Rust language support
-Plug 'rust-lang/rust.vim'
-
-" Haskell specific plugins
-Plug 'neovimhaskell/haskell-vim'
-Plug 'alx741/vim-hindent'
-Plug 'dan-t/vim-hsimport'
-
-Plug 'vmchale/sql-qq'     " syntax highlighting of sql within quasi-quoting.
-
-" Golang specific plugins
-Plug 'fatih/vim-go'
-" We like Ctrl-T for our own mapping
-let g:go_def_mapping_enabled = 0
-
-" General Programming support
-"Plug 'majutsushi/tagbar'
-Plug 'dense-analysis/ale'
-Plug 'sbdchd/neoformat'
-Plug 'janko/vim-test'
-
-" Zeal - offline, searchable, programming documentation
-" https://github.com/KabbAmine/zeavim.vim
-Plug 'KabbAmine/zeavim.vim'
-
-" Taskwarrior related
-" Plug 'xarthurx/taskwarrior.vim'
-"Plug 'tbabej/taskwiki'
-"Plug 'powerman/vim-plugin-AnsiEsc'
-"
-" CSS pretty colors in the window
-Plug 'ap/vim-css-color'
-
-" VIFM file picker
-Plug 'vifm/vifm.vim'
-
-" themes and look'n'feel of vim
-let g:airline#extensions#coc#enabled = 0
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'goatslacker/mango.vim'
-Plug 'zeis/vim-kolor'
-Plug 'jnurmine/Zenburn'
-Plug 'morhetz/gruvbox'
-Plug 'sickill/vim-monokai'
-Plug 'w0ng/vim-hybrid'
-Plug 'fneu/breezy'
-
-" nix support
-Plug 'LnL7/vim-nix'
+source ~/.config/nvim/plugins/themes.vim   " Collections of themes
 
 call plug#end()
-
-"Tab stuff
-"TODO
 
 
 "Disable code folding
@@ -418,12 +335,7 @@ set nofoldenable
 "set foldmethod=indent
 "set foldlevel=99
 "set foldlevelstart=99
-" stop fastfold updating on save
-let g:fastfold_savehook = 0
-let g:fastfold_force = 1
 
-" open/close folds using <space> in normal mode.
-"nnoremap <space> za
 
 "Highlight the colour column to be textwidth+2 and 120
 if v:version >= 703
@@ -461,13 +373,6 @@ endif
 vmap <Leader><Leader>y :w! /tmp/neovim.tmp<CR>
 nmap <Leader><Leader>p :r! cat /tmp/neovim.tmp<CR>
 
-" Goyo set to 79 withd
-let g:goyo_width = 82
-map <F8> :Goyo<cr>
-
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
   let _s=@/
@@ -493,16 +398,6 @@ augroup files
   autocmd FocusLost * :wa
 augroup END
 
-"autocmd FileType python
-augroup python
-  autocmd!
-  autocmd BufNewFile,BufRead *.py set tabstop=4 softtabstop=4
-    \ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
-  autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-  autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-  autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
-  autocmd BufWinEnter *.py setlocal number relativenumber
-augroup END
 
 "autocmd FileType yaml
 augroup yaml
@@ -523,17 +418,6 @@ augroup c
   autocmd!
   autocmd BufNewFile,BufRead *.c,*.h,*.cpp,*.c++,*.h++ set tabstop=4 softtabstop=4
     \ shiftwidth=4 expandtab autoindent fileformat=unix
-augroup END
-
-let g:pencil#joinspaces = 0      " 0=one_space (def), 1=two_spaces
-let g:pencil#autoformat = 0      " 0=manual, 1=auto (def)
-let g:pencil#textwidth = 79
-let g:pencil#wrapModeDefault = 'soft'
-
-" pencil configuration for writing
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
 augroup END
 
 " html files
@@ -564,357 +448,9 @@ augroup markdown
 augroup END
 
 
-"Plugin configuration
-
-"Better digraphs
-inoremap <expr> <C-K> BDG_GetDigraph()
-
-"dragvisuals.vim configuration
-"Doesn't work properly yet!
-"vmap <expr> <LEFT>   DVB_Drag('lefy')
-"vmap <expr> <RIGHT>  DVB_Drag('right')
-"vmap <expr> <DOWN>   DVB_Drag('down')
-"vmap <expr> <UP>     DVB_Drag('up')
-"vmap <expr> D        DVB_Duplicate()
-
-"let g:DVB_TrimWS = 1
-
-"NERDTree
-map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeIgnore = ['\.pyc$']
-
-"CtrlP configuration
-"let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-nnoremap <Leader>o :CtrlPCurWD<CR>
-nnoremap <C-t> :CtrlPBuffer<cr>
-
-"vim-expand-region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
-"vim-signify
-let g:signify_vcs_list = [ 'bzr', 'git' ]
-let g:signify_update_on_focusgained = 1
-let g:signify_mapping_next_hunk = '<leader>gj'
-let g:signify_mapping_prev_hunk = '<leader>gk'
-
-
-"Yggdroot/indentLine
-"let g:indentLine_char = '┊'
-"let g:indentLine_color_term = 234
-"let g:indentLine_leadingSpaceChar = '.'
-"let g:indentLine_leadingSpaceEnabled = 1
-
-"TagBar configuration
-"nnoremap <F2> :TagbarToggle<cr>
-
-" Rainbow parenthesis configuration
-nnoremap <F3> :RainbowParenthesesToggleAll<cr>
-
-" Gundo call up configuration
-nnoremap <F5> :GundoToggle<cr>
-
-" COC configuration
-inoremap <silent><expr> <c-space> coc#refresh() " Use c-space to trigger refresh
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use <leader>kk to show documentation in preview window
-nnoremap <silent> <leader>kk :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-" NOTE: disabled as the highlight is hard to read at the moment!
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-
-"function! s:check_back_space() abort "{{{
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~ '\s'
-"endfunction
-
-" use C-n and C-p to go up and down the completions
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" TODO: move to a rust section
-" also ensure we rustfmt on every save:
-let g:rustfmt_autosave = 1
-
-"TODO: move to a python section
-"Configure vim-python-pep8-indent
-let g:pymode_indent = 0
-
-"Configure python-syntax
-let python_highlight_all = 1
-
-let g:ale_python_flake8_options = '--ignore=W503,W504,E402'  " enable binary ops at start of line
-
-"Configure python SimpylFold
-let g:SimpylFold_docstring_preview=1
-
-" Haskell related config
-
-" Disable haskell-vim omnifunc
-let g:haskellmode_completion_ghc = 0
-
-" neovimhaskell/haskell-vim:
-let g:haskell_indent_if = 2
-let g:haskell_indent_before_where = 2
-let g:haskell_indent_case_alternative = 1
-let g:haskell_indent_let_no_in = 0
-
-" hindent & stylish-haskell
-" don't indent on save
-let g:hindent_on_save = 0
-
-" Helper function (from https://blog.jez.io/haskell-development-with-neovim/)
-" To do either an hindent, a stylish or both:
-function! HaskellFormat(which) abort
-  if a:which ==# 'hindent' || a:which ==# 'both'
-    :Hindent
-  endif
-  if a:which ==# 'stylish' || a:which ==# 'both'
-    silent! exe 'undojoin'
-    silent! exe 'keepjumps %!stylish-haskell'
-  endif
-endfunction
-
-"autocmd FileType haskell
-augroup haskell
-  autocmd!
-  autocmd BufNewFile,BufRead *.hs set tabstop=8 softtabstop=2
-    \ shiftwidth=4 textwidth=80 expandtab autoindent shiftround
-    \ fileformat=unix
-  "autocmd FileType haskell call SetLSPShortcuts()
-augroup END
-
-" keybindings for haskell files
-augroup haskellStylish
-  autocmd!
-  autocmd FileType haskell nnoremap <leader>hi :Hindent<CR>
-  autocmd FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
-  autocmd FileType haskell nnoremap <leader>hr :call HaskellFormat('both')<CR>
-  autocmd FileType haskell nnoremap <leader>= :Tabularize /=<CR>
-  autocmd FileType haskell nnoremap <leader>- :Tabularize /-><CR>
-  autocmd FileType haskell nnoremap <leader>; :Tabularize /::<CR>
-  autocmd FileType haskell nnoremap <leader>I :HsimportSymbol<CR>
-  autocmd FileType haskell nnoremap <leader>M :HsimportModule<CR>
-augroup END
-
-" for w0rp/ale for haskell
-let g:ale_linters = {}
-let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
-" Note for ghc-mod, the following is needed to install it:
-" stack build ghc-mod-5.7.0.0 --resolver=lts-8.23
-
-" Map Scratch to leader <tab> to open the scratch buffer
-nnoremap <leader><tab> :Scratch<cr>
-
-" Fugitive mappings
-nnoremap <leader>gu :diffupdate<cr>
-nnoremap <leader>g2 :diffget //2<cr>
-nnoremap <leader>g3 :diffget //3<cr>
-
-" Syntastic ignore empty spans, h1s, etc as common with Bootstrap
-"let g:syntastic_html_tidy_ignore_errors = [
-  "\  '<html> attribute "lang" lacks value',
-  "\  '<a> attribute "href" lacks value',
-  "\  'trimming empty <span>',
-  "\  'trimming empty <h1>',
-  "\  '<link> proprietary attribute "sizes"'
-  "\ ]
-
-"" Ensure that syntastic + rust play properly
-"let g:syntastic_rust_checkers = ['rustc']
-
-" ALE (Asynchronous Linting Engine configuration
-let g:airline#extensions#ale#enabled = 1
-let g:ale_lint_on_text_changed = 'normal'
-
-nnoremap <leader>ad :ALEDetail<cr>
-
-" Configure ack.vim on Ubuntu (it's called ack-grep)
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-elseif executable('ack-grep')
-  let g:ackprg = 'ack-grep --nocolor'
-endif
-
-" leader-aa to start a search, leader-aw to search for the word under the
-" cursor
-nnoremap <leader>aa :Ack! ""<Left>
-nnoremap <leader>aw :Ack! "<c-r>=expand("<cword>")<cr>"<Left>
-
-" close the results window.
-nnoremap <leader>c :ccl<CR>
-
-" Configure notes.vim
-"let g:notes_directories = ['~/Dropbox/VimNotes']
-
-" vim-test configuration
-" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
-nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ts :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tg :TestVisit<CR>
-
-" from https://github.com/relaxdiego/dotfiles
-
-" Determine the python test runner to use
-if filereadable("tox.ini") && filereadable(".stestr.conf")
-    let test#runners = {'Python': ['ToxWithStestr']}
-    let test#python#runner = 'toxwithstestr'
-elseif filereadable("pytest.ini") && filereadable("script/test")
-    let test#python#runner = 'pytest'
-    let test#python#pytest#executable = 'script/test'
-    let test#python#pytest#file_pattern = '_test.py'
-elseif filereadable(".pytest") && filereadable("Pipfile")
-    let test#python#runner = 'pytest'
-    let test#python#pytest#executable = 'pipenv run pytest'
-    let test#python#pytest#file_pattern = '_test.py'
-elseif filereadable(".pytest")
-    let test#python#runner = 'pytest'
-elseif filereadable(".djangotest")
-    let test#python#runner = 'djangotest'
-endif
-
-" Pytest options
-" NOTE: Make sure pytest-random-order is installed
-let test#python#pytest#options = {
-    \ 'nearest': '--capture=no -v',
-    \ 'file': '--capture=no',
-    \ 'suite': '--capture=no',
-    \}
-" Nose options
-let test#python#nose#options = {
-    \ 'nearest': '-v -s',
-    \ 'file': '-s --randomize',
-    \ 'suite': '-s --randomize',
-    \}
-
-" -----------------
-" Configure vimwiki
-augroup vimwiki
-  autocmd!
-  autocmd FileType vimwiki setlocal tabstop=2 softtabstop=2
-    \ shiftwidth=2 expandtab autoindent shiftround
-augroup END
-
-let wiki_notes_md = {}
-let wiki_notes_md.path = "~/Documents/VimWikiNotes/notes"
-let wiki_notes_md.path_html = '~/Documents/VimWikiNotes/html'
-let wiki_notes_md.syntax = 'markdown'
-let wiki_notes_md.ext = '.md'
-let wiki_notes_md.nested_syntaxes = {'python': 'python', 'rust': 'rust',
-                                  \  'haskell': 'haskell'}
-let wiki_notes_md.auto_export = 0  " set to 1 to auto generate the page on save
-let wiki_notes_md.auto_doc = 0     " set to 1 to auto redo TOC on the page.
-let wiki_notes_md.custom_wiki2html = '~/bin/vw2html'
-let wiki_notes_md.template_path = '~/Documents/VimWikiNotes/templates'
-let wiki_notes_md.template_default = 'default'
-let wiki_notes_md.template_ext = '.html'
-
-let wiki_notes_md.list_margin = 0  " needs to be this for markdown
-let wiki_notes_md.auto_tags = 1    " update tags metadata on save
-
-" This is an attempt at a blog using Vimwiki markdown with pandoc and my
-" own converter.  It's an on going project.
-let wiki_sites = {}
-let wiki_sites.path = '~/Projects/Personal/sites/vps-sites/vimwiki-src'
-let wiki_sites.path_html = '~/Projects/Personal/sites/vps-sites/vw2html-site'
-let wiki_sites.syntax = 'markdown'
-let wiki_sites.ext = '.md'
-let wiki_sites.nested_syntaxes = {'python': 'python', 'rust': 'rust',
-                              \  'haskell': 'haskell'}
-let wiki_sites.auto_export = 0  " set to 1 to auto generate the page on save
-let wiki_sites.auto_doc = 0     " set to 1 to auto redo TOC on the page.
-let wiki_sites.custom_wiki2html = '~/bin/vw2html'
-let wiki_sites.template_path = '~/Projects/Personal/sites/vps-sites/vw2html-templates'
-let wiki_sites.template_default = 'default'
-let wiki_sites.template_ext = '.html'
-
-let wiki_sites.list_margin = 0  " needs to be this for markdown
-let wiki_sites.auto_tags = 1    " update tags metadata on save
-
-" ----------------------
-" Canonical related wiki
-let wiki_canonical = {}
-let wiki_canonical.path = '~/Projects/Canonical/vimwiki/vimwiki-content'
-let wiki_canonical.path_html = '~/Projects/Canonical/vimwiki/vw2html-site'
-let wiki_canonical.syntax = 'markdown'
-let wiki_canonical.ext = '.md'
-let wiki_canonical.nested_syntaxes = {'python': 'python', 'rust': 'rust',
-                              \  'haskell': 'haskell'}
-let wiki_canonical.auto_export = 0  " set to 1 to auto generate the page on save
-let wiki_canonical.auto_doc = 0     " set to 1 to auto redo TOC on the page.
-let wiki_canonical.custom_wiki2html = '~/bin/vw2html'
-let wiki_canonical.template_path = '~/Projects/Canonical/vimwiki/vw2html-templates'
-let wiki_canonical.template_default = 'default'
-let wiki_canonical.template_ext = '.html'
-
-let wiki_canonical.list_margin = 0  " needs to be this for markdown
-let wiki_canonical.auto_tags = 1    " update tags metadata on save
-
-" back to global configuration for vimwiki
-
-let g:vimwiki_table_mappings=0
-let g:vimwiki_table_auto_fmt=0
-let g:vimwiki_list = [wiki_notes_md, wiki_sites]
-let g:vimwiki_global_ext = 0
-let g:vimwiki_ext2syntax = {}
-let g:vimwiki_markdown_link_ext = 1
-let g:vimwiki_auto_chdir = 1        " set the lcd to the vimwiki so that searching works
-
-" don't shorten links at all
-let g:vimwiki_url_maxsave = 0
-
 " Set the theme up
 set background=dark
-"colorscheme solarized
 colorscheme dracula
-
 
 " I like italicised comments
 highlight Comment cterm=italic
-
-" Folding colous
-highlight Folded ctermbg=black ctermfg=grey
-highlight FoldColumn ctermbg=black ctermfg=blue
-
-
-" I want haskell to use the alternative -- always
-let g:NERDAltDelims_haskell = 1
-
-" vim-markdown-composer ... I don't like it opening the browser wing
-let g:markdown_composer_browser = "firefox"
-let g:markdown_composer_open_browser = 0
-let g:markdown_composer_autostart = 0
