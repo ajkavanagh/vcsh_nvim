@@ -1,11 +1,21 @@
 "NVIM init.vim file
+
+" -----------------------------------------------------------------------------
 "
+" General variable settings that can be used for configuration.
+"
+" -----------------------------------------------------------------------------
+
 " Shouldn't be needed, but would be useful in the .vimrc file.
 if has('nvim')
   set encoding=utf-8
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   set termguicolors
 endif
+
+" configure python interpreters for neovim
+let g:python_host_prog = '/home/alex/.virtualenvs/py2-for-neovim/bin/python'
+let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
 
 "Determine what the os is and set a global.
 "This will be either Linux, Darwin or Windows
@@ -29,6 +39,13 @@ else
   let g:xwindows = 0
 endif
 
+
+" -----------------------------------------------------------------------------
+"
+" General configuration settings and config for typical windows.
+"
+" -----------------------------------------------------------------------------
+
 "Enable filetypes
 filetype on
 filetype plugin on
@@ -43,16 +60,131 @@ set autowrite
 "Display current cursor position in the lower right corner
 set ruler
 
+" Default editor settings
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set autoindent
+
 "Set the titlestring; this is for the autoswap plugin that also requires wmctrl
 "to be installed in linux
 set title titlestring=
 
-" add some digraphs -- we have to do it early before the plugin initialises
-let g:BDG_add = {
-    \
-    \ '::' : '∷',
-    \ '=>' : '⇒',
-    \}
+" Put yanks, etc. into the * and + buffers.
+set clipboard=unnamedplus
+
+"Backups
+call mkdir ('~/.config/nvim/tmp/backup', 'p')
+set backupdir=~/.config/nvim/tmp/backup//
+set directory=~/.config/nvim/tmp/swap//
+set backup
+
+" Undofile is useful!
+set undofile
+
+"Show matching brackets
+set showmatch
+
+"List chars are useful
+set list
+"set listchars=tab:▸\ ,eol:¬
+set listchars=tab:→\ 
+
+"Show trailing whitespace as an error.
+match ErrorMsg '\s\+$'
+
+" files to ignore in file pickers
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
+
+" Make space for messages, sign column, etc.
+set cmdheight=2    " Better display for messages
+set updatetime=300  " quicker update time for messages.
+set shortmess+=c    " don't give |ins-completion-menu| messages
+set signcolumn=yes  " Will this compete with signify??
+
+" Syntax highlighting on.
+syntax on
+
+" See where the cursor is at all times
+set viewoptions=cursor
+
+"Ever notice a slight lag after typing the leader key + command? This lowers
+"the timeout.
+set timeoutlen=500
+
+"Switch between buffers without saving
+set hidden
+
+" Disable showing the mode in the mode-line; Airline does this for us.
+set noshowmode
+
+"Set font size and type. Depends on resolution. Larger screens, prefer h20
+set guifont=Menlo:h14
+
+" spelling stuff
+set spelllang=en
+set spellfile=$HOME/syncthing/Config/nvim/en.utf-8.add
+" use :setlocal spell to enable it for the file
+
+"Show command in bottom right portion of the screen
+set showcmd
+
+" Sane autocompletions for the tab key in menus
+set wildmenu
+set wildmode=list:longest
+
+"Show line numbers
+set number
+set relativenumber
+
+" Like to see the cursor line
+set cursorline
+
+"Scrolling - I like to see a number of lines in the buffer
+set scrolloff=3
+
+"Always show the status line
+set laststatus=2
+
+"Prefer a slightly higher line height
+set linespace=3
+
+"Set incremental, highlighted and case-insensitive searching
+"also sane regexs (the / /\v bit)
+"nnoremap / /\v
+"vnoremap / /\v
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+"Hide mouse when typing
+set mousehide
+
+"Allow Cmd-C in item2
+set mouse=
+
+" where we want our splits
+set splitbelow
+set splitright
+
+
+" -----------------------------------------------------------------------------
+"
+" Default keymaps
+"
+" -----------------------------------------------------------------------------
+
+let mapleader = ","
+let g:mapleader = ","
+let maplocalleader = "\\"
+
+" Useful key defs to edit and source the nvim config
+" <leader>ev to edit my (n)vim RC file
+nnoremap <leader>ev :tabe $MYVIMRC<cr>
+" <leader>ev to source the (n)vim RC file
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Bindings for terminal mode.  Let's use Crtl hjkl to leave rather than Ctrl
 " + \n which is just annoying
@@ -63,33 +195,77 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 " Let's allow Ctrl-\ Ctrl R n be paste from the 'n' buffer.
 tnoremap <expr> <C-\><C-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
-" configure python interpreters for neovim
-let g:python_host_prog = '/home/alex/.virtualenvs/py2-for-neovim/bin/python'
-let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
+"Use leader <space>> to disable the search highlight until the next search
+nnoremap <leader><space> :noh<CR>
+
+"Hard-wrap paragraphs of text
+noremap <leader>q gqip
+
+"Map K to 'split' line in normal mode
+:nnoremap K i<CR><Esc>
+
+"Easier split navigation
+nnoremap <c-j> <c-w><c-j>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-l> <c-w><c-l>
+nnoremap <c-h> <c-w><c-h>
+
+" resize splits by percentage
+nnoremap <silent> <C-Up>    :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <C-Down>  :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <C-Left>  :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <C-Right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+
+" change splits from vert to horiz and horiz to vert
+map <leader>th <C-w>t<C-W>H
+map <leader>tw <C-w>t<C-W>K
+
+" stop using arrow keys to make me learn hjkl and use modes more
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+" make j, k do 'normal' action on wrapped lines.
+nnoremap j gj
+nnoremap k gk
 
 
-" Disable Jedi-vim autocompletion and enable call-signatures options
-" This has to come before the plugin is loaded to have an effect
-"let g:jedi#auto_vim_configuration = 0
-"let g:jedi#auto_initialization = 1  " this enables the plugin and sets up the keys below
-"let g:jedi#completions_enabled = 0
-"let g:jedi#smart_auto_mappings = 0
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#completions_command = ""
-"let g:jedi#show_call_signatures = 2  " Call signatures go in the command prompt area
-"let g:jedi#force_py_version = 3
+" Reselect visual selection after indenting or outdenting
+vnoremap < <gv
+vnoremap > >gv
 
-"let g:jedi#documentation_command = "<leader>kk"
-"let g:jedi#goto_command = "<leader>cc"
-"let g:jedi#goto_assignments_command = "<leader>gg"
-"let g:jedi#goto_definitions_command = "<leader>dd"
-"let g:jedi#usages_command = "<leader>gn"
-"let g:jedi#rename_command = "<leader>rr"
+" Maintain the cursor position even when yanking in visual mode.
+" curtesy of: https://ddrscott.github.io/blog/2016/yank-without-jank/
+vnoremap y myy`y
+vnoremap Y myY`y
 
-"Plugins using vim-plug
-call plug#begin("~/.config/nvim/plugged")
+" open the file even if file doesn't exist
+:noremap <leader>gf :e <cfile><cr>
+" HERE
 
+" -----------------------------------------------------------------------------
+"
+" Plugins managed by vim-plug
+"
+" -----------------------------------------------------------------------------
+
+"stdpath('data') == /home/alex/.local/share/nvim
+" Automatic installation of vim-plug if it is missing
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+"Plugins managed by vim-plug
 "Ensure you use single quotes '' for plugin names
+call plug#begin(data_dir . '/plugins')
+
 
 " NERD tree will be loaded on the first invocation of NERDTreeToggle command
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -130,9 +306,9 @@ Plug 'pearofducks/ansible-vim'
 
 " Markdown / writing support
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+"Plug 'plasticboy/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
-Plug 'reedes/vim-pencil'
+Plug 'preservim/vim-pencil'
 Plug 'joanrivera/vim-zimwiki-syntax'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/gist-vim'
@@ -140,7 +316,15 @@ Plug 'mattn/webapi-vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'reedes/vim-wordy'
+
+" add some digraphs -- we have to do it early before the plugin initialises
+let g:BDG_add = {
+    \
+    \ '::' : '∷',
+    \ '=>' : '⇒',
+    \}
 Plug 'atweiden/vim-betterdigraphs'
+
 Plug 'dhruvasagar/vim-table-mode'
 
 
@@ -168,7 +352,6 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-python/python-syntax'
 "Plug 'nvie/vim-flake8'
 Plug 'Glench/Vim-Jinja2-Syntax'
-"Plug 'davidhalter/jedi-vim'
 Plug 'kalekundert/vim-coiled-snake'      " folding support
 
 " Rust language support
@@ -212,14 +395,13 @@ let g:airline#extensions#coc#enabled = 0
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
-Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'goatslacker/mango.vim'
 Plug 'zeis/vim-kolor'
 Plug 'jnurmine/Zenburn'
 Plug 'morhetz/gruvbox'
 Plug 'sickill/vim-monokai'
 Plug 'w0ng/vim-hybrid'
-Plug 'reedes/vim-colors-pencil'
 Plug 'fneu/breezy'
 
 " nix support
@@ -227,83 +409,9 @@ Plug 'LnL7/vim-nix'
 
 call plug#end()
 
-set viewoptions=cursor,slash,unix
-
-"Want a different map leader than \
-let mapleader = ","
-let g:mapleader = ","
-let maplocalleader = "\\"
-
-"Ever notice a slight lag after typing the leader key + command? This lowers
-"the timeout.
-set timeoutlen=500
-
-"Switch between buffers without saving - also required by vim-ctrlspace
-set hidden
-
-" Insert mode key mappings
-" Ctrl-U = uppercase current work in Insert mode.
-inoremap <c-u> <esc>viwUi
-
-" airline specific stuff
-set noshowmode
-
-"Set the colour scheme.  Change this to your preference
-"Here's 100's to choose from:
-"http://www.vim.org/scripts/script.php?script_id=625
-"colorscheme twilight
-
-"Set font size and type. Depends on resolution. Larger screens, prefer h20
-set guifont=Menlo:h14
-
 "Tab stuff
 "TODO
 
-" spelling stuff
-set spelllang=en
-set spellfile=$HOME/syncthing/Config/nvim/en.utf-8.add
-" use :setlocal spell to enable it for the file
-
-"Show command in bottom right portion of the screen
-set showcmd
-
-" Sane autocompletions for the tab key in menus
-set wildmenu
-set wildmode=list:longest
-
-"Show line numbers
-set number
-set relativenumber
-
-" Like to see the cursor line
-set cursorline
-
-"Scrolling - I like to see a number of lines in the buffer
-set scrolloff=3
-
-"Indent stuff
-set autoindent
-
-"Always show the status line
-set laststatus=2
-
-"Prefer a slightly higher line height
-set linespace=3
-
-"Set incremental, highlighted and case-insensitive searching
-"also sane regexs (the / /\v bit)
-"nnoremap / /\v
-"vnoremap / /\v
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-
-"Use leader <space>> to disable the search highlight until the next search
-nnoremap <leader><space> :noh<CR>
-
-"Hard-wrap paragraphs of text
-noremap <leader>q gqip
 
 "Disable code folding
 set nofoldenable
@@ -317,54 +425,6 @@ let g:fastfold_force = 1
 " open/close folds using <space> in normal mode.
 "nnoremap <space> za
 
-" Moving text around (transposes, etc.)
-" transpose chars, without moving the character position
-:nnoremap <silent> gc xph
-" Swap the current word with the next, without moving
-:nnoremap <silent> gw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>:nohlsearch<CR>
-
-
-"Hide mouse when typing
-set mousehide
-
-"Allow Cmd-C in item2
-set mouse=
-
-"Map K to 'split' line in normal mode
-:nnoremap K i<CR><Esc>
-
-"Easier split navigation
-nnoremap <c-j> <c-w><c-j>
-nnoremap <c-k> <c-w><c-k>
-nnoremap <c-l> <c-w><c-l>
-nnoremap <c-h> <c-w><c-h>
-
-" where we want our splits
-set splitbelow
-set splitright
-
-" resize splits by percentage
-nnoremap <silent> <C-Up>    :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <C-Down>  :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <silent> <C-Left>  :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <silent> <C-Right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
-
-" change splits from vert to horiz and horiz to vert
-map <leader>th <C-w>t<C-W>H
-map <leader>tw <C-w>t<C-W>K
-
-"Backups
-call mkdir ($HOME . '/.config/nvim/tmp/backup', 'p')
-set backupdir=~/.config/nvim/tmp/backup//
-set directory=~/.config/nvim/tmp/swap//
-set backup
-
-" Undofile is useful!
-set undofile
-
-"Show matching brackets
-set showmatch
-
 "Highlight the colour column to be textwidth+2 and 120
 if v:version >= 703
   "a faint gray color, not too insistent
@@ -377,7 +437,7 @@ if v:version >= 703
   endif
 endif
 
-" if now windows AND we are in tmux, then use the tmux paste register
+" if not windows AND we are in tmux, then use the tmux paste register
 if !g:xwindows && g:tmux
   "Copy & Paste to the fakeclip & register (tmux paste)
   vmap <Leader>y "&y
@@ -400,12 +460,6 @@ endif
 " use a register in tmp to copy text between sessions (or even just store it)
 vmap <Leader><Leader>y :w! /tmp/neovim.tmp<CR>
 nmap <Leader><Leader>p :r! cat /tmp/neovim.tmp<CR>
-
-"Enter visual mode quickly.
-"nmap <Leader><Leader> V
-
-"Show trailing whitespace as an error.
-match ErrorMsg '\s\+$'
 
 " Goyo set to 79 withd
 let g:goyo_width = 82
@@ -432,31 +486,6 @@ function! TrimWhiteSpace()
 endfunction
 
 nnoremap <Leader>rts :call Preserve("%s/\\s\\+$//e")<CR>
-
-"List chars are useful
-set list
-"set listchars=tab:▸\ ,eol:¬
-"set listchars=tab:▸\ 
-set listchars=tab:→\ 
-
-" stop using arrow keys to make me learn hjkl and use modes more
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-" make j, k do 'normal' action on wrapped lines.
-nnoremap j gj
-nnoremap k gk
-
-" <leader>ev to edit my (n)vim RC file
-nnoremap <leader>ev :tabe $MYVIMRC<cr>
-" <leader>ev to source the (n)vim RC file
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
 
 " file augroups
 augroup files
@@ -496,17 +525,16 @@ augroup c
     \ shiftwidth=4 expandtab autoindent fileformat=unix
 augroup END
 
+let g:pencil#joinspaces = 0      " 0=one_space (def), 1=two_spaces
+let g:pencil#autoformat = 0      " 0=manual, 1=auto (def)
+let g:pencil#textwidth = 79
+let g:pencil#wrapModeDefault = 'soft'
+
 " pencil configuration for writing
 augroup pencil
   autocmd!
-  "autocmd FileType markdown,mkd call pencil#init()
-  "autocmd FileType markdown,mkd setlocal spell "no spelling on markdown -- too annoying
-  "autocmd FileType text         call pencil#init()
+  autocmd FileType markdown,mkd call pencil#init()
 augroup END
-
-let g:pencil#joinspaces = 1      " 0=one_space (def), 1=two_spaces
-let g:pencil#autoformat = 0      " 0=manual, 1=auto (def)
-let g:pencil#textwidth = 79
 
 " html files
 augroup html
@@ -561,7 +589,6 @@ let NERDTreeIgnore = ['\.pyc$']
 "let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
 nnoremap <Leader>o :CtrlPCurWD<CR>
 nnoremap <C-t> :CtrlPBuffer<cr>
 
@@ -592,10 +619,6 @@ nnoremap <F3> :RainbowParenthesesToggleAll<cr>
 nnoremap <F5> :GundoToggle<cr>
 
 " COC configuration
-set cmdheight=2    " Better display for messages
-set updatetime=300  " quicker update time for messages.
-set shortmess+=c    " don't give |ins-completion-menu| messages
-set signcolumn=yes  " Will this compete with signify??
 inoremap <silent><expr> <c-space> coc#refresh() " Use c-space to trigger refresh
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -651,7 +674,6 @@ let g:pymode_indent = 0
 
 "Configure python-syntax
 let python_highlight_all = 1
-syntax on
 
 let g:ale_python_flake8_options = '--ignore=W503,W504,E402'  " enable binary ops at start of line
 
@@ -877,7 +899,9 @@ let g:vimwiki_url_maxsave = 0
 
 " Set the theme up
 set background=dark
-colorscheme solarized
+"colorscheme solarized
+colorscheme dracula
+
 
 " I like italicised comments
 highlight Comment cterm=italic
@@ -894,7 +918,3 @@ let g:NERDAltDelims_haskell = 1
 let g:markdown_composer_browser = "firefox"
 let g:markdown_composer_open_browser = 0
 let g:markdown_composer_autostart = 0
-
-" And some keyboard shortcuts to switch between the color schemes
-nnoremap <leader><leader>bd :set background=dark<cr>
-nnoremap <leader><leader>bl :set background=light<cr>
