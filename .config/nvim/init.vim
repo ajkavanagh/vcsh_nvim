@@ -42,10 +42,16 @@ endif
 
 " -----------------------------------------------------------------------------
 "
+" Load the functions
+"
+" -----------------------------------------------------------------------------
+source <sfile>:h/init/functions.vim
+
+" -----------------------------------------------------------------------------
+"
 " General configuration settings and config for typical windows.
 "
 " -----------------------------------------------------------------------------
-
 "Enable filetypes
 filetype on
 filetype plugin on
@@ -115,9 +121,6 @@ set timeoutlen=500
 
 "Switch between buffers without saving
 set hidden
-
-" Disable showing the mode in the mode-line; Airline does this for us.
-set noshowmode
 
 "Set font size and type. Depends on resolution. Larger screens, prefer h20
 set guifont=Menlo:h14
@@ -244,7 +247,7 @@ vnoremap y myy`y
 vnoremap Y myY`y
 
 " open the file even if file doesn't exist
-:noremap <leader>gf :e <cfile><cr>
+noremap <leader>gf :e <cfile><cr>
 
 " close the results window.
 nnoremap <leader>c :ccl<CR>
@@ -275,57 +278,58 @@ endif
 "Ensure you use single quotes '' for plugin names
 call plug#begin(data_dir . '/plugins')
 
-source ~/.config/nvim/plugins/airline.vim  " airline related configuration
+"source ~/.config/nvim/plugins/airline.vim  " airline related configuration
+source <sfile>:h/plugins/airline.vim  " airline related configuration
 
-source ~/.config/nvim/plugins/nerdtree.vim
-source ~/.config/nvim/plugins/nerdcommenter.vim
-source ~/.config/nvim/plugins/ctrlp.vim
-source ~/.config/nvim/plugins/restore_view.vim
-source ~/.config/nvim/plugins/vim_surround.vim
-source ~/.config/nvim/plugins/vim_repeat.vim
-source ~/.config/nvim/plugins/vim_fugitive.vim
-source ~/.config/nvim/plugins/vim_unimpaired.vim
-source ~/.config/nvim/plugins/vim_scratch.vim
-source ~/.config/nvim/plugins/ack.vim
-source ~/.config/nvim/plugins/gundo.vim
-source ~/.config/nvim/plugins/rainbow_parentheses.vim
-source ~/.config/nvim/plugins/folding.vim
-source ~/.config/nvim/plugins/vim_peekaboo.vim
+source <sfile>:h/plugins/nerdtree.vim
+source <sfile>:h/plugins/nerdcommenter.vim
+source <sfile>:h/plugins/ctrlp.vim
+source <sfile>:h/plugins/restore_view.vim
+source <sfile>:h/plugins/vim_surround.vim
+source <sfile>:h/plugins/vim_repeat.vim
+source <sfile>:h/plugins/vim_fugitive.vim
+source <sfile>:h/plugins/vim_unimpaired.vim
+source <sfile>:h/plugins/vim_scratch.vim
+source <sfile>:h/plugins/ack.vim
+source <sfile>:h/plugins/gundo.vim
+source <sfile>:h/plugins/rainbow_parentheses.vim
+source <sfile>:h/plugins/folding.vim
+source <sfile>:h/plugins/vim_peekaboo.vim
 
 " These two are lua plugins; diffview relies on plenary; NEEDS configuring.
-source ~/.config/nvim/plugins/nvim_lua_plenary.vim
-source ~/.config/nvim/plugins/nvim_sindrets_diffview.vim  " needs LUA configuration at some point
+source <sfile>:h/plugins/nvim_lua_plenary.vim
+source <sfile>:h/plugins/nvim_sindrets_diffview.vim  " needs LUA configuration at some point
 
-source ~/.config/nvim/plugins/autoswap.vim
-source ~/.config/nvim/plugins/vim_expand_region.vim
-source ~/.config/nvim/plugins/easymotion.vim
-source ~/.config/nvim/plugins/vim_signify.vim
-source ~/.config/nvim/plugins/vim_toml.vim
-source ~/.config/nvim/plugins/ansible.vim
-source ~/.config/nvim/plugins/tabular.vim  " Note some au commands for Haskell
-source ~/.config/nvim/plugins/pencil.vim
-source ~/.config/nvim/plugins/wordy.vim
-source ~/.config/nvim/plugins/zim_wiki_syntax.vim
-source ~/.config/nvim/plugins/vimwiki.vim
-source ~/.config/nvim/plugins/gist.vim
-source ~/.config/nvim/plugins/goyo.vim
-source ~/.config/nvim/plugins/betterdigraphs.vim
-source ~/.config/nvim/plugins/vim_table_mode.vim
-source ~/.config/nvim/plugins/markdown_composer.vim
-source ~/.config/nvim/plugins/todoist.vim
-source ~/.config/nvim/plugins/coc.vim     " Replace with built-in language server
-source ~/.config/nvim/plugins/python.vim  " Python language support
-source ~/.config/nvim/plugins/jinja2_syntax.vim
-source ~/.config/nvim/plugins/rust.vim    " Rust language support
-source ~/.config/nvim/plugins/haskell.vim  " Haskell language support
-source ~/.config/nvim/plugins/go_lang.vim  " Go language support
-source ~/.config/nvim/plugins/ale.vim      " Replace with Treesitter/LUA?
-source ~/.config/nvim/plugins/vim_test.vim
-source ~/.config/nvim/plugins/zeal.vim
-source ~/.config/nvim/plugins/vim_css_color.vim
-source ~/.config/nvim/plugins/nix.vim
+source <sfile>:h/plugins/autoswap.vim
+source <sfile>:h/plugins/vim_expand_region.vim
+source <sfile>:h/plugins/easymotion.vim
+source <sfile>:h/plugins/vim_signify.vim
+source <sfile>:h/plugins/vim_toml.vim
+source <sfile>:h/plugins/ansible.vim
+source <sfile>:h/plugins/tabular.vim  " Note some au commands for Haskell
+source <sfile>:h/plugins/pencil.vim
+source <sfile>:h/plugins/wordy.vim
+source <sfile>:h/plugins/zim_wiki_syntax.vim
+source <sfile>:h/plugins/vimwiki.vim
+source <sfile>:h/plugins/gist.vim
+source <sfile>:h/plugins/goyo.vim
+source <sfile>:h/plugins/betterdigraphs.vim
+source <sfile>:h/plugins/vim_table_mode.vim
+source <sfile>:h/plugins/markdown_composer.vim
+source <sfile>:h/plugins/todoist.vim
+source <sfile>:h/plugins/coc.vim     " Replace with built-in language server
+source <sfile>:h/plugins/python.vim  " Python language support
+source <sfile>:h/plugins/jinja2_syntax.vim
+source <sfile>:h/plugins/rust.vim    " Rust language support
+source <sfile>:h/plugins/haskell.vim  " Haskell language support
+source <sfile>:h/plugins/go_lang.vim  " Go language support
+source <sfile>:h/plugins/ale.vim      " Replace with Treesitter/LUA?
+source <sfile>:h/plugins/vim_test.vim
+source <sfile>:h/plugins/zeal.vim
+source <sfile>:h/plugins/vim_css_color.vim
+source <sfile>:h/plugins/nix.vim
 
-source ~/.config/nvim/plugins/themes.vim   " Collections of themes
+source <sfile>:h/plugins/themes.vim   " Collections of themes
 
 call plug#end()
 
@@ -372,23 +376,6 @@ endif
 " use a register in tmp to copy text between sessions (or even just store it)
 vmap <Leader><Leader>y :w! /tmp/neovim.tmp<CR>
 nmap <Leader><Leader>p :r! cat /tmp/neovim.tmp<CR>
-
-function! Preserve(command)
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  execute a:command
-  " Clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-
-" Removes trailing spaces
-function! TrimWhiteSpace()
-  %s/\s\+$//e
-endfunction
 
 nnoremap <Leader>rts :call Preserve("%s/\\s\\+$//e")<CR>
 
@@ -453,4 +440,4 @@ set background=dark
 colorscheme dracula
 
 " I like italicised comments
-highlight Comment cterm=italic
+"highlight Comment cterm=italic gui=italic
