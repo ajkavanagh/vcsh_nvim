@@ -45,11 +45,11 @@ endif
 " Setup
 "
 " -----------------------------------------------------------------------------
-runtime ./init/functions.vim
-runtime ./init/general_config.vim
-runtime ./init/general_keymaps.vim
-runtime ./init/load_plugins.vim
-runtime ./init/general_augroups.vim
+runtime ./functions.vim
+runtime ./general_config.vim
+runtime ./general_keymaps.vim
+runtime ./load_plugins.vim
+runtime ./general_augroups.vim
 
 " -----------------------------------------------------------------------------
 "
