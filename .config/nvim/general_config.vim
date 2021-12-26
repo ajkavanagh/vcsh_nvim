@@ -33,9 +33,10 @@ set title titlestring=
 set clipboard=unnamedplus
 
 "Backups
-call mkdir ('~/.config/nvim/tmp/backup', 'p')
-set backupdir=~/.config/nvim/tmp/backup//
-set directory=~/.config/nvim/tmp/swap//
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+call mkdir(data_dir . '/tmp/backup', 'p')
+let &backupdir = data_dir . '/tmp/backup//'
+let &directory = data_dir . '/tmp/swap//'
 set backup
 
 " Undofile is useful!
