@@ -5,12 +5,12 @@ end
 
 local actions = require("telescope.actions")
 telescope.setup({
-    defaults = {
-        mappings = {
-            i = {
-                -- ensure a single escape closes the dialog
-                ["<esc>"] = actions.close,
-            },
-        },
+  defaults = {
+    mappings = {
+      i = {
+        -- ensure a single escape closes the dialo
+        ["<esc>"] = actions.close,
+      },
     },
+  },
 })
