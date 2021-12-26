@@ -56,7 +56,7 @@ match ErrorMsg '\s\+$'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
 
 " Make space for messages, sign column, etc.
-set cmdheight=2    " Better display for messages
+set cmdheight=2     " Better display for messages
 set updatetime=300  " quicker update time for messages.
 set shortmess+=c    " don't give |ins-completion-menu| messages
 set signcolumn=yes  " Will this compete with signify??

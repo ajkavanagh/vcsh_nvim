@@ -21,7 +21,9 @@ runtime ./plugins/airline.vim  " airline related configuration
 
 runtime ./plugins/nerdtree.vim
 runtime ./plugins/nerdcommenter.vim
+
 runtime ./plugins/ctrlp.vim
+
 runtime ./plugins/restore_view.vim
 runtime ./plugins/vim_surround.vim
 runtime ./plugins/vim_repeat.vim
@@ -37,6 +39,10 @@ runtime ./plugins/vim_peekaboo.vim
 " These two are lua plugins; diffview relies on plenary; NEEDS configuring.
 runtime ./plugins/nvim_lua_plenary.vim
 runtime ./plugins/nvim_sindrets_diffview.vim  " needs LUA configuration at some point
+runtime ./plugins/treesitter.vim              " used by telescope
+runtime ./plugins/telescope.vim
+runtime ./plugins/lsp.vim                     " related plugins for native lsp work
+runtime ./plugins/nvim_cmp.vim                " completion related plugins and configuration
 
 runtime ./plugins/autoswap.vim
 runtime ./plugins/vim_expand_region.vim
@@ -55,13 +61,13 @@ runtime ./plugins/betterdigraphs.vim
 runtime ./plugins/vim_table_mode.vim
 runtime ./plugins/markdown_composer.vim
 runtime ./plugins/todoist.vim
-runtime ./plugins/coc.vim     " Replace with built-in language server
+"runtime ./plugins/coc.vim     " Replace with built-in language server
 runtime ./plugins/python.vim  " Python language support
 runtime ./plugins/jinja2_syntax.vim
 runtime ./plugins/rust.vim    " Rust language support
 runtime ./plugins/haskell.vim  " Haskell language support
 runtime ./plugins/go_lang.vim  " Go language support
-runtime ./plugins/ale.vim      " Replace with Treesitter/LUA?
+"runtime ./plugins/ale.vim      " Replace with Treesitter/LUA?
 runtime ./plugins/vim_test.vim
 runtime ./plugins/zeal.vim
 runtime ./plugins/vim_css_color.vim

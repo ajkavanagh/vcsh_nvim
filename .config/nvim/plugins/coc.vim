@@ -23,7 +23,6 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-" NOTE: disabled as the highlight is hard to read at the moment!
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word

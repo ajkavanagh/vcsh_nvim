@@ -7,4 +7,3 @@ let g:ctrlp_root_markers = ['.ctrlp_root']
 
 nnoremap <Leader>o :CtrlPCurWD<CR>
 nnoremap <C-t> :CtrlPBuffer<cr>
-
