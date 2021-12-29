@@ -5,6 +5,7 @@ augroup vimwiki
   autocmd!
   autocmd FileType vimwiki setlocal tabstop=2 softtabstop=2
     \ shiftwidth=2 expandtab autoindent shiftround
+  autocmd FileType vimwiki call pencil#init({'wrap': 'hard'})
 augroup END
 
 let wiki_notes_md = {}
