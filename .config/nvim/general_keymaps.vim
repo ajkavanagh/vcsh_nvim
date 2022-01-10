@@ -68,8 +68,8 @@ vnoremap > >gv
 
 " Maintain the cursor position even when yanking in visual mode.
 " curtesy of: https://ddrscott.github.io/blog/2016/yank-without-jank/
-vnoremap y myy`y
-vnoremap Y myY`y
+"vnoremap y myy`y
+"vnoremap Y myY`y
 
 " open the file even if file doesn't exist
 noremap <leader>gf :e <cfile><cr>
