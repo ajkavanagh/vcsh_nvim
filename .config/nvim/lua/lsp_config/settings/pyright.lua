@@ -3,7 +3,11 @@ return {
 
     python = {
       analysis = {
-        typeCheckingMode = "basic"
+        typeCheckingMode = "basic",
+        diagnosticSeverityOverrides = {
+            reportUnknownParameterType = "warning",
+            reportGeneralTypeIssues = "warning"
+        }
       }
     }
   },
