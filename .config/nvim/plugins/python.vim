@@ -3,6 +3,7 @@ Plug 'vim-python/python-syntax'
 
 "Configure vim-python-pep8-indent
 let g:pymode_indent = 0
+let g:python_pep8_indent_multiline_string = 0
 
 "Configure python-syntax
 let python_highlight_all = 1
