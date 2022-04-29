@@ -49,7 +49,7 @@ augroup END
 augroup sh
   autocmd!
   autocmd FileType sh set tabstop=4 softtabstop=4
-    \ shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
+    \ shiftwidth=4 expandtab autoindent fileformat=unix
 augroup END
 
 " markdown files NEVER use tabs
