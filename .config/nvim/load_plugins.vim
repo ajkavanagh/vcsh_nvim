@@ -31,7 +31,7 @@ runtime ./plugins/vim_fugitive.vim
 runtime ./plugins/vim_unimpaired.vim
 runtime ./plugins/vim_scratch.vim
 runtime ./plugins/ack.vim
-runtime ./plugins/gundo.vim
+runtime ./plugins/vim-mundo.vim
 runtime ./plugins/rainbow_parentheses.vim
 runtime ./plugins/folding.vim
 runtime ./plugins/vim_peekaboo.vim
