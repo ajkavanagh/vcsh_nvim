@@ -17,6 +17,11 @@ endif
 let g:python_host_prog = '/home/alex/.virtualenvs/py2-for-neovim/bin/python'
 let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
 
+" disable perl and ruby
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+
+
 "Determine what the os is and set a global.
 "This will be either Linux, Darwin or Windows
 if has("win64") || has("win32") || has("win16")
