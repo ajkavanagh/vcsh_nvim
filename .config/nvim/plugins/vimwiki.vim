@@ -67,7 +67,7 @@ let wiki_canonical.auto_tags = 1    " update tags metadata on save
 
 let g:vimwiki_table_mappings=0
 let g:vimwiki_table_auto_fmt=0
-let g:vimwiki_list = [wiki_notes_md, wiki_sites]
+let g:vimwiki_list = [wiki_notes_md, wiki_sites, wiki_canonical]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}
 let g:vimwiki_markdown_link_ext = 1
