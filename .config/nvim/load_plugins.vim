@@ -44,7 +44,7 @@ runtime ./plugins/telescope.vim
 runtime ./plugins/lsp.vim                     " related plugins for native lsp work
 runtime ./plugins/nvim_cmp.vim                " completion related plugins and configuration
 
-runtime ./plugins/autoswap.vim
+"runtime ./plugins/autoswap.vim               " DISABLED: doesn't work with wayland
 runtime ./plugins/vim_expand_region.vim
 runtime ./plugins/easymotion.vim
 runtime ./plugins/vim_signify.vim

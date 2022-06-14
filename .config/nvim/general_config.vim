@@ -27,7 +27,8 @@ set autoindent
 
 "Set the titlestring; this is for the autoswap plugin that also requires wmctrl
 "to be installed in linux
-set title titlestring=
+"BUG: note that this doesn't work on wayland, so it is now disabled.
+"set title titlestring=""
 
 " Put yanks, etc. into the * and + buffers.
 set clipboard=unnamedplus
@@ -47,7 +48,7 @@ set showmatch
 
 "List chars are useful
 set list
-"set listchars=tab:▸\ ,eol:¬
+""set listchars=tab:▸\ ,eol:¬
 set listchars=tab:→\ 
 
 "Show trailing whitespace as an error.
@@ -108,8 +109,8 @@ set linespace=3
 
 "Set incremental, highlighted and case-insensitive searching
 "also sane regexs (the / /\v bit)
-"nnoremap / /\v
-"vnoremap / /\v
+""nnoremap / /\v
+""vnoremap / /\v
 set incsearch
 set hlsearch
 set ignorecase
