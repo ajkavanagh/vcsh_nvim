@@ -13,8 +13,17 @@ if (has('nvim'))
 endif
 
 " configure python interpreters for neovim
-let g:python_host_prog = '/home/alex/.virtualenvs/py2-for-neovim/bin/python'
-let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
+if filereadable(expand('~/.nix-profile/bin/python'))
+  let g:python3_host_prog = expand('~/.nix-profile/bin/python')
+else
+  let g:python_host_prog = '/home/alex/.virtualenvs/py2-for-neovim/bin/python'
+  let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
+endif
+
+" configure the neovim-node-host if we're on nixos
+if filereadable(expand('~/.nix-profile/bin/neovim-node-host'))
+  let g:node_host_prog = expand('~/.nix-profile/bin/neovim-node-host')
+endif
 
 "Disable providers not being used:
 let g:loaded_perl_provider = 0
