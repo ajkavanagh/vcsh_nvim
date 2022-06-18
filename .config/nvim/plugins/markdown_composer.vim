@@ -1,3 +1,4 @@
+if exists("g:not_in_nix")
 " Markdown composer plugin - building feature
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
@@ -10,6 +11,7 @@ function! BuildComposer(info)
 endfunction
 
 Plug 'euclio/vim-markdown-composer', {'do': function('BuildComposer') }
+endif
 
 " vim-markdown-composer ... I don't like it opening the browser wing
 let g:markdown_composer_browser = "firefox"

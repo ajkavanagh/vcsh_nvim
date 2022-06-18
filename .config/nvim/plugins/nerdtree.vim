@@ -1,6 +1,8 @@
+if exists("g:not_in_nix")
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+endif
 
 let NERDTreeShowHidden=1
 let g:NERDTreeDirArrowExpandable = '▸'

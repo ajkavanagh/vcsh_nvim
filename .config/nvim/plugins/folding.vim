@@ -1,6 +1,8 @@
+if exists("g:not_in_nix")
 Plug 'Konfekt/FastFold'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'kalekundert/vim-coiled-snake'      " folding support
+endif
 
 " stop fastfold updating on save
 let g:fastfold_savehook = 0

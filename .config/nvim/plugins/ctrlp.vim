@@ -1,4 +1,6 @@
+if exists("g:not_in_nix")
 Plug 'ctrlpvim/ctrlp.vim'
+endif
 
 "let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'

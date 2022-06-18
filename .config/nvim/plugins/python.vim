@@ -1,5 +1,7 @@
+if exists("g:not_in_nix")
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-python/python-syntax'
+endif
 
 "Configure vim-python-pep8-indent
 let g:pymode_indent = 0

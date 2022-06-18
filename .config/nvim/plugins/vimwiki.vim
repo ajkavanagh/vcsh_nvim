@@ -1,4 +1,6 @@
+if exists("g:not_in_nix")
 Plug 'vimwiki/vimwiki'
+endif
 
 
 augroup vimwiki

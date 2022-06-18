@@ -1,4 +1,5 @@
 " themes and look'n'feel of vim
+if exists("g:not_in_nix")
 " Plug 'frankier/neovim-colors-solarized-truecolor-only'   " solarized
 Plug 'dracula/vim', { 'as': 'dracula' }                  " dracula
 " Plug 'zeis/vim-kolor'                                    " kolor
@@ -6,6 +7,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }                  " dracula
 " Plug 'sickill/vim-monokai'
 " Plug 'w0ng/vim-hybrid'
 " Plug 'fneu/breezy'
+endif
 
 " use 'colortheme xxx' to set it; see comments above
 

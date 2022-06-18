@@ -4,6 +4,9 @@
 "
 " -----------------------------------------------------------------------------
 
+" only run vim-plug if we are not running in nix
+if exists("g:not_in_nix")
+
 " Automatic installation of vim-plug if it is missing
 " stdpath('data') == /home/alex/.local/share/nvim
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -16,6 +19,8 @@ endif
 "Plugins managed by vim-plug
 "Ensure you use single quotes '' for plugin names
 call plug#begin(data_dir . '/plugins')
+
+endif
 
 runtime ./plugins/airline.vim  " airline related configuration
 
@@ -60,7 +65,7 @@ runtime ./plugins/goyo.vim
 runtime ./plugins/betterdigraphs.vim
 runtime ./plugins/vim_table_mode.vim
 runtime ./plugins/markdown_composer.vim
-runtime ./plugins/todoist.vim
+"runtime ./plugins/todoist.vim
 "runtime ./plugins/coc.vim     " Replace with built-in language server
 runtime ./plugins/python.vim  " Python language support
 runtime ./plugins/jinja2_syntax.vim
@@ -69,10 +74,12 @@ runtime ./plugins/haskell.vim  " Haskell language support
 runtime ./plugins/go_lang.vim  " Go language support
 "runtime ./plugins/ale.vim      " Replace with Treesitter/LUA?
 runtime ./plugins/vim_test.vim
-runtime ./plugins/zeal.vim
+"runtime ./plugins/zeal.vim
 runtime ./plugins/vim_css_color.vim
 runtime ./plugins/nix.vim
 
 runtime ./plugins/themes.vim   " Collections of themes
 
+if exists("g:not_in_nix")
 call plug#end()
+endif

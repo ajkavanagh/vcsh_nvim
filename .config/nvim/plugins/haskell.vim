@@ -1,7 +1,9 @@
+if exists("g:not_in_nix")
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent'
 Plug 'dan-t/vim-hsimport'
 Plug 'vmchale/sql-qq'     " syntax highlighting of sql within quasi-quoting.
+endif
 
 
 " Disable haskell-vim omnifunc

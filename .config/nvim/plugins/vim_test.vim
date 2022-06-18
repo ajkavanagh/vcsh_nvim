@@ -1,4 +1,6 @@
+if exists("g:not_in_nix")
 Plug 'janko/vim-test'
+endif
 
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
 nnoremap <silent> <leader>tn :TestNearest<CR>

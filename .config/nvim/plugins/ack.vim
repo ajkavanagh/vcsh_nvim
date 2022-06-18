@@ -1,4 +1,6 @@
+if exists("g:not_in_nix")
 Plug 'mileszs/ack.vim'
+endif
 
 " Configure ack.vim on Ubuntu (it's called ack-grep)
 if executable('ag')

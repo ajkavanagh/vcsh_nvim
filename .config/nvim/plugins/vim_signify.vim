@@ -1,4 +1,6 @@
+if exists("g:not_in_nix")
 Plug 'mhinz/vim-signify'
+endif
 
 let g:signify_vcs_list = [ 'bzr', 'git' ]
 let g:signify_update_on_focusgained = 1
