@@ -52,7 +52,7 @@ in {
       sumneko-lua-language-server  # lua
       nodePackages.vim-language-server  # vim language
       zls # zig language server
-      # jsonls  (missing, needs support)
+      nodePackages.vscode-json-languageserver  # jsonls
       nodePackages.bash-language-server  # bash
       cmake-language-server  # cmake
       # dot language server missing
@@ -95,7 +95,42 @@ in {
       # get treesitter and telescope going
       plenary-nvim
       diffview-nvim
-      nvim-treesitter
+      (nvim-treesitter.withPlugins (
+        plugins: with plugins; [
+          tree-sitter-go
+          tree-sitter-toml
+          tree-sitter-make
+          tree-sitter-json
+          tree-sitter-json5
+          tree-sitter-yaml
+          tree-sitter-nix
+          tree-sitter-cpp
+          tree-sitter-rst
+          tree-sitter-javascript
+          tree-sitter-bash
+          tree-sitter-html
+          tree-sitter-vim
+          tree-sitter-dot
+          #tree-sitter-verilog
+          tree-sitter-dockerfile
+          tree-sitter-latex
+          tree-sitter-jsdoc
+          tree-sitter-lua
+          tree-sitter-java
+          tree-sitter-zig
+          tree-sitter-bibtex
+          tree-sitter-regex
+          tree-sitter-c
+          tree-sitter-cmake
+          tree-sitter-rust
+          tree-sitter-typescript
+          tree-sitter-python
+          tree-sitter-markdown
+          tree-sitter-scala
+          tree-sitter-css
+          tree-sitter-haskell
+        ]
+        ))
       telescope-nvim
       telescope-fzf-native-nvim
       (plugin "nvim-telescope/telescope-media-files.nvim")
