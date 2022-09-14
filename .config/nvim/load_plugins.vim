@@ -65,6 +65,7 @@ runtime ./plugins/goyo.vim
 runtime ./plugins/betterdigraphs.vim
 runtime ./plugins/vim_table_mode.vim
 runtime ./plugins/markdown_composer.vim
+runtime ./plugins/vim_checkbox.vim " toggle checkboxes in markdown using <leader>tt
 "runtime ./plugins/todoist.vim
 "runtime ./plugins/coc.vim     " Replace with built-in language server
 runtime ./plugins/python.vim  " Python language support

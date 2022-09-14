@@ -160,6 +160,7 @@ in {
       (plugin "atweiden/vim-betterdigraphs")  # may need to do a let early (before plugin?)
       vim-table-mode
       vim-markdown-composer
+      (plugin "jkramer/vim-checkbox")  # toggle checkboxes in markdown using <leader>tt
 
       python-syntax
       vim-python-pep8-indent
