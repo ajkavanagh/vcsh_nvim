@@ -143,3 +143,7 @@ if v:version >= 703
     set colorcolumn=
   endif
 endif
+
+" Set a useful command to close all the buffers apart from the current one.
+command! BufOnly execute '%bdelete|edit #|normal `"'
+

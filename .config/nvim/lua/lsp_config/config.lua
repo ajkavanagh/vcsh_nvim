@@ -15,7 +15,8 @@
 --if exists("g:not_in_nix") then
 if vim.g.not_in_nix then
   -- do the non Nix, interactive, installation and configuration.
-  require('lsp_config.lsp_installer')
+  -- require('lsp_config.lsp_installer')
+  require('lsp_config.mason')
   require('lsp_config.handlers').setup()
 else
   -- do the Nix/Home Manager declaritive configuration.
