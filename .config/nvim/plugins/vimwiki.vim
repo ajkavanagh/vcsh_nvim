@@ -1,5 +1,5 @@
 if exists("g:not_in_nix")
-Plug 'vimwiki/vimwiki'
+    Plug 'vimwiki/vimwiki', { 'tag': 'v2023.04.04_1' }
 endif
 
 
