@@ -54,9 +54,9 @@ lspconfig['rust_analyzer'].setup(vim.deepcopy(opts))
 
 
 -- lua setup
-local sumneko_opts = require("lsp_config.settings.sumneko_lua")
-sumneko_opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
-lspconfig['sumneko_lua'].setup(sumneko_opts)
+local lua_ls_opts = require("lsp_config.settings.lua_ls")
+lua_ls_opts = vim.tbl_deep_extend("force", lua_ls_opts, opts)
+lspconfig['lua_ls'].setup(lua_ls_opts)
 
 
 --  - vim-language-server

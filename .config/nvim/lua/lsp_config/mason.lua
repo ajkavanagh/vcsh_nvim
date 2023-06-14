@@ -37,11 +37,11 @@ mason_lspconfig.setup_handlers {
             require("lsp_config.settings.pyright"),
             opts))
     end,
-    ['sumneko_lua'] = function ()
-        lspconfig['sumneko_lua'].setup(
+    ['lua_ls'] = function ()
+        lspconfig['lua_ls'].setup(
         vim.tbl_deep_extend(
             "force",
-            require("lsp_config.settings.sumneko_lua"),
+            require("lsp_config.settings.lua_ls"),
             opts))
     end,
     ['jsonls'] = function ()
@@ -49,6 +49,13 @@ mason_lspconfig.setup_handlers {
         vim.tbl_deep_extend(
             "force",
             require("lsp_config.settings.jsonls"),
+            opts))
+    end,
+    ['yamlls'] = function ()
+        lspconfig['yamlls'].setup(
+        vim.tbl_deep_extend(
+            "force",
+            require("lsp_config.settings.yamlls"),
             opts))
     end
 }

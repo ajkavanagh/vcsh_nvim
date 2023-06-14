@@ -20,6 +20,7 @@ endif
 "Ensure you use single quotes '' for plugin names
 call plug#begin(data_dir . '/plugins')
 
+" end if exists("g:not_in_nix")
 endif
 
 runtime ./plugins/airline.vim  " airline related configuration
@@ -59,7 +60,10 @@ runtime ./plugins/tabular.vim  " Note some au commands for Haskell
 runtime ./plugins/pencil.vim
 runtime ./plugins/wordy.vim
 runtime ./plugins/zim_wiki_syntax.vim
+
 runtime ./plugins/vimwiki.vim
+runtime ./plugins/taskwiki.vim
+
 runtime ./plugins/gist.vim
 runtime ./plugins/goyo.vim
 runtime ./plugins/betterdigraphs.vim
@@ -67,13 +71,11 @@ runtime ./plugins/vim_table_mode.vim
 runtime ./plugins/markdown_composer.vim
 runtime ./plugins/vim_checkbox.vim " toggle checkboxes in markdown using <leader>tt
 "runtime ./plugins/todoist.vim
-"runtime ./plugins/coc.vim     " Replace with built-in language server
 runtime ./plugins/python.vim  " Python language support
 runtime ./plugins/jinja2_syntax.vim
 runtime ./plugins/rust.vim    " Rust language support
 runtime ./plugins/haskell.vim  " Haskell language support
 runtime ./plugins/go_lang.vim  " Go language support
-"runtime ./plugins/ale.vim      " Replace with Treesitter/LUA?
 runtime ./plugins/vim_test.vim
 "runtime ./plugins/zeal.vim
 runtime ./plugins/vim_css_color.vim
