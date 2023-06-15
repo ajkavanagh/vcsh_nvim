@@ -30,6 +30,8 @@ runtime ./plugins/nerdcommenter.vim
 
 runtime ./plugins/ctrlp.vim
 
+runtime ./plugins/qfenter.vim
+
 runtime ./plugins/restore_view.vim
 runtime ./plugins/vim_surround.vim
 runtime ./plugins/vim_repeat.vim
