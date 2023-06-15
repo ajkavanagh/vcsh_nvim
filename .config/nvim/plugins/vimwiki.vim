@@ -10,6 +10,10 @@ augroup vimwiki
   autocmd FileType vimwiki call pencil#init({'wrap': 'hard'})
 augroup END
 
+" map leader <CR> to vim follow links so that we can force a follow with using taskwiki
+nnoremap <Leader><CR> :VimwikiFollowLink<CR>
+
+
 let wiki_notes_md = {}
 let wiki_notes_md.path = "~/Documents/VimWikiNotes/notes"
 let wiki_notes_md.path_html = '~/Documents/VimWikiNotes/html'

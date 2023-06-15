@@ -7,7 +7,7 @@ endif
 
 " taskwiki config
 let g:taskwiki_taskrc_location = '~/.config/task/taskrc'
-let g:taskwiki_data_location = '~/syncthing/Config/taskwarrior'
+let g:taskwiki_data_location = '~/.local/state/taskwarrior'
 let g:taskwiki_disable_concealcursor = 'yes'
 
 
