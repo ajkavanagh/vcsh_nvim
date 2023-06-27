@@ -69,7 +69,9 @@ in {
       # ./plugins/nerdtree.vim for config
       nerdtree
       vim-devicons
-      vim-nerdtree-syntax-highlight
+      #vim-nerdtree-syntax-highlight
+      # switched to a fork due to E5248 - see the configuration for NERDTree
+      (plugin "johnstef99/vim-nerdtree-syntax-highlight")
 
       # ./plugs/nerdcommenter.vim for config
       nerdcommenter
@@ -144,7 +146,6 @@ in {
 
       # text editing helper plugins
       vim-expand-region
-      vim-easymotion
       vim-signify
       vim-toml
       ansible-vim

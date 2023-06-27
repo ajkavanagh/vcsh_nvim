@@ -54,7 +54,6 @@ runtime ./plugins/nvim_cmp.vim                " completion related plugins and c
 
 "runtime ./plugins/autoswap.vim               " DISABLED: doesn't work with wayland
 runtime ./plugins/vim_expand_region.vim
-runtime ./plugins/easymotion.vim
 runtime ./plugins/vim_signify.vim
 runtime ./plugins/vim_toml.vim
 runtime ./plugins/ansible.vim
