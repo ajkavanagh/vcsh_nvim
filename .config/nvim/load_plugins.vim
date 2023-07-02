@@ -71,7 +71,6 @@ runtime ./plugins/betterdigraphs.vim
 runtime ./plugins/vim_table_mode.vim
 runtime ./plugins/markdown_composer.vim
 runtime ./plugins/vim_checkbox.vim " toggle checkboxes in markdown using <leader>tt
-"runtime ./plugins/todoist.vim
 runtime ./plugins/python.vim  " Python language support
 runtime ./plugins/jinja2_syntax.vim
 runtime ./plugins/rust.vim    " Rust language support
