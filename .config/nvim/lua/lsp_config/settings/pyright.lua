@@ -5,6 +5,12 @@ return {
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = "openFilesOnly",
+        exclude = {
+          "**/node_modules",
+          "**/__pycache__",
+          "**/.*",
+          "**/venv",
+        },
         useLibraryCodeForTypes = true,
         typeCheckingMode = "basic",
         diagnosticSeverityOverrides = {
