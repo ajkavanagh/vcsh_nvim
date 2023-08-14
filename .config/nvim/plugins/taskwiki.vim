@@ -1,5 +1,6 @@
 if exists("g:not_in_nix")
-    Plug 'tools-life/taskwiki'
+    "Plug 'tools-life/taskwiki'
+    Plug 'ajkavanagh/taskwiki', { 'branch': 'pr-430' }
     Plug 'powerman/vim-plugin-AnsiEsc'
     "Plug 'preservim/tagbar'  - disabled as I don't use ctags
     Plug 'blindFS/vim-taskwarrior'

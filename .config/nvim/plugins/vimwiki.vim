@@ -15,6 +15,7 @@ nnoremap <Leader><CR> :VimwikiFollowLink<CR>
 
 
 let wiki_notes_md = {}
+let wiki_notes_md.name = 'home'
 let wiki_notes_md.path = "~/Documents/VimWikiNotes/notes"
 let wiki_notes_md.path_html = '~/Documents/VimWikiNotes/html'
 let wiki_notes_md.syntax = 'markdown'
@@ -34,6 +35,7 @@ let wiki_notes_md.auto_tags = 1    " update tags metadata on save
 " This is an attempt at a blog using Vimwiki markdown with pandoc and my
 " own converter.  It's an on going project.
 let wiki_sites = {}
+let wiki_sites.name = 'sites'
 let wiki_sites.path = '~/Projects/Personal/sites/vps-sites/vimwiki-src'
 let wiki_sites.path_html = '~/Projects/Personal/sites/vps-sites/vw2html-site'
 let wiki_sites.syntax = 'markdown'
@@ -53,6 +55,7 @@ let wiki_sites.auto_tags = 1    " update tags metadata on save
 " ----------------------
 " Canonical related wiki
 let wiki_canonical = {}
+let wiki_canonical.name = 'canonical'
 let wiki_canonical.path = '~/Projects/Canonical/vimwiki/vimwiki-content'
 let wiki_canonical.path_html = '~/Projects/Canonical/vimwiki/vw2html-site'
 let wiki_canonical.syntax = 'markdown'
