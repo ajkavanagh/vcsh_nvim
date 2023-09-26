@@ -23,6 +23,16 @@ else
   require('lsp_config.servers')
 end
 
+-- pull in the watchman configuration - see bug: https://github.com/neovim/neovim/issues/23291
+require('lsp_config.watcher')
+
+-- Alternative to completely disable the file watcher within neovim
+--function _watchman(path, opts, callback)
+  --return function()
+  --end
+--end
+
+--require('vim.lsp._watchfiles')._watchfunc = _watchman
 
 vim.diagnostic.config({
   signs = false,    -- I find diagnostics interferes with gutter for changes
