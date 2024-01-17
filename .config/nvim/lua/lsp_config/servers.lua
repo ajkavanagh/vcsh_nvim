@@ -49,10 +49,6 @@ pyright_opts = vim.tbl_deep_extend("force", pyright_opts, opts)
 lspconfig['pyright'].setup(pyright_opts)
 
 
---  - rust-analyzer
-lspconfig['rust_analyzer'].setup(vim.deepcopy(opts))
-
-
 -- lua setup
 local lua_ls_opts = require("lsp_config.settings.lua_ls")
 lua_ls_opts = vim.tbl_deep_extend("force", lua_ls_opts, opts)

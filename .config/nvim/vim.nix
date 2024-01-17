@@ -167,6 +167,7 @@ in {
       vim-python-pep8-indent
       (plugin "Glench/Vim-Jinja2-Syntax")
       rust-vim
+      rustacean
       haskell-vim
       vim-hindent
       (plugin "dan-t/vim-hsimport")

@@ -39,6 +39,13 @@ augroup html
     \ shiftwidth=2 expandtab autoindent fileformat=unix
 augroup END
 
+" lua files
+augroup lua
+  autocmd!
+  autocmd BufNewFile,BufRead *.lua set tabstop=2 softtabstop=2
+    \ shiftwidth=2 expandtab autoindent fileformat=unix
+augroup END
+
 " gitcommit files
 augroup gitcommit
   autocmd!

@@ -51,6 +51,7 @@ runtime ./plugins/treesitter.vim              " used by telescope
 runtime ./plugins/telescope.vim
 runtime ./plugins/lsp.vim                     " related plugins for native lsp work
 runtime ./plugins/nvim_cmp.vim                " completion related plugins and configuration
+runtime ./plugins/dap.vim                     " debugging help.
 
 "runtime ./plugins/autoswap.vim               " DISABLED: doesn't work with wayland
 runtime ./plugins/vim_expand_region.vim
