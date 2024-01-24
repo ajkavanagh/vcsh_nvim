@@ -48,15 +48,18 @@ nnoremap <silent> <C-Right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 map <leader>th <C-w>t<C-W>H
 map <leader>tw <C-w>t<C-W>K
 
+" I've learnt hjkl, and now my keyboard is going to be colemak-dh, I have a
+" navigation layer that uses arrows in hjkl, so let's disable the disabling of
+" the arrows.
 " stop using arrow keys to make me learn hjkl and use modes more
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+"nnoremap <up> <nop>
+"nnoremap <down> <nop>
+"nnoremap <left> <nop>
+"nnoremap <right> <nop>
+"inoremap <up> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
 " make j, k do 'normal' action on wrapped lines.
 nnoremap j gj
 nnoremap k gk
