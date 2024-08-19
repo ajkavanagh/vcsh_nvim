@@ -70,7 +70,7 @@ runtime ./plugins/gist.vim
 runtime ./plugins/goyo.vim
 runtime ./plugins/betterdigraphs.vim
 runtime ./plugins/vim_table_mode.vim
-runtime ./plugins/markdown_composer.vim
+"runtime ./plugins/markdown_composer.vim
 runtime ./plugins/markdown_preview.vim " this is the altenarive to markdown_composer
 runtime ./plugins/vim_checkbox.vim " toggle checkboxes in markdown using <leader>tt
 runtime ./plugins/python.vim  " Python language support
