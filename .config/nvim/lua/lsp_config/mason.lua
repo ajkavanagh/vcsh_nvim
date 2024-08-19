@@ -13,7 +13,9 @@ if not lspconfig_ok then
   return
 end
 
-mason.setup()
+mason.setup({
+  -- log_level = vim.log.levels.DEBUG
+})
 
 local handlers = require("lsp_config.handlers")
 
@@ -57,5 +59,8 @@ mason_lspconfig.setup_handlers {
             "force",
             require("lsp_config.settings.yamlls"),
             opts))
-    end
+    end,
+    -- quell:
+    -- ERROR nvim-lspconfig.rust_analyzer has been setup.
+    ['rust_analyzer'] = function() end,
 }
