@@ -1,4 +1,4 @@
-if exists("g:not_in_nix")
+if exists("g:not_in_nix") && executable('task')
     "Plug 'tools-life/taskwiki'
     Plug 'ajkavanagh/taskwiki', { 'branch': 'pr-430' }
     Plug 'powerman/vim-plugin-AnsiEsc'
