@@ -73,13 +73,19 @@ if isdirectory(expand('~/Projects/Canonical/vimwiki'))
     let vimwiki_list = vimwiki_list + [wiki_canonical]
 endif
 
-if isdirectory(expand('~/Sync/vimwiki'))
+" Work with either lambda vimwiki on the company laptop or on the backup
+if isdirectory(expand('~/Sync/vimwiki')) || isdirectory(expand('~/syncthing/lambda-sync/vimwiki'))
+    if isdirectory(expand('~/syncthing/lambda-sync/vimwiki'))
+        let path = '~/syncthing/lambda-sync/vimwiki'
+    else
+        let path = '~/Sync/vimwiki'
+    endif
     " ----------------------
     " Lambda related wiki
     let wiki_lambda = {}
     let wiki_lambda.name = 'lambda'
-    let wiki_lambda.path = '~/Sync/vimwiki/vimwiki-content'
-    let wiki_lambda.path_html = '~/Sync/vimwiki/vw2html-site'
+    let wiki_lambda.path = path . '/vimwiki-content'
+    let wiki_lambda.path_html = path . '/vw2html-site'
     let wiki_lambda.syntax = 'markdown'
     let wiki_lambda.ext = '.md'
     let wiki_lambda.nested_syntaxes = {'python': 'python', 'rust': 'rust',
@@ -87,7 +93,7 @@ if isdirectory(expand('~/Sync/vimwiki'))
     let wiki_lambda.auto_export = 0  " set to 1 to auto generate the page on save
     let wiki_lambda.auto_doc = 0     " set to 1 to auto redo TOC on the page.
     let wiki_lambda.custom_wiki2html = '~/bin/vw2html'
-    let wiki_lambda.template_path = '~/Sync/vimwiki/vw2html-templates'
+    let wiki_lambda.template_path = path . '/vw2html-templates'
     let wiki_lambda.template_default = 'default'
     let wiki_lambda.template_ext = '.html'
 
