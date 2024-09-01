@@ -48,7 +48,8 @@ runtime ./general_augroups.vim
 
 " Set the theme up
 set background=dark
-colorscheme dracula
+"colorscheme dracula
+colorscheme nord
 
 " I like italicised comments
 highlight Comment cterm=italic gui=italic
