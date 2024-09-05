@@ -7,7 +7,8 @@ Plug 'dracula/vim', { 'as': 'dracula' }                  " dracula
 " Plug 'sickill/vim-monokai'
 " Plug 'w0ng/vim-hybrid'
 " Plug 'fneu/breezy'
-Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
+Plug 'shaunsingh/nord.nvim'
 endif
 
 " set a theme
@@ -27,9 +28,9 @@ endif
 
 if theme == "nord"
     " overrides for nord scheme
-    augroup nord-theme-overrides
-        autocmd!
-        " Use 'nord7' as foreground color for Vim comment titles.
-        autocmd ColorScheme nord highlight vimCommentTitle ctermfg=14 guifg=#8FBCBB
-    augroup END
+    "augroup nord-theme-overrides
+        "autocmd!
+        "" Use 'nord7' as foreground color for Vim comment titles.
+        "autocmd ColorScheme nord highlight vimCommentTitle ctermfg=14 guifg=#8FBCBB
+    "augroup END
 endif
