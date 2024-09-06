@@ -99,6 +99,8 @@ if isdirectory(expand('~/Sync/vimwiki')) || isdirectory(expand('~/syncthing/lamb
 
     let wiki_lambda.list_margin = 0  " needs to be this for markdown
     let wiki_lambda.auto_tags = 1    " update tags metadata on save
+    let wiki_lambda.diary_frequency = 'weekly'
+    let wiki_lambda.diary_start_week_day = 'monday'
 
     let vimwiki_list = vimwiki_list + [wiki_lambda]
 endif
