@@ -39,6 +39,13 @@ mason_lspconfig.setup_handlers {
             require("lsp_config.settings.pyright"),
             opts))
     end,
+    ['basedpyright'] = function()
+        lspconfig['basedpyright'].setup(
+        vim.tbl_deep_extend(
+            "force",
+            require("lsp_config.settings.basedpyright"),
+            opts))
+    end,
     ['lua_ls'] = function ()
         lspconfig['lua_ls'].setup(
         vim.tbl_deep_extend(
