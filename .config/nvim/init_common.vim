@@ -49,7 +49,25 @@ runtime ./general_augroups.vim
 " Set the theme up
 set background=dark
 "colorscheme dracula
-colorscheme nord
+"colorscheme nord
+
+colorscheme catppuccin
+lua << EOF
+  -- this is the default.
+  require("catppuccin").setup({
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+    }
+  })
+EOF
 
 " I like italicised comments
 highlight Comment cterm=italic gui=italic

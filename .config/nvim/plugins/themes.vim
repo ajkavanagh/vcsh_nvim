@@ -9,6 +9,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }                  " dracula
 " Plug 'fneu/breezy'
 " Plug 'arcticicestudio/nord-vim'
 Plug 'shaunsingh/nord.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 endif
 
 " set a theme
@@ -34,3 +35,4 @@ if theme == "nord"
         "autocmd ColorScheme nord highlight vimCommentTitle ctermfg=14 guifg=#8FBCBB
     "augroup END
 endif
+
