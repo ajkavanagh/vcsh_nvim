@@ -31,7 +31,8 @@ set autoindent
 "set title titlestring=""
 
 " Put yanks, etc. into the * and + buffers.
-set clipboard=unnamedplus
+" This option, when set, flashes the gnome dock annoyingly.
+"set clipboard=unnamedplus
 
 "Backups
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -146,4 +147,3 @@ endif
 
 " Set a useful command to close all the buffers apart from the current one.
 command! BufOnly execute '%bdelete|edit #|normal `"'
-
