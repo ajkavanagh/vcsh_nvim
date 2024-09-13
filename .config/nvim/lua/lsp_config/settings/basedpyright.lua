@@ -15,7 +15,8 @@ return {
         typeCheckingMode = "basic",
         diagnosticSeverityOverrides = {
             reportUnknownParameterType = "warning",
-            reportGeneralTypeIssues = "warning"
+            reportGeneralTypeIssues = "warning",
+            reportUnusedCallResult = false
         }
       }
     }
