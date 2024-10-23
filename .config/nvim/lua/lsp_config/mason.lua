@@ -53,6 +53,9 @@ mason_lspconfig.setup_handlers {
             require("lsp_config.settings.lua_ls"),
             opts))
     end,
+    ['marksman'] = function ()
+        lspconfig['marksman'].setup({})
+    end,
     ['jsonls'] = function ()
         lspconfig['jsonls'].setup(
         vim.tbl_deep_extend(
