@@ -22,8 +22,8 @@ augroup END
 augroup json
   autocmd!
   autocmd FileType json syntax match Comment +\/\/.\+$+
-  autocmd BufNewFile,BufRead *.json set tabstop=4 softtabstop=4
-    \ shiftwidth=4 textwidth=80 expandtab autoindent fileformat=unix
+  autocmd BufNewFile,BufRead *.json set tabstop=2 softtabstop=2
+    \ shiftwidth=2 textwidth=120 expandtab autoindent fileformat=unix
 augroup END
 
 augroup c
