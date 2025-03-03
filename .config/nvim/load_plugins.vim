@@ -78,6 +78,8 @@ runtime ./plugins/jinja2_syntax.vim
 runtime ./plugins/rust.vim    " Rust language support
 runtime ./plugins/haskell.vim  " Haskell language support
 runtime ./plugins/go_lang.vim  " Go language support
+runtime ./plugins/curl.vim     " Simple curl in neovim
+"runtime ./plugins/rest.vim   " Full REST client using files; handy for REST development.
 runtime ./plugins/vim_test.vim
 "runtime ./plugins/zeal.vim
 runtime ./plugins/vim_css_color.vim

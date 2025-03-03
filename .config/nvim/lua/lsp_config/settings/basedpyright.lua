@@ -16,7 +16,8 @@ return {
         diagnosticSeverityOverrides = {
             reportUnknownParameterType = "warning",
             reportGeneralTypeIssues = "warning",
-            reportUnusedCallResult = false
+            reportUnusedCallResult = false,
+            reportImplicitStringConcatenation = false
         }
       }
     }

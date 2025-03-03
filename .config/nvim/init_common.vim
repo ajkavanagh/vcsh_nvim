@@ -14,8 +14,8 @@ endif
 
 " configure python interpreters for neovim
 if exists("g:not_in_nix")
-  let g:python_host_prog = '/home/alex/.virtualenvs/py2-for-neovim/bin/python'
-  let g:python3_host_prog = '/home/alex/.virtualenvs/py3-for-neovim/bin/python'
+  let g:python_host_prog = expand('$HOME/.virtualenvs/py2-for-neovim/bin/python')
+  let g:python3_host_prog = expand('$HOME/.virtualenvs/py3-for-neovim/bin/python')
 endif
 
 " configure the neovim-node-host if we're on nixos

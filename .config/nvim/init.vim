@@ -13,6 +13,16 @@
 "
 " -----------------------------------------------------------------------------
 
+function! IsOnHost(hostname)
+    return match(system("hostname"), a:hostname) >= 0
+endfunction
+
+if !IsOnHost("A02430")
+    let g:host_name = "lambdal-laptop"
+else
+    let g:host_name = "generic"
+endif
+
 let g:not_in_nix = 1
 
 runtime ./init_common.vim

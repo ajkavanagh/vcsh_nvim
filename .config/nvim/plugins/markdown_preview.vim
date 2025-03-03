@@ -17,7 +17,7 @@ let g:mkdp_auto_close = 0
 " when leaving insert mode. Default 0 is auto-refresh Markdown as you edit or
 " move the cursor
 " default: 0
-let g:mkdp_refresh_slow = 0
+let g:mkdp_refresh_slow = 1
 
 " set to 1, the MarkdownPreview command can be used for all files,
 " by default it can be use in Markdown files only
@@ -27,13 +27,17 @@ let g:mkdp_command_for_global = 0
 " set to 1, the preview server is available to others in your network.
 " By default, the server listens on localhost (127.0.0.1)
 " default: 0
-let g:mkdp_open_to_the_world = 0
+let g:mkdp_open_to_the_world = 1
 
 " use custom IP to open preview page.
 " Useful when you work in remote Vim and preview on local browser.
 " For more details see: https://github.com/iamcco/markdown-preview.nvim/pull/9
 " default empty
-let g:mkdp_open_ip = ''
+if g:host_name == 'lambdal-laptop'
+    let g:mkdp_open_ip = '100.100.0.102'
+else
+    let g:mkdp_open_ip = '127.0.0.1'
+endif
 
 " specify browser to open preview page
 " for path with space
@@ -89,7 +93,7 @@ let g:mkdp_markdown_css = ''
 let g:mkdp_highlight_css = ''
 
 " use a custom port to start server or empty for random
-let g:mkdp_port = ''
+let g:mkdp_port = '8901'
 
 " preview page title
 " ${name} will be replace with the file name
